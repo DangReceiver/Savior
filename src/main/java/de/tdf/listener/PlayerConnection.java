@@ -1,4 +1,4 @@
-package de.tdf.de.tdf.listener;
+package de.tdf.listener;
 
 import de.tdf.language.Language;
 import org.bukkit.entity.Player;
@@ -14,8 +14,9 @@ public class PlayerConnection implements Listener {
     @EventHandler
     public void handle(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        e.setJoinMessage(null);
+        Language.setLang(p, Language.getLangFile("en"));
 
+        e.setJoinMessage(null);
         Language.broadcastArg("player_join_" + new Random().nextInt(4), p.getName());
     }
 
@@ -25,5 +26,6 @@ public class PlayerConnection implements Listener {
         e.setQuitMessage(null);
 
         Language.broadcastArg("player_quit_" + new Random().nextInt(4), p.getName());
+        Language.removePlayer(p);
     }
 }

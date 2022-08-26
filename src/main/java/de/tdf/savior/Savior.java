@@ -1,9 +1,12 @@
-package de.tdf.savior.savior;
+package de.tdf.savior;
 
-import de.tdf.de.tdf.listener.PlayerConnection;
+import de.tdf.listener.FireWorkJump;
+import de.tdf.listener.PlayerConnection;
 import de.tdf.language.Language;
+import de.tdf.listener.SneakEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -27,15 +30,24 @@ public final class Savior extends JavaPlugin {
         }
 
         Bukkit.getPluginManager().registerEvents(new PlayerConnection(), this);
+        Bukkit.getPluginManager().registerEvents(new FireWorkJump(), this);
+        Bukkit.getPluginManager().registerEvents(new SneakEvent(), this);
+
+        for (Player ap : Bukkit.getOnlinePlayers())
+            Language.setLang(ap, Language.getLangFile("en"));
+
         Language.broadcast("plugin_loaded");
     }
 
     @Override
     public void onDisable() {
+        savior = null;
+
+        for (Player ap : Bukkit.getOnlinePlayers())
+            Language.removePlayer(ap);
+
         ConsoleCommandSender cs = Bukkit.getConsoleSender();
         Language.broadcast("plugin_unloaded");
-
-        savior = null;
     }
 
     public static Plugin getSavior() {

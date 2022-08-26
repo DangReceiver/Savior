@@ -1,6 +1,6 @@
 name: Savior
 version: '${project.version}'
-main: de.tdf.savior.savior.Savior
+main: de.tdf.savior.Savior
 api-version: 1.19
 authors: [ TearsDontFall ]
 description: Survival Plugin

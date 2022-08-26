@@ -1,6 +1,6 @@
 package de.tdf.language;
 
-import de.tdf.savior.savior.Savior;
+import de.tdf.savior.Savior;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
