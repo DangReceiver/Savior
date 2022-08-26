@@ -1,0 +1,21 @@
+prefixes:
+  info: ""
+  error: ""
+  warn: ""
+
+errors:
+  string_not_found: "The string %s could not be determined."
+
+system_messages:
+  plugin:
+    loaded: "The plugin was loaded successfully."
+    unloaded: "The plugin was disabled successfully."
+
+player_feedback:
+  default: "default feedback"
+
+broadcasts:
+  player_join: "%s just hopped in."
+  player_first_join: "%s joined us for the first time!"
+  player_quit: "%s has enough for today."
+  player_unsuitable_quit: "%s dodged the quitting system."
