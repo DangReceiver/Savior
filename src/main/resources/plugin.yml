@@ -1,0 +1,11 @@
+name: Savior
+version: '${project.version}'
+main: de.tdf.savior.savior.Savior
+api-version: 1.19
+authors: [ TearsDontFall ]
+description: Survival Plugin
+
+
+commands:
+  test:
+    description: nix
