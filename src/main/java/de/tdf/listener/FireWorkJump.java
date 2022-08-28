@@ -2,6 +2,7 @@ package de.tdf.listener;
 
 import de.tdf.savior.Savior;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -14,29 +15,33 @@ import org.bukkit.util.Vector;
 
 public class FireWorkJump implements Listener {
 
-    @EventHandler
-    public void handle(PlayerInteractEvent e) {
-        if (e.isCancelled()) return;
+	@EventHandler
+	public void handle(PlayerInteractEvent e) {
+		if (e.isCancelled()) return;
 
-        Player p = e.getPlayer();
-        ItemStack i = e.getItem();
-        Material m = i.getType();
+		Player p = e.getPlayer();
+		ItemStack i = e.getItem();
 
-        if (m == Material.FIREWORK_ROCKET && p.isSneaking()) {
+		if (i == null) return;
+		Material m = i.getType();
 
-            if (e.getClickedBlock() == null) return;
-            FireworkMeta fwm = (FireworkMeta) i.getItemMeta();
+		if (m == Material.FIREWORK_ROCKET && p.isSneaking()) {
 
-            if (i.getAmount() >= 1) i.setAmount(i.getAmount() - 1);
-            else i.setType(Material.AIR);
+			if (e.getClickedBlock() == null) return;
+			FireworkMeta fwm = (FireworkMeta) i.getItemMeta();
 
-            p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0)));
-            Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
-                p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0)));
+			if (p.getGameMode() != GameMode.CREATIVE)
+				if (i.getAmount() >= 1) i.setAmount(i.getAmount() - 1);
+				else i.setType(Material.AIR);
 
-                Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () ->
-                        p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0))), 2);
-            }, 2);
-        }
-    }
+			p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0)));
+			Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
+				p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0)));
+				p.setFallDistance(p.getFallDistance() * 0.6f);
+
+				Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () ->
+						p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0))), 2);
+			}, 2);
+		}
+	}
 }

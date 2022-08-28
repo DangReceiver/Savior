@@ -1,21 +1,28 @@
 prefixes:
-  info: ""
-  error: ""
-  warn: ""
+  info: "§9Info §8‖ §7"
+  error: "§cError §8‖ §7"
+  warn: "§6Warn §8‖ §7"
 
 errors:
   string_not_found: "The string %s could not be determined."
 
 system_messages:
-  plugin:
-    loaded: "The plugin was loaded successfully."
-    unloaded: "The plugin was disabled successfully."
+  language_loaded: "The language %s was loaded."
+  plugin_loaded: "The plugin was loaded successfully."
+  plugin_unloaded: "The plugin was disabled successfully."
 
 player_feedback:
   default: "default feedback"
+  firework_jump_hint: "§7Right click on a block while sneaking to be boosted."
 
 broadcasts:
-  player_join: "%s just hopped in."
+  player_join_0: "%s just hopped in§8. ⌈§a»§8⌋"
+  player_join_1: "%s is now with us§8. ⌈§a»§8⌋"
+  player_join_2: "Hey %s, lookin' good today§8! ⌈§a»§8⌋"
+  player_join_3: "%s now accompanies us§8. ⌈§a»§8⌋"
   player_first_join: "%s joined us for the first time!"
-  player_quit: "%s has enough for today."
+  player_quit_0: "%s has enough for today§8. ⌈§c«§8⌋"
+  player_quit_1: "%s forgot their pizza in the oven§8. ⌈§c«§8⌋"
+  player_quit_2: "%s separated from us§8. ⌈§c«§8⌋"
+  player_quit_3: "%s just broke someones heart§8. ⌈§c«§8⌋"
   player_unsuitable_quit: "%s dodged the quitting system."

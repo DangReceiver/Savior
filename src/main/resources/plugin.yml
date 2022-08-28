@@ -7,5 +7,5 @@ description: Survival Plugin
 
 
 commands:
-  test:
-    description: nix
+  SetLanguage:
+    description: Set your preferred language.
