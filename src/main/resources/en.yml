@@ -14,7 +14,7 @@ system_messages:
   lang_updated: "Your language has been updated from %s to %s"
   lang_current: "Your current language: %s"
   lang_how_to_change: "Use '/SetLanguage <Language acronym>' to change your language."
-  lang_invalid: "The provided language is invalid."
+  arg_invalid: "The provided argument (%s) is invalid."
 
 player_feedback:
   default: "default feedback"

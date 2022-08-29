@@ -44,7 +44,7 @@ public class SetLanguage implements CommandExecutor, TabCompleter {
             File lf = Language.getLangFile(lang);
 
             if (!lf.exists()) {
-                p.sendMessage(Language.PRE + String.format(Language.getMessage(pl, "lang_invalid"), pls));
+                p.sendMessage(Language.PRE + String.format(Language.getMessage(pl, "arg_invalid"), pls));
                 return true;
             }
 

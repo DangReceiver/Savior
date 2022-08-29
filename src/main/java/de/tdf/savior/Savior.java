@@ -19,18 +19,13 @@ public final class Savior extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		savior = this;
-		ConsoleCommandSender cs = Bukkit.getConsoleSender();
+//		ConsoleCommandSender cs = Bukkit.getConsoleSender();
 
 		if (Language.updateServerLang())
-			if (Language.updateServerLang()) {
-
+			if (Language.updateServerLang())
 				return;
-			}
 
-		if (!Language.loadMessages()) {
-			cs.sendMessage("Could not load plugin messages!");
-			return;
-		}
+		Language.loadMessages();
 
 		Bukkit.getPluginManager().registerEvents(new PlayerConnection(), this);
 		Bukkit.getPluginManager().registerEvents(new FireWorkJump(), this);
@@ -50,7 +45,7 @@ public final class Savior extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		ConsoleCommandSender cs = Bukkit.getConsoleSender();
-		cs.sendMessage(Language.getMessage(Language.getServerLang(), "plugin_unloaded"));
+		cs.sendMessage("Language.getMessage(Language.getServerLang(), \"plugin_unloaded\")");
 
 		for (Player ap : Bukkit.getOnlinePlayers())
 			Language.removePlayer(ap);

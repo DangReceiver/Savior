@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.io.File;
@@ -156,7 +157,8 @@ public class Language {
 		return false;
 	}
 
-	public static boolean loadMessages() {
+	@Nullable
+	public static File langFolderExists() {
 		Plugin s = Savior.getSavior();
 		File langFolder = new File(s.getDataFolder() + "/language");
 
@@ -165,19 +167,27 @@ public class Language {
 			langFolder.mkdir();
 		}
 
-		File enFile = new File(langFolder, "en.yml");
-		try {
-			if (!enFile.exists()) {
-				InputStream in = s.getResource("en.yml");
-				Files.copy(in, enFile.toPath());
+		return langFolder;
+	}
+
+	public static void loadResources(Plugin s, File langF) {
+		for (File lf : s.getDataFolder().listFiles()) {
+			File rf = new File(langF, lf.getName());
+
+			try {
+				if (!rf.exists()) {
+					InputStream in = s.getResource("en.yml");
+					Files.copy(in, rf.toPath());
+				}
+
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
+	}
 
-		if (getServerLang() == null) setServerLang(new File(langFolder, "en.yml"));
-
-		for (File file : langFolder.listFiles()) {
+	public static void loadCustomLanguages(File langF) {
+		for (File file : langF.listFiles()) {
 			Map<String, String> lm = new HashMap<>();
 			FileConfiguration lang = YamlConfiguration.loadConfiguration(file);
 
@@ -191,16 +201,29 @@ public class Language {
 			}
 
 			messages.put(file, lm);
-			if (!validString(file, "string_not_found")) {
-				Bukkit.getConsoleSender().sendMessage(PRE + String.format(
-						"The language %s could not be loaded. There might be missing Strings!", file.getName()));
-				continue;
-			}
+			if (!checkValidLang(file)) continue;
 
 			Bukkit.getConsoleSender().sendMessage(PRE +
 					String.format(getMessage(file, "language_loaded"), file.getName()));
 		}
+	}
 
+	public static void loadMessages() {
+		Plugin s = Savior.getSavior();
+		File langF = langFolderExists();
+
+		if (getServerLang() == null) setServerLang(new File(langF, "en.yml"));
+
+		loadResources(s, langF);
+		loadCustomLanguages(langF);
+	}
+
+	public static boolean checkValidLang(File lang) {
+		if (!validString(lang, "string_not_found")) {
+			Bukkit.getConsoleSender().sendMessage(PRE + String.format(
+					"The language %s could not be loaded. There might be missing Strings!", lang.getName()));
+			return false;
+		}
 		return true;
 	}
 }
