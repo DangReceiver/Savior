@@ -6,8 +6,6 @@ prefixes:
 errors:
   string_not_found: "The string %s could not be determined."
   arg_length_desired: "The required argument length for this command is %s."
-  lang_load_error: "This language could not be used, it is missing essential strings."
-  no_player: "This feature is exclusively available to players."
 
 system_messages:
   language_loaded: "The language %s was loaded."
@@ -17,8 +15,6 @@ system_messages:
   lang_current: "Your current language is %s"
   lang_how_to_change: "Use '/SetLanguage <Language acronym>' to change your language."
   arg_invalid: "The provided argument (%s) is invalid."
-  replacing_lang_file: "The language file %s was replaced by its' resource, since it was estimated more up to date."
-  creating_lang_resource: "The language file %s was created from the resource."
 
 player_feedback:
   default: "default feedback"
@@ -30,7 +26,6 @@ player_feedback:
   player_death_4: "%s can now play around with ghosts."
   player_death_5: "%s tripped over a stone too hard."
   player_death_info: "Your recent deaths location§8: §e%s, %s, %s§8."
-  lang_missing_strings_warning: "Be aware: this language is apparently missing translations."
 
 broadcasts:
   player_join_0: "%s just hopped in§8. ⌈§a»§8⌋"

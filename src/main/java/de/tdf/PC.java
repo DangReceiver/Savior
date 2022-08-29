@@ -1,5 +1,6 @@
 package de.tdf;
 
+import com.google.errorprone.annotations.Var;
 import de.tdf.savior.Savior;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -170,9 +171,31 @@ public class PC {
 		return config.isSet(s) ? config.getItemStack(s) : new ItemStack(Material.AIR);
 	}
 
-	public String getDefaultMessageColor() {
-		return config.isSet("Customization.ChatColor") ? config.getString("Customization.ChatColor") : "§7";
+	public boolean setDefaultMessageColor(int r, int g, int b) {
+		if (r > 255 || r < 0 || g > 255 || g < 0 || b > 255 || b < 0) return false;
+
+		List<Integer> rgb = new ArrayList<>(Arrays.asList(r, g, b));
+		config.set("Customization.ChatColor", rgb);
+		return true;
 	}
+
+	public List<Integer> getDefaultMessageColor() {
+		return config.isSet("Customization.ChatColor") ? config.getIntegerList("Customization.ChatColor") :
+				Arrays.asList(210, 210, 210);
+	}
+
+	public boolean setDefaultMessageColor(List<Integer> rgb) {
+		if (rgb.size() != 2) return false;
+		if (rgb.get(0) > 255 || rgb.get(0) < 0 || rgb.get(1) > 255 || rgb.get(1) < 0 || rgb.get(2) > 255 || rgb.get(2) < 0)
+			return false;
+
+		config.set("Customization.ChatColor", rgb);
+		return true;
+	}
+
+//	public String getDefaultMessageColor() {
+//		return config.isSet("Customization.ChatColor") ? config.getString("Customization.ChatColor") : "§7";
+//	}
 
 	public String getPlayerColor() {
 		return config.isSet("Customization.Color") ? config.getString("Customization.Color") : "§7";

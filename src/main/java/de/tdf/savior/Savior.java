@@ -19,12 +19,15 @@ public final class Savior extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		savior = this;
-//		ConsoleCommandSender cs = Bukkit.getConsoleSender();
+		ConsoleCommandSender cs = Bukkit.getConsoleSender();
 
-		if (Language.updateServerLang())
-			if (Language.updateServerLang())
+		if (Language.updateServerLang()) {
+			cs.sendMessage("hi1");
+			if (Language.updateServerLang()){
+				cs.sendMessage("hi2");
 				return;
-
+			}
+		}
 		Language.loadMessages();
 
 		Bukkit.getPluginManager().registerEvents(new PlayerConnection(), this);
@@ -32,21 +35,18 @@ public final class Savior extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new SneakEvent(), this);
 		Bukkit.getPluginManager().registerEvents(new Chat(), this);
 		Bukkit.getPluginManager().registerEvents(new Death(), this);
+		Bukkit.getPluginManager().registerEvents(new StartToSprint(), this);
 
 		Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());
 		Objects.requireNonNull(getCommand("SetLanguage")).setTabCompleter(new SetLanguage());
 
 		for (Player ap : Bukkit.getOnlinePlayers())
 			Language.setLang(ap, Language.getLangFile("en"));
-
-		Language.broadcast("plugin_loaded");
 	}
 
 	@Override
 	public void onDisable() {
-		ConsoleCommandSender cs = Bukkit.getConsoleSender();
-		cs.sendMessage("Language.getMessage(Language.getServerLang(), \"plugin_unloaded\")");
-
+//		ConsoleCommandSender cs = Bukkit.getConsoleSender();
 		for (Player ap : Bukkit.getOnlinePlayers())
 			Language.removePlayer(ap);
 

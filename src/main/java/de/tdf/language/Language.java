@@ -3,10 +3,12 @@ package de.tdf.language;
 import de.tdf.savior.Savior;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
@@ -14,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -157,8 +160,7 @@ public class Language {
 		return false;
 	}
 
-	@Nullable
-	public static File langFolderExists() {
+	public static File langFolder() {
 		Plugin s = Savior.getSavior();
 		File langFolder = new File(s.getDataFolder() + "/language");
 
@@ -171,18 +173,32 @@ public class Language {
 	}
 
 	public static void loadResources(Plugin s, File langF) {
-		for (File lf : s.getDataFolder().listFiles()) {
-			File rf = new File(langF, lf.getName());
+		File rf = new File(langF, "en.yml");
+		InputStream in = s.getResource("en.yml");
 
-			try {
-				if (!rf.exists()) {
-					InputStream in = s.getResource("en.yml");
-					Files.copy(in, rf.toPath());
-				}
+		ConsoleCommandSender cs = Bukkit.getConsoleSender();
+		Path target = rf.toPath();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+		try {
+			if (rf == null) {
+				Files.copy(in, target);
+
+				Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
+					File sl = Language.getServerLang();
+					cs.sendMessage(Language.getMessage(sl, "info") + Language.getMessage(sl, "creating_lang_resource"));
+				}, 1);
+
+			} else if (rf.length() < s.getResource("en.yml").available()) {
+				if (rf.delete()) Files.copy(in, target);
+
+				Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
+					File sl = Language.getServerLang();
+					cs.sendMessage(Language.getMessage(sl, "info") + Language.getMessage(sl, "replacing_lang_file"));
+				}, 1);
 			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -201,7 +217,7 @@ public class Language {
 			}
 
 			messages.put(file, lm);
-			if (!checkValidLang(file)) continue;
+			if (!isValidLang(file)) continue;
 
 			Bukkit.getConsoleSender().sendMessage(PRE +
 					String.format(getMessage(file, "language_loaded"), file.getName()));
@@ -210,20 +226,29 @@ public class Language {
 
 	public static void loadMessages() {
 		Plugin s = Savior.getSavior();
-		File langF = langFolderExists();
-
-		if (getServerLang() == null) setServerLang(new File(langF, "en.yml"));
+		File langF = langFolder();
 
 		loadResources(s, langF);
 		loadCustomLanguages(langF);
+
+		if (getServerLang() == null) setServerLang(new File(langF, "en.yml"));
 	}
 
-	public static boolean checkValidLang(File lang) {
+	public static boolean isValidLang(File lang) {
 		if (!validString(lang, "string_not_found")) {
 			Bukkit.getConsoleSender().sendMessage(PRE + String.format(
 					"The language %s could not be loaded. There might be missing Strings!", lang.getName()));
 			return false;
 		}
 		return true;
+	}
+
+	public static boolean compareLanguages(File main, File comp) {
+
+		long ms = main.getTotalSpace(), cs = comp.getTotalSpace();
+		Bukkit.broadcastMessage("First: " + ms + " | second:" + cs);
+		Bukkit.broadcastMessage("equals: " + ((ms - cs) * 4) + " | boolean:" + (((ms - cs) * 4) <= 1000));
+
+		return (((ms - cs) * 4) <= 1000);
 	}
 }

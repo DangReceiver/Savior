@@ -17,7 +17,7 @@ public class PlayerConnection implements Listener {
         Language.setLang(p, Language.getLangFile("en"));
 
         e.setJoinMessage(null);
-        Language.broadcastArg("player_join_" + new Random().nextInt(4), p.getName());
+        Language.broadcastArg("player_join_" + new Random().nextInt(9), p.getName());
     }
 
     @EventHandler
@@ -25,7 +25,7 @@ public class PlayerConnection implements Listener {
         Player p = e.getPlayer();
         e.setQuitMessage(null);
 
-        Language.broadcastArg("player_quit_" + new Random().nextInt(4), p.getName());
+        Language.broadcastArg("player_quit_" + new Random().nextInt(9), p.getName());
         Language.removePlayer(p);
     }
 }

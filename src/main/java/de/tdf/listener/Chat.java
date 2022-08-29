@@ -7,24 +7,24 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import java.util.List;
+
 public class Chat implements Listener {
 
 	@EventHandler
 	public void handle(AsyncPlayerChatEvent e) {
 		Player p = e.getPlayer();
-		p.sendMessage(e.getFormat());
+		PC pc = PC.loadConfig(p);
 
-		String f = "<counter_link><player_color><player_name><link> <message_color><message>\t<suffix>";
+		String f = " <counter_link><player_color><player_name><link> <message_color><message>  <suffix>";
 		e.setFormat(f);
 
-		p.sendMessage(e.getFormat());
-		PC pc = PC.loadConfig(p);
+		List<Integer> dmc = pc.getDefaultMessageColor();
 
 		f = f.replaceAll("<player_name>", p.getName()).replaceAll("<player_color>", pc.getPlayerColor());
 		f = f.replaceAll("<counter_link>", pc.getCounterLink()).replaceAll("<link>", pc.getLink());
-		f = f.replaceAll("<message_color>", pc.getDefaultMessageColor()).replaceAll("<message>", e.getMessage());
+		f = f.replaceAll("<message_color>", "" + Language.colorFromRGB(dmc.get(0), dmc.get(1), dmc.get(2)))
+				.replaceAll("<message>", e.getMessage());
 		e.setFormat(f.replaceAll("<suffix>", Language.PRE));
-
-		p.sendMessage(e.getFormat());
 	}
 }

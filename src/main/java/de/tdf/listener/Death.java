@@ -18,7 +18,7 @@ public class Death implements Listener {
 
 		e.setDeathMessage(null);
 
-		Language.broadcastArg("player_death_" + new Random().nextInt(4), p.getName());
+		Language.broadcastArg("player_death_" + new Random().nextInt(6), p.getName());
 		p.sendMessage(Language.PRE + String.format(Language.getMessage(Language.getLang(p),
 				"player_death_info"), block.getX(), block.getY(), block.getZ()));
 	}
