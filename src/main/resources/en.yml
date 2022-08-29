@@ -5,15 +5,25 @@ prefixes:
 
 errors:
   string_not_found: "The string %s could not be determined."
+  arg_length_desired: "The required argument length for this command is %s."
 
 system_messages:
   language_loaded: "The language %s was loaded."
   plugin_loaded: "The plugin was loaded successfully."
   plugin_unloaded: "The plugin was disabled successfully."
+  lang_updated: "Your language has been updated from %s to %s"
+  lang_current: "Your current language: %s"
+  lang_how_to_change: "Use '/SetLanguage <Language acronym>' to change your language."
+  lang_invalid: "The provided language is invalid."
 
 player_feedback:
   default: "default feedback"
   firework_jump_hint: "§7Right click on a block while sneaking to be boosted."
+  player_death_0: "%s took the easy way out."
+  player_death_1: "%s may find more luck in another life."
+  player_death_2: "%s's situation was... complicated."
+  player_death_3: "%s is in a better place now."
+  player_death_info: "Your recent deaths location§8: §e%s, %s, %s§8."
 
 broadcasts:
   player_join_0: "%s just hopped in§8. ⌈§a»§8⌋"
