@@ -23,7 +23,7 @@ public final class Savior extends JavaPlugin {
 
 		if (Language.updateServerLang()) {
 			cs.sendMessage("hi1");
-			if (Language.updateServerLang()){
+			if (Language.updateServerLang()) {
 				cs.sendMessage("hi2");
 				return;
 			}
@@ -36,6 +36,7 @@ public final class Savior extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new Chat(), this);
 		Bukkit.getPluginManager().registerEvents(new Death(), this);
 		Bukkit.getPluginManager().registerEvents(new StartToSprint(), this);
+		Bukkit.getPluginManager().registerEvents(new EffectHeadBottle(), this);
 
 		Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());
 		Objects.requireNonNull(getCommand("SetLanguage")).setTabCompleter(new SetLanguage());
@@ -46,7 +47,6 @@ public final class Savior extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-//		ConsoleCommandSender cs = Bukkit.getConsoleSender();
 		for (Player ap : Bukkit.getOnlinePlayers())
 			Language.removePlayer(ap);
 
@@ -60,13 +60,15 @@ public final class Savior extends JavaPlugin {
 	public static boolean createFolder(String path) {
 		if (path == null)
 			path = "plugins/Savior";
+
 		File f1 = new File(path);
 		if (f1.exists()) {
-			System.out.println("The folder already exists.");
+			System.out.println(Language.getMessage(Language.getServerLang(), "warn") + Language.getMessage(Language.getServerLang(), "file_creation_exists"));
 			return false;
 		}
+
 		if (!f1.mkdir()) {
-			System.out.println("The folder could not be created.");
+			System.out.println(Language.getMessage(Language.getServerLang(), "error") + Language.getMessage(Language.getServerLang(), "file_creation_error"));
 			return false;
 		}
 		return true;

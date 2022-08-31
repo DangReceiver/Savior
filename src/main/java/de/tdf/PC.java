@@ -174,8 +174,7 @@ public class PC {
 	public boolean setDefaultMessageColor(int r, int g, int b) {
 		if (r > 255 || r < 0 || g > 255 || g < 0 || b > 255 || b < 0) return false;
 
-		List<Integer> rgb = new ArrayList<>(Arrays.asList(r, g, b));
-		config.set("Customization.ChatColor", rgb);
+		config.set("Customization.ChatColor", new ArrayList<>(Arrays.asList(r, g, b)));
 		return true;
 	}
 
@@ -185,8 +184,7 @@ public class PC {
 	}
 
 	public boolean setDefaultMessageColor(List<Integer> rgb) {
-		if (rgb.size() != 2) return false;
-		if (rgb.get(0) > 255 || rgb.get(0) < 0 || rgb.get(1) > 255 || rgb.get(1) < 0 || rgb.get(2) > 255 || rgb.get(2) < 0)
+		if (rgb.size() != 2 || rgb.get(0) > 255 || rgb.get(0) < 0 || rgb.get(1) > 255 || rgb.get(1) < 0 || rgb.get(2) > 255 || rgb.get(2) < 0)
 			return false;
 
 		config.set("Customization.ChatColor", rgb);
