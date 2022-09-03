@@ -1,5 +1,6 @@
 package de.tdf.listener;
 
+import de.tdf.PC;
 import de.tdf.language.Language;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,21 +12,23 @@ import java.util.Random;
 
 public class PlayerConnection implements Listener {
 
-    @EventHandler
-    public void handle(PlayerJoinEvent e) {
-        Player p = e.getPlayer();
-        Language.setLang(p, Language.getLangFile("en"));
+	@EventHandler
+	public void handle(PlayerJoinEvent e) {
+		Player p = e.getPlayer();
+		PC pc = PC.loadConfig(p);
 
-        e.setJoinMessage(null);
-        Language.broadcastArg("player_join_" + new Random().nextInt(9), p.getName());
-    }
+		Language.setLang(p, pc.getLanguage());
 
-    @EventHandler
-    public void handle(PlayerQuitEvent e) {
-        Player p = e.getPlayer();
-        e.setQuitMessage(null);
+		e.setJoinMessage(null);
+		Language.broadcastArg("player_join_" + new Random().nextInt(13), p.getName());
+	}
 
-        Language.broadcastArg("player_quit_" + new Random().nextInt(9), p.getName());
-        Language.removePlayer(p);
-    }
+	@EventHandler
+	public void handle(PlayerQuitEvent e) {
+		Player p = e.getPlayer();
+		e.setQuitMessage(null);
+
+		Language.broadcastArg("player_quit_" + new Random().nextInt(13), p.getName());
+		Language.removePlayer(p);
+	}
 }

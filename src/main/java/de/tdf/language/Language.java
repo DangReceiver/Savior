@@ -24,7 +24,9 @@ import java.util.Map;
 
 public class Language {
 
-	public static String PRE = "§8⌈" + colorFromRGB(245, 25, 125) + "Savior§8⌋ §7";
+	// ⌈⌋ | ⌜⌟
+
+	public static String PRE = "§8⌜" + colorFromRGB(245, 25, 125) + "Savior§8⌟ §7";
 
 	public static File sLang;
 	private static File df = Savior.getSavior().getDataFolder();
@@ -188,12 +190,14 @@ public class Language {
 					cs.sendMessage(Language.getMessage(sl, "info") + Language.getMessage(sl, "creating_lang_resource"));
 				}, 1);
 
-			} else if (rf.length() < s.getResource("en.yml").available()) {
+			} else if (rf.length() < s.getResource("en.yml").available()
+					&& s.getResource("en.yml").available() - rf.length() >= 25) {
 				if (rf.delete()) Files.copy(in, target);
 
 				Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
 					File sl = Language.getServerLang();
-					cs.sendMessage(Language.getMessage(sl, "info") + Language.getMessage(sl, "replacing_lang_file"));
+					cs.sendMessage(Language.getMessage(sl, "info") + String.format(Language.getMessage(sl,
+							"replacing_lang_file"), rf.getName().split(".")[0]));
 				}, 1);
 			}
 
@@ -244,11 +248,7 @@ public class Language {
 	}
 
 	public static boolean compareLanguages(File main, File comp) {
-
 		long ms = main.getTotalSpace(), cs = comp.getTotalSpace();
-		Bukkit.broadcastMessage("First: " + ms + " | second:" + cs);
-		Bukkit.broadcastMessage("equals: " + ((ms - cs) * 4) + " | boolean:" + (((ms - cs) * 4) <= 1000));
-
 		return (((ms - cs) * 4) <= 1000);
 	}
 }

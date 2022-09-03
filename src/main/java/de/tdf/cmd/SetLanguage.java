@@ -41,23 +41,7 @@ public class SetLanguage implements CommandExecutor, TabCompleter {
 		String lang = args[0];
 		File lf = Language.getLangFile(lang);
 
-		if (!Language.isLangFile(lang)) {
-			p.sendMessage(Language.PRE + String.format(Language.getMessage(pl, "arg_invalid"), args[0]));
-			return false;
-		}
-
-		if (lf == null) {
-			p.sendMessage(Language.PRE + String.format(Language.getMessage(pl, "arg_invalid"), args[0]));
-			return true;
-		}
-
-		if (!Language.isValidLang(lf)) {
-			p.sendMessage(Language.PRE + String.format(Language.getMessage(pl, "lang_load_error"), args[0]));
-			return true;
-		}
-
-		if (pl != Language.getServerLang() && Language.compareLanguages(Language.getServerLang(), pl))
-			p.sendMessage(Language.PRE + String.format(Language.getMessage(pl, "lang_missing_strings_warning"), args[0]));
+		if(!validLangInputFeedback(p, args[0], lf)) return false;
 
 		Language.setLang(p, lf);
 
@@ -65,6 +49,30 @@ public class SetLanguage implements CommandExecutor, TabCompleter {
 				pls, Language.getLang(p).getName().split(".yml")[0]));
 
 		return false;
+	}
+
+	public boolean validLangInputFeedback(Player p, String lang, File lf) {
+		File pl = Language.getLang(p);
+
+		if (!Language.isLangFile(lang)) {
+			p.sendMessage(Language.PRE + String.format(Language.getMessage(pl, "arg_invalid"), lang));
+			return false;
+		}
+
+		if (lf == null) {
+			p.sendMessage(Language.PRE + String.format(Language.getMessage(pl, "arg_invalid"), lang));
+			return false;
+		}
+
+		if (!Language.isValidLang(lf)) {
+			p.sendMessage(Language.PRE + String.format(Language.getMessage(pl, "lang_load_error"), lang));
+			return false;
+		}
+
+		if (pl != Language.getServerLang() && Language.compareLanguages(Language.getServerLang(), pl))
+			p.sendMessage(Language.PRE + String.format(Language.getMessage(pl, "lang_missing_strings_warning"), lang));
+
+		return true;
 	}
 
 	@Override
