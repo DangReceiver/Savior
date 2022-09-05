@@ -4,6 +4,7 @@ import de.tdf.cmd.SetLanguage;
 import de.tdf.listener.*;
 import de.tdf.language.Language;
 import org.bukkit.Bukkit;
+import org.bukkit.GameRule;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -21,13 +22,7 @@ public final class Savior extends JavaPlugin {
 		savior = this;
 		ConsoleCommandSender cs = Bukkit.getConsoleSender();
 
-		if (Language.updateServerLang()) {
-			cs.sendMessage("hi1");
-			if (Language.updateServerLang()) {
-				cs.sendMessage("hi2");
-				return;
-			}
-		}
+		if (Language.updateServerLang()) if (Language.updateServerLang()) return;
 		Language.loadMessages();
 
 		Bukkit.getPluginManager().registerEvents(new PlayerConnection(), this);
@@ -38,12 +33,15 @@ public final class Savior extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new StartToSprint(), this);
 		Bukkit.getPluginManager().registerEvents(new EffectHeadBottle(), this);
 		Bukkit.getPluginManager().registerEvents(new PreDeath(), this);
+		Bukkit.getPluginManager().registerEvents(new Respawn(), this);
 
 		Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());
 		Objects.requireNonNull(getCommand("SetLanguage")).setTabCompleter(new SetLanguage());
 
 		for (Player ap : Bukkit.getOnlinePlayers())
 			Language.setLang(ap, Language.getLangFile("en"));
+
+		Bukkit.getWorld("world").setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
 	}
 
 	@Override

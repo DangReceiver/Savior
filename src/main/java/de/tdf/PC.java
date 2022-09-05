@@ -203,6 +203,14 @@ public class PC {
 		return Language.getLangFile(getLanguageString() != null ? getLanguageString() : Language.getServerLang().getName().split(".")[0]);
 	}
 
+	public boolean setLanguage(File f) {
+		if (Language.isValidLang(f)) {
+			c.set("Customization.Language", f.getName().split("\\.")[0]);
+			return true;
+		}
+		return false;
+	}
+
 	public String getPlayerColor() {
 		return c.isSet("Customization.Chat.Color") ? c.getString("Customization.Chat.Color") : "§7";
 	}

@@ -30,8 +30,8 @@ public class StartToSprint implements Listener {
 		Player p = e.getPlayer();
 		if (p.isSprinting()) return;
 
-		if (new Random().nextInt(16) == 0) p.addPotionEffect(
-				new PotionEffect(PotionEffectType.SPEED, 50, 2, false, false, false));
+		if (new Random().nextInt(26) == 0) p.addPotionEffect(
+				new PotionEffect(PotionEffectType.SPEED, 60, 3, false, false, false));
 
 	}
 }

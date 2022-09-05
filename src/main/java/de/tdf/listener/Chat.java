@@ -16,7 +16,7 @@ public class Chat implements Listener {
 		Player p = e.getPlayer();
 		PC pc = PC.loadConfig(p);
 
-		String f = " <counter_link><player_color><player_name><link> <message_color><message>  <suffix>";
+		String f = "‖ <counter_link><player_color><player_name><link> <message_color><message>  <suffix>";
 		e.setFormat(f);
 
 		List<Integer> dmc = pc.getDefaultMessageColor();

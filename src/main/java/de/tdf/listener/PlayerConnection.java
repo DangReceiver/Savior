@@ -17,6 +17,10 @@ public class PlayerConnection implements Listener {
 		Player p = e.getPlayer();
 		PC pc = PC.loadConfig(p);
 
+		if (pc.getLanguageString() == null) {
+			pc.setLanguage(Language.getServerLang());
+			pc.savePCon();
+		}
 		Language.setLang(p, pc.getLanguage());
 
 		e.setJoinMessage(null);

@@ -155,6 +155,8 @@ public class Language {
 		if (sl == null) {
 			c.set("server_language", "en");
 			Savior.getSavior().saveConfig();
+
+			sLang = getLangFile(c.getString("server_language"));
 			return true;
 		}
 
@@ -177,6 +179,8 @@ public class Language {
 	public static void loadResources(Plugin s, File langF) {
 		File rf = new File(langF, "en.yml");
 		InputStream in = s.getResource("en.yml");
+
+		if (in == null) return;
 
 		ConsoleCommandSender cs = Bukkit.getConsoleSender();
 		Path target = rf.toPath();
@@ -206,8 +210,10 @@ public class Language {
 		}
 	}
 
-	public static void loadCustomLanguages(File langF) {
+	public static void loadCustomLanguages(Plugin s, File langF) {
 		for (File file : langF.listFiles()) {
+			if (s.getResource(file.getName()) != null) loadResources(s, new File(s.getDataFolder() + "/language"));
+
 			Map<String, String> lm = new HashMap<>();
 			FileConfiguration lang = YamlConfiguration.loadConfiguration(file);
 
@@ -233,7 +239,7 @@ public class Language {
 		File langF = langFolder();
 
 		loadResources(s, langF);
-		loadCustomLanguages(langF);
+		loadCustomLanguages(s, langF);
 
 		if (getServerLang() == null) setServerLang(new File(langF, "en.yml"));
 	}
