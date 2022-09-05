@@ -37,6 +37,7 @@ public final class Savior extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new Death(), this);
 		Bukkit.getPluginManager().registerEvents(new StartToSprint(), this);
 		Bukkit.getPluginManager().registerEvents(new EffectHeadBottle(), this);
+		Bukkit.getPluginManager().registerEvents(new PreDeath(), this);
 
 		Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());
 		Objects.requireNonNull(getCommand("SetLanguage")).setTabCompleter(new SetLanguage());
