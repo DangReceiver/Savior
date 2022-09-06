@@ -51,7 +51,7 @@ public class Language {
 	}
 
 	public static String getMessage(File f, String key) {
-		return validString(getServerLang(), key) ? messages.get(f).get(key)
+		return validString(f, key) ? messages.get(f).get(key)
 				: validString(getServerLang(), key) ? messages.get(getServerLang()).get(key)
 				: validString(f, "string_not_found")
 				? String.format(messages.get(f).get("string_not_found"), key) :
