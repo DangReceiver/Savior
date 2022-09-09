@@ -1,3 +1,8 @@
+values:
+  default_language: true
+  preferred_language: true
+  has_resource: true
+
 prefixes:
   info: "§9Info §8‖ §7"
   error: "§cError §8‖ §7"
@@ -17,11 +22,11 @@ system_messages:
   lang_current: "Your current language is %s"
   lang_how_to_change: "Use '/SetLanguage <Language acronym>' to change your language§8."
   arg_invalid: "The provided argument (%s) is invalid§8."
-  replacing_lang_file: "The language file %s was replaced by its' resource, since it was estimated more up to date§8."
+  replacing_lang_file: "The language file %s was replaced by its resource, since it was estimated more up to date§8."
   creating_lang_resource: "The language file %s was created from the resource§8."
+  invalid_language_resource: "The provided language resource file %s could not be accessed."
 
 player_feedback:
-  default: "default feedback"
   firework_jump_hint: "§7Right click on a block while sneaking to be boosted§8."
   player_death_0: "%s took the easy way out§8. "
   player_death_1: "%s may find more luck in another life§8. "
@@ -38,6 +43,7 @@ player_feedback:
   lang_missing_strings_warning: "Be aware: this language is apparently missing translations§8."
 
 broadcasts:
+  player_first_join: "%s joined us for the first time!"
   player_join_0: "%s just hopped in§8. ⌈§a»§8⌋"
   player_join_1: "%s is now with us§8. ⌈§a»§8⌋"
   player_join_2: "Hey %s, lookin' good today§8! ⌈§a»§8⌋"
@@ -51,7 +57,7 @@ broadcasts:
   player_join_10: "%s§8. §7Nothing more than that§8. ⌈§a»§8⌋"
   player_join_11: "%s was summoned§8. ⌈§a»§8⌋"
   player_join_12: "%s is now looking for diamonds§8. ⌈§a»§8⌋"
-  player_first_join: "%s joined us for the first time!"
+  player_unsuitable_quit: "%s dodged the quitting system§8."
   player_quit_0: "%s has enough for today§8. ⌈§c«§8⌋"
   player_quit_1: "%s forgot their pizza in the oven§8. ⌈§c«§8⌋"
   player_quit_2: "%s separated from us§8. ⌈§c«§8⌋"
@@ -65,4 +71,3 @@ broadcasts:
   player_quit_10: "%s has to pee really bad§8. ⌈§c«§8⌋"
   player_quit_11: "%s was caught by their parental authority§8. ⌈§c«§8⌋"
   player_quit_12: "The day %s left, was the day my heart broke§8. ⌈§c«§8⌋"
-  player_unsuitable_quit: "%s dodged the quitting system§8."

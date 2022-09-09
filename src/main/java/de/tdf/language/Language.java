@@ -8,8 +8,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.io.File;
@@ -17,10 +15,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class Language {
 
@@ -29,10 +25,10 @@ public class Language {
 	public static String PRE = "§8⌜" + colorFromRGB(245, 25, 125) + "Savior§8⌟ §7";
 
 	public static File sLang;
-	private static File df = Savior.getSavior().getDataFolder();
+	private static final File df = Savior.getSavior().getDataFolder();
 
-	private static Map<Player, File> settings = new HashMap<>();
-	private static Map<File, Map<String, String>> messages = new HashMap<>();
+	private static final Map<Player, File> settings = new HashMap<>();
+	private static final Map<File, Map<String, String>> messages = new HashMap<>();
 
 	public static net.md_5.bungee.api.ChatColor colorFromRGB(int r, int g, int b) {
 		return net.md_5.bungee.api.ChatColor.of(new Color(r, g, b));
@@ -74,7 +70,7 @@ public class Language {
 		List<File> lf = new ArrayList<>();
 
 		if (new File(df + "/language").listFiles() == null) return null;
-		for (File f : new File(df + "/language").listFiles()) lf.add(f);
+		Collections.addAll(lf, new File(df + "/language").listFiles());
 
 		return lf;
 	}
@@ -176,37 +172,42 @@ public class Language {
 		return langFolder;
 	}
 
-	public static void loadResources(Plugin s, File langF) {
-		File rf = new File(langF, "en.yml");
-		InputStream in = s.getResource("en.yml");
+	public static void loadResources(Plugin sa, File langF) {
+		List<String> resources = new ArrayList<>(Arrays.asList("de.yml", "en.yml"));
 
-		if (in == null) return;
+		for (String s : resources) {
 
-		ConsoleCommandSender cs = Bukkit.getConsoleSender();
-		Path target = rf.toPath();
+			File rf = new File(langF, s);
+			Path target = rf.toPath();
+			InputStream in = sa.getResource(s);
 
-		try {
-			if (rf == null) {
-				Files.copy(in, target);
+			ConsoleCommandSender cs = Bukkit.getConsoleSender();
+			File sl = Language.getServerLang();
 
-				Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
-					File sl = Language.getServerLang();
-					cs.sendMessage(Language.getMessage(sl, "info") + Language.getMessage(sl, "creating_lang_resource"));
-				}, 1);
-
-			} else if (rf.length() < s.getResource("en.yml").available()
-					&& s.getResource("en.yml").available() - rf.length() >= 25) {
-				if (rf.delete()) Files.copy(in, target);
-
-				Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
-					File sl = Language.getServerLang();
-					cs.sendMessage(Language.getMessage(sl, "info") + String.format(Language.getMessage(sl,
-							"replacing_lang_file"), rf.getName().split(".")[0]));
-				}, 1);
+			if (in == null) {
+				Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> cs.sendMessage(Language.getMessage(sl,
+						"info") + Language.getMessage(sl, "invalid_language_resource")), 1);
+				return;
 			}
 
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				if (rf.length() < sa.getResource(s).available() &&
+						sa.getResource(s).available() - rf.length() >= 25) {
+					if (rf.delete()) Files.copy(in, target);
+
+					Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> cs.sendMessage(Language.getMessage(sl,
+							"info") + String.format(Language.getMessage(sl, "replacing_lang_file"),
+							rf.getName().split(".")[0])), 1);
+					continue;
+				}
+
+				Files.copy(in, target);
+				Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> cs.sendMessage(Language.getMessage(sl,
+						"info") + Language.getMessage(sl, "creating_lang_resource")), 1);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -255,6 +256,6 @@ public class Language {
 
 	public static boolean compareLanguages(File main, File comp) {
 		long ms = main.getTotalSpace(), cs = comp.getTotalSpace();
-		return (((ms - cs) * 4) <= 1000);
+		return ((ms - cs) <= 250);
 	}
 }
