@@ -4,6 +4,7 @@ values:
   has_resource: true
 
 prefixes:
+  broadcast: "§3Broadcast §8‖ §7"
   info: "§9Info §8‖ §7"
   error: "§cError §8‖ §7"
   warn: "§6Warn §8‖ §7"
@@ -24,7 +25,7 @@ system_messages:
   arg_invalid: "The provided argument (%s) is invalid§8."
   replacing_lang_file: "The language file %s was replaced by its resource, since it was estimated more up to date§8."
   creating_lang_resource: "The language file %s was created from the resource§8."
-  invalid_language_resource: "The provided language resource file %s could not be accessed."
+  invalid_lang_resource: "The provided language resource file %s could not be accessed."
 
 player_feedback:
   firework_jump_hint: "§7Right click on a block while sneaking to be boosted§8."
@@ -41,6 +42,7 @@ player_feedback:
   player_death_10: "%s just found a way out of that shit§8. "
   player_death_info: "Your recent deaths location§8: §e%s, %s, %s§8§8."
   lang_missing_strings_warning: "Be aware: this language is apparently missing translations§8."
+  tps_to_complete: "Current server §eTPS §8- §71 minute§8: §6%s§8; §75 minutes§8: §6%s§8; §715 minutes§8: §6%s"
 
 broadcasts:
   player_first_join: "%s joined us for the first time!"

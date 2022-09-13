@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
 
 public class FireWorkJump implements Listener {
@@ -35,11 +36,14 @@ public class FireWorkJump implements Listener {
 				else i.setType(Material.AIR);
 
 			p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0)));
-			Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
+
+			BukkitScheduler bs = Bukkit.getScheduler();
+			bs.runTaskLater(Savior.getSavior(), () -> {
+
 				p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0)));
 				p.setFallDistance(p.getFallDistance() * 0.6f);
 
-				Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () ->
+				bs.runTaskLater(Savior.getSavior(), () ->
 						p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0))), 2);
 			}, 2);
 		}

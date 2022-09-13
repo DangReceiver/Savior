@@ -9,3 +9,5 @@ description: Survival Plugin
 commands:
   SetLanguage:
     description: Set your preferred language.
+  Tps:
+    description: get the servers tps.

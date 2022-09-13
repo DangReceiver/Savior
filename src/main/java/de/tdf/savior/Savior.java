@@ -1,13 +1,18 @@
 package de.tdf.savior;
 
 import de.tdf.cmd.SetLanguage;
+import de.tdf.cmd.Tps;
 import de.tdf.listener.*;
 import de.tdf.language.Language;
-import org.bukkit.Bukkit;
-import org.bukkit.GameRule;
+import de.tdf.worlds.Spawn;
+import org.bukkit.*;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -20,29 +25,50 @@ public final class Savior extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		savior = this;
-		ConsoleCommandSender cs = Bukkit.getConsoleSender();
 
-		if (Language.updateServerLang()) if (Language.updateServerLang()) return;
+		ConsoleCommandSender cs = Bukkit.getConsoleSender();
+		Bukkit.getWorld("world").setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
+
+		if (!Spawn.checkExists()) {
+			cs.sendMessage(Language.PRE + "The world \"Spawn\" could not be loaded. The plugin will be disabled.");
+			getServer().getPluginManager().disablePlugin(this);
+			return;
+		}
+
+		if (Language.updateServerLang()) if (Language.updateServerLang()) {
+			cs.sendMessage(Language.PRE + "The server language could not be estimated. Stopping plugin load process.");
+			return;
+		}
+
 		Language.loadMessages();
 
-		Bukkit.getPluginManager().registerEvents(new PlayerConnection(), this);
-		Bukkit.getPluginManager().registerEvents(new FireWorkJump(), this);
-		Bukkit.getPluginManager().registerEvents(new SneakEvent(), this);
-		Bukkit.getPluginManager().registerEvents(new Chat(), this);
-		Bukkit.getPluginManager().registerEvents(new Death(), this);
-		Bukkit.getPluginManager().registerEvents(new StartToSprint(), this);
-		Bukkit.getPluginManager().registerEvents(new EffectHeadBottle(), this);
-		Bukkit.getPluginManager().registerEvents(new PreDeath(), this);
-		Bukkit.getPluginManager().registerEvents(new Respawn(), this);
-		Bukkit.getPluginManager().registerEvents(new Teleport(), this);
+		PluginManager pm = Bukkit.getPluginManager();
+		pm.registerEvents(new PlayerConnection(), this);
+		pm.registerEvents(new FireWorkJump(), this);
+		pm.registerEvents(new SneakEvent(), this);
+		pm.registerEvents(new Chat(), this);
+		pm.registerEvents(new Death(), this);
+		pm.registerEvents(new StartToSprint(), this);
+		pm.registerEvents(new EffectHeadBottle(), this);
+		pm.registerEvents(new PreDeath(), this);
+		pm.registerEvents(new Respawn(), this);
+		pm.registerEvents(new Teleport(), this);
+		pm.registerEvents(new SpawnButtonPush(), this);
+		pm.registerEvents(new EntityDamageDisplay(), this);
+//		pm.registerEvents(new ToSaviorCommand(), this);
 
 		Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());
 		Objects.requireNonNull(getCommand("SetLanguage")).setTabCompleter(new SetLanguage());
+//		Objects.requireNonNull(getCommand("Tps")).setExecutor(new Tps());
 
 		for (Player ap : Bukkit.getOnlinePlayers())
 			Language.setLang(ap, Language.getLangFile("en"));
 
-		Bukkit.getWorld("world").setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
+
+		for (Entity as : Bukkit.getWorld("world").getEntities())
+			if (as instanceof ArmorStand) as.remove();
+		for (Entity as : Bukkit.getWorld("Spawn").getEntities())
+			if (as instanceof ArmorStand) as.remove();
 	}
 
 	@Override
@@ -73,4 +99,18 @@ public final class Savior extends JavaPlugin {
 		}
 		return true;
 	}
+
+	public static Location getSafeSpawnLocation() {
+		FileConfiguration c = Savior.getSavior().getConfig();
+		Location spawnLoc = c.getLocation("Locations.Spawn");
+
+		if (spawnLoc == null) {
+			spawnLoc = new Location(Bukkit.getWorld("Spawn"), 0, 64.02, 0);
+
+			c.set("Locations.Spawn", spawnLoc);
+			Savior.getSavior().saveConfig();
+		}
+		return spawnLoc;
+	}
 }
+

@@ -228,6 +228,18 @@ public class PC {
 				: new ArrayList<>(Arrays.asList("", "§8:"));
 	}
 
+	public boolean hasLogoutLocation() {
+		return c.isSet("Statistics.Locations.LogOut");
+	}
+
+	public Location getLogoutLocation() {
+		return c.getLocation("Statistics.Locations.LogOut");
+	}
+
+	public void setLogoutLocation(Location l) {
+		c.set("Statistics.Locations.LogOut", l);
+	}
+
 	public void savePCon() {
 		try {
 			c.save(this.f);

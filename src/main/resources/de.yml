@@ -24,7 +24,7 @@ system_messages:
   arg_invalid: "Das angegebene Argument (%s) ist ungültig§8."
   replacing_lang_file: "Die Sprach-Datei %s wurde von ihrer Resource ersetzt, da angenommen wird, dass sie aktueller ist§8."
   creating_lang_resource: "Die Sprach-Datei %s wurde per Resource erstellt§8."
-  invalid_language_resource: "The provided language resource file %s could not be accessed."
+  invalid_lang_resource: "The provided language resource file %s could not be accessed."
 
 player_feedback:
   firework_jump_hint: "§7Rechts klicke auf einen Block während du die Raketen hältst, um geboostet zu werden§8."

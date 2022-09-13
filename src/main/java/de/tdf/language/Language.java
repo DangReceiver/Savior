@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.List;
 
@@ -84,7 +85,7 @@ public class Language {
 	}
 
 	public static void broadcastArg(String key, String... arg) {
-		Bukkit.getConsoleSender().sendMessage(getMessage(getServerLang(), "info") +
+		Bukkit.getConsoleSender().sendMessage(getMessage(getServerLang(), "broadcast") +
 				String.format(getMessage(getServerLang(), key), arg));
 
 		for (Player ap : Bukkit.getOnlinePlayers()) {
@@ -173,7 +174,7 @@ public class Language {
 	}
 
 	public static void loadResources(Plugin sa, File langF) {
-		List<String> resources = new ArrayList<>(Arrays.asList("de.yml", "en.yml"));
+		List<String> resources = new ArrayList<>(Arrays.asList("en.yml", "de.yml"));
 
 		for (String s : resources) {
 
@@ -182,28 +183,28 @@ public class Language {
 			InputStream in = sa.getResource(s);
 
 			ConsoleCommandSender cs = Bukkit.getConsoleSender();
-			File sl = Language.getServerLang();
+			File sl = Language.getLangFile(s.split(".yml")[0]);
 
 			if (in == null) {
-				Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> cs.sendMessage(Language.getMessage(sl,
-						"info") + Language.getMessage(sl, "invalid_language_resource")), 1);
+				Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> cs.sendMessage(
+						Language.getMessage(sl, "error") + Language.getMessage(sl, "invalid_lang_resource")), 1);
 				return;
 			}
 
 			try {
 				if (rf.length() < sa.getResource(s).available() &&
 						sa.getResource(s).available() - rf.length() >= 25) {
-					if (rf.delete()) Files.copy(in, target);
+					Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
 
-					Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> cs.sendMessage(Language.getMessage(sl,
-							"info") + String.format(Language.getMessage(sl, "replacing_lang_file"),
-							rf.getName().split(".")[0])), 1);
+					Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () ->
+							cs.sendMessage(Language.getMessage(sl, "info") + String.format(
+									Language.getMessage(sl, "replacing_lang_file"), s)), 1);
 					continue;
 				}
 
 				Files.copy(in, target);
-				Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> cs.sendMessage(Language.getMessage(sl,
-						"info") + Language.getMessage(sl, "creating_lang_resource")), 1);
+				Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> cs.sendMessage(
+						Language.getMessage(sl, "info") + Language.getMessage(sl, "creating_lang_resource")), 1);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -212,17 +213,18 @@ public class Language {
 	}
 
 	public static void loadCustomLanguages(Plugin s, File langF) {
-		for (File file : langF.listFiles()) {
-			if (s.getResource(file.getName()) != null) loadResources(s, new File(s.getDataFolder() + "/language"));
 
+		if (langF.listFiles() == null || langF.listFiles().length == 0)
+			loadResources(s, new File(s.getDataFolder() + "/language"));
+
+		for (File file : langF.listFiles()) {
 			Map<String, String> lm = new HashMap<>();
 			FileConfiguration lang = YamlConfiguration.loadConfiguration(file);
 
 			for (String key : lang.getKeys(false)) {
 				for (String messName : lang.getConfigurationSection(key).getKeys(false)) {
 
-					String message = ChatColor.translateAlternateColorCodes('§',
-							lang.getString(key + "." + messName));
+					String message = ChatColor.translateAlternateColorCodes('§', lang.getString(key + "." + messName));
 					lm.put(messName, message);
 				}
 			}
@@ -239,7 +241,6 @@ public class Language {
 		Plugin s = Savior.getSavior();
 		File langF = langFolder();
 
-		loadResources(s, langF);
 		loadCustomLanguages(s, langF);
 
 		if (getServerLang() == null) setServerLang(new File(langF, "en.yml"));

@@ -1,5 +1,6 @@
 package de.tdf.cmd;
 
+import de.tdf.PC;
 import de.tdf.language.Language;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -44,6 +45,10 @@ public class SetLanguage implements CommandExecutor, TabCompleter {
 		if(!validLangInputFeedback(p, args[0], lf)) return false;
 
 		Language.setLang(p, lf);
+
+		PC pc = PC.loadConfig(p);
+		pc.setLanguage(lf);
+		pc.savePCon();
 
 		p.sendMessage(Language.PRE + String.format(Language.getMessage(Language.getLang(p), "lang_updated"),
 				pls, Language.getLang(p).getName().split(".yml")[0]));
