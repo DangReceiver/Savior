@@ -16,6 +16,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.awt.*;
+
 public class EntityDamageDisplay implements Listener {
 
 	@EventHandler
@@ -28,26 +30,39 @@ public class EntityDamageDisplay implements Listener {
 		Bukkit.getScheduler().runTaskLater(Savior.getSavior(), as::remove, 2 * 20);
 
 		as.setMarker(true);
+		as.setInvulnerable(true);
+		as.setInvisible(true);
 		as.setCustomNameVisible(true);
-		as.setCustomName("§" + getPercentageColor(damagePercentage(en.getMaxHealth(), ev.getDamage())) + ev.getDamage());
+		as.setCustomName(getPercentageColor(damagePercentage(en.getMaxHealth(), ev.getDamage())) + ""
+				+ damagePercentage(en.getMaxHealth(), ev.getDamage()) + "  /  " + ev.getDamage());
 		as.setSmall(true);
-		as.setHelmet(new ItemStack(Material.GOLDEN_SWORD));
+		as.setHelmet(new ItemStack(Material.RED_TULIP));
 
 		int i = 0;
 		tpAs(as, i);
 
-		if (e instanceof EntityDamageByEntityEvent event) {
+		ChatColor color = getPercentageColor(damagePercentage(en.getMaxHealth(), ev.getDamage()));
+		Bukkit.broadcastMessage("R: " + color.getColor().getRed()
+				+ "\n G: " + color.getColor().getRed() + "\n B: " + color.getColor().getRed());
 
-		}
+//		if (e instanceof EntityDamageByEntityEvent event) {
+//
+//		}
 	}
 
 	public ChatColor getPercentageColor(double percent) {
 		double toHex = percent * 7.65;
 
-		double r = -255 + percent * 4 <= 255 ? percent * 4 : 255,
-				g = percent * 2 <= 255 ? percent * 2 : 255;
+		double r = 0, g = 0;
+		try {
+			r = Double.parseDouble((-255 + toHex * 4 <= 255 ? toHex * 4 : 255) + "");
+			g = Double.parseDouble((toHex * 2 <= 255 ? toHex * 2 : 255) + "");
+		} catch (NumberFormatException ex) {
+			ex.printStackTrace();
+		}
 
-		return Language.colorFromRGB((int) r, (int) g, 0);
+		Bukkit.broadcastMessage("§eR: " + r + " G: " + g);
+		return net.md_5.bungee.api.ChatColor.of(new Color((int) r, (int) g, 0));
 	}
 
 	/**
@@ -55,14 +70,23 @@ public class EntityDamageDisplay implements Listener {
 	 */
 	@Deprecated
 	public double damagePercentage(double maxHealth, double damage) {
-		double percent = 100 * damage / maxHealth;
-		return Math.round(percent) / 100f;
+		double percent = damage / maxHealth * 100;
+		percent = Math.round(percent);
+
+		return percent / 100;
 	}
 
 	public void tpAs(ArmorStand as, int i) {
-		if (i++ >= 25) return;
-		if (!as.isDead()) as.teleport(as.getLocation().add(0, 0.1, 0));
+		int copy = i + 1;
 
-		tpAs(as, i);
+		if (copy >= 22) {
+			Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
+				if (!as.isDead()) as.remove();
+			}, 15);
+			return;
+		}
+
+		if (!as.isDead()) as.teleport(as.getLocation().add(0, 0.15, 0));
+		Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> tpAs(as, i), 1);
 	}
 }
