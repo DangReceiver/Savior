@@ -42,8 +42,9 @@ public class EntityDamageDisplay implements Listener {
 		tpAs(as, i);
 
 		ChatColor color = getPercentageColor(damagePercentage(en.getMaxHealth(), ev.getDamage()));
-		Bukkit.broadcastMessage("R: " + color.getColor().getRed()
-				+ "\n G: " + color.getColor().getRed() + "\n B: " + color.getColor().getRed());
+		Bukkit.broadcastMessage(" R: " + color.getColor().getRed()
+				+ "\n G: " + color.getColor().getGreen() + "\n B: " + color.getColor().getBlue() + "\n"
+				+ getPercentageColor(damagePercentage(en.getMaxHealth(), ev.getDamage())) + "Text Example");
 
 //		if (e instanceof EntityDamageByEntityEvent event) {
 //
@@ -51,18 +52,12 @@ public class EntityDamageDisplay implements Listener {
 	}
 
 	public ChatColor getPercentageColor(double percent) {
-		double toHex = percent * 7.65;
+		double value = (percent <= 1 ? percent : 1) * 255;
+		Bukkit.broadcastMessage("percent: " + percent + " | RGB value part: " + value + " | 255 -: " + (255 - (int) value));
 
-		double r = 0, g = 0;
-		try {
-			r = Double.parseDouble((-255 + toHex * 4 <= 255 ? toHex * 4 : 255) + "");
-			g = Double.parseDouble((toHex * 2 <= 255 ? toHex * 2 : 255) + "");
-		} catch (NumberFormatException ex) {
-			ex.printStackTrace();
-		}
+		int r = (int) value, g = 255 - (int) value;
 
-		Bukkit.broadcastMessage("§eR: " + r + " G: " + g);
-		return net.md_5.bungee.api.ChatColor.of(new Color((int) r, (int) g, 0));
+		return net.md_5.bungee.api.ChatColor.of(new Color(r, g, 0));
 	}
 
 	/**
