@@ -1,6 +1,7 @@
 package de.tdf.listener;
 
 import de.tdf.language.Language;
+import de.tdf.savior.Savior;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,5 +18,7 @@ public class Respawn implements Listener {
 		File l = Language.getLang(p);
 		p.sendTitle(Language.getMessage(l, "you_died_title"), Language.getMessage(l,
 				"you_died_subtitle"), 20, 60, 40);
+
+		e.setRespawnLocation(Savior.getSafeSpawnLocation());
 	}
 }

@@ -14,22 +14,16 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 public class SpawnButtonPush implements Listener {
 
-//	@EventHandler
+	@EventHandler
 	public void handle(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
 		Block cb = e.getClickedBlock();
 
 		if (cb == null) return;
+		if (cb.getWorld() != Bukkit.getWorld("Spawn")) return;
 
-//		p.sendMessage(cb.getType() + " | " + cb.getLocation().getBlock().getLocation());
-
-		if (cb.getWorld() != Bukkit.getWorld("Spawn")) {
-			e.setCancelled(true);
-			return;
-		}
-
-		if (!cb.getType().toString().contains("button")) return;
-		if (cb.getLocation().getBlock() != Savior.getSafeSpawnLocation().getBlock()) return;
+		if (!cb.getType().toString().contains("BUTTON")) return;
+		if (!cb.equals(Savior.getSafeSpawnLocation().getBlock())) return;
 
 		PC pc = PC.loadConfig(p);
 

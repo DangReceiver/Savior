@@ -1,7 +1,6 @@
 package de.tdf.savior;
 
-import de.tdf.cmd.SetLanguage;
-import de.tdf.cmd.Tps;
+import de.tdf.cmd.*;
 import de.tdf.listener.*;
 import de.tdf.language.Language;
 import de.tdf.worlds.Spawn;
@@ -16,15 +15,19 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Objects;
+import java.util.Properties;
 
 public final class Savior extends JavaPlugin {
 
 	private static Savior savior;
+	public static String version;
 
 	@Override
 	public void onEnable() {
 		savior = this;
+		version = getVersion();
 
 		ConsoleCommandSender cs = Bukkit.getConsoleSender();
 		Bukkit.getWorld("world").setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
@@ -43,7 +46,7 @@ public final class Savior extends JavaPlugin {
 		Language.loadMessages();
 
 		PluginManager pm = Bukkit.getPluginManager();
-		pm.registerEvents(new PlayerConnection(), this);
+		pm.registerEvents(new ConnectionManager(), this);
 		pm.registerEvents(new FireWorkJump(), this);
 		pm.registerEvents(new SneakEvent(), this);
 		pm.registerEvents(new Chat(), this);
@@ -55,11 +58,26 @@ public final class Savior extends JavaPlugin {
 		pm.registerEvents(new Teleport(), this);
 		pm.registerEvents(new SpawnButtonPush(), this);
 		pm.registerEvents(new EntityDamageDisplay(), this);
+		pm.registerEvents(new TreeCutDown(), this);
+		pm.registerEvents(new Doors(), this);
+		pm.registerEvents(new CreeperActivateCreeper(), this);
+		pm.registerEvents(new SpawnProtection(), this);
 //		pm.registerEvents(new ToSaviorCommand(), this);
 
 		Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());
 		Objects.requireNonNull(getCommand("SetLanguage")).setTabCompleter(new SetLanguage());
-//		Objects.requireNonNull(getCommand("Tps")).setExecutor(new Tps());
+		Objects.requireNonNull(getCommand("TicksPerSecond")).setExecutor(new TicksPerSecond());
+		Objects.requireNonNull(getCommand("ArrowsInBody")).setExecutor(new ArrowsInBody());
+		Objects.requireNonNull(getCommand("ClearChat")).setExecutor(new ClearChat());
+		Objects.requireNonNull(getCommand("Ench")).setExecutor(new Ench());
+		Objects.requireNonNull(getCommand("Fly")).setExecutor(new Fly());
+		Objects.requireNonNull(getCommand("Gm")).setExecutor(new Gm());
+		Objects.requireNonNull(getCommand("Heal")).setExecutor(new Heal());
+		Objects.requireNonNull(getCommand("Info")).setExecutor(new Info());
+		Objects.requireNonNull(getCommand("Invsee")).setExecutor(new Invsee());
+		Objects.requireNonNull(getCommand("Speed")).setExecutor(new Speed());
+		Objects.requireNonNull(getCommand("TpExact")).setExecutor(new TpExact());
+		Objects.requireNonNull(getCommand("TpWorld")).setExecutor(new TpWorld());
 
 		for (Player ap : Bukkit.getOnlinePlayers())
 			Language.setLang(ap, Language.getLangFile("en"));
@@ -77,6 +95,28 @@ public final class Savior extends JavaPlugin {
 			Language.removePlayer(ap);
 
 		savior = null;
+	}
+
+	public synchronized String getVersion() {
+		String v = null;
+		try {
+			Properties p = new Properties();
+			InputStream is = getClass().getResourceAsStream("/META-INF/maven/de.tdf/Savior/pom.properties");
+			if (is != null) {
+				p.load(is);
+				v = p.getProperty("version", "");
+			}
+		} catch (Exception ignored) {
+		}
+		if (v == null) {
+			Package ap = getClass().getPackage();
+			if (ap != null) {
+				v = ap.getImplementationVersion();
+				if (v == null)
+					v = ap.getSpecificationVersion();
+			}
+		}
+		return v;
 	}
 
 	public static Plugin getSavior() {

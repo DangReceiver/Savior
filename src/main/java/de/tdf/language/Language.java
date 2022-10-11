@@ -21,9 +21,9 @@ import java.util.List;
 
 public class Language {
 
-	// ⌈⌋ | ⌜⌟
+	// ⌈⌋ | ⌜⌟ | ⌞⌝ | ⌊⌉
 
-	public static String PRE = "§8⌜" + colorFromRGB(245, 25, 125) + "Savior§8⌟ §7";
+	public static String PRE = "§8⌊" + colorFromRGB(245, 25, 125) + "Savior§8⌉ §7";
 
 	public static File sLang;
 	private static final File df = Savior.getSavior().getDataFolder();
@@ -89,9 +89,7 @@ public class Language {
 				String.format(getMessage(getServerLang(), key), arg));
 
 		for (Player ap : Bukkit.getOnlinePlayers()) {
-			String format = "";
-
-			for (String ts : arg) format = String.format(getMessage(getLang(ap), key), ts);
+			String format = String.format(getMessage(getLang(ap), key), arg);
 			ap.sendMessage(PRE + format);
 		}
 	}

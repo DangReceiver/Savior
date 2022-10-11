@@ -13,6 +13,8 @@ public class Death implements Listener {
 
 	@EventHandler
 	public void handle(PlayerDeathEvent e) {
+		if (e.isCancelled()) return;
+
 		Player p = e.getPlayer();
 		Block block = p.getLocation().getBlock();
 

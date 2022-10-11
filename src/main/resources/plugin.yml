@@ -3,11 +3,35 @@ version: '${project.version}'
 main: de.tdf.savior.Savior
 api-version: 1.19
 authors: [ TearsDontFall ]
-description: Survival Plugin
+description: Advanced Survival Plugin
 
 
 commands:
+  ArrowsInBody:
+    description: Set the amount of arrows in your body.
+  ClearChat:
+    description: Clear the in game chat.
+  Ench:
+    description: Enchant items without vanilla set limits.
+  Fly:
+    description: Fly without the need of the gamemode.
+  Gm:
+    description: Quick-change your gamemode. Works best with a hotkey.
+  Heal:
+    description: Heal you, someone else or everyone.
+  Health:
+    description: Set peoples max health.
+  Info:
+    description: Get current server and plugin specifics.
+  Invsee:
+    description: See and configure other players inventories.
+  Speed:
+    description: Change your or others base speed.
+  TpExact:
+    description: Quick-teleport to the middle of the block you are on.
+  TpWorld:
+    description: Teleport to another world.
   SetLanguage:
     description: Set your preferred language.
-  Tps:
-    description: get the servers tps.
+  TicksPerSecond:
+    description: Get the servers tps.
