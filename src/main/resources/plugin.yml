@@ -9,29 +9,62 @@ description: Advanced Survival Plugin
 commands:
   ArrowsInBody:
     description: Set the amount of arrows in your body.
+    aliases:
+      - AIB
+      - Arrows
   ClearChat:
     description: Clear the in game chat.
+    aliases:
+      - CC
   Ench:
     description: Enchant items without vanilla set limits.
+    aliases:
+      - Enchant
+      - CustomEnchant
   Fly:
     description: Fly without the need of the gamemode.
+    aliases:
+      - Flight
   Gm:
     description: Quick-change your gamemode. Works best with a hotkey.
+    aliases:
+      - Gamemode
+      - Mode
   Heal:
     description: Heal you, someone else or everyone.
-  Health:
-    description: Set peoples max health.
   Info:
     description: Get current server and plugin specifics.
+    aliases:
+      - Help
+      - Information
+      - Ram
+      - Author
   Invsee:
     description: See and configure other players inventories.
   Speed:
     description: Change your or others base speed.
   TpExact:
     description: Quick-teleport to the middle of the block you are on.
+    aliases:
+      - Middle
+      - Position
   TpWorld:
     description: Teleport to another world.
+    aliases:
+      - ChangeWorld
+      - SwitchWorld
+      - World
   SetLanguage:
     description: Set your preferred language.
+    aliases:
+      - Language
+      - Local
   TicksPerSecond:
     description: Get the servers tps.
+    aliases:
+      - TPS
+      - ServerTicks
+  Health:
+    description: Set your or a target's max health.
+    aliases:
+      - MaxHealth

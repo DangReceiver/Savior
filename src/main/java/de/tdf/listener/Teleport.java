@@ -1,6 +1,7 @@
 package de.tdf.listener;
 
 import de.tdf.language.Language;
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,13 +13,13 @@ public class Teleport implements Listener {
 	@EventHandler
 	public void handle(PlayerTeleportEvent e) {
 		Player p = e.getPlayer();
+		if (p.getLastDamageCause() == null) return;
 
-		if (e.getCause() == PlayerTeleportEvent.TeleportCause.SPECTATE &&
-				p.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID) {
+		if (!(e.getCause() == PlayerTeleportEvent.TeleportCause.SPECTATE &&
+				p.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID)) return;
 
-			p.sendActionBar(Language.PRE + Language.getMessage(Language.getLang(p),
-					"player_action_spectate_teleport_cancel_death"));
-			e.setCancelled(true);
-		}
+		p.sendActionBar(Component.text(Language.PRE + Language.getMessage(Language.getLang(p),
+				"death_action_cancel_teleport")));
+		e.setCancelled(true);
 	}
 }

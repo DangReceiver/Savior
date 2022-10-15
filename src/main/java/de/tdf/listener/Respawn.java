@@ -1,7 +1,9 @@
 package de.tdf.listener;
 
+import de.tdf.PC;
 import de.tdf.language.Language;
 import de.tdf.savior.Savior;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,5 +22,15 @@ public class Respawn implements Listener {
 				"you_died_subtitle"), 20, 60, 40);
 
 		e.setRespawnLocation(Savior.getSafeSpawnLocation());
+
+		PC pcd = PC.loadConfig(p);
+		if (!pcd.hasDeathLocation()) {
+			p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "no_death_location"));
+			return;
+		}
+
+		pcd.setDeathLocation(null);
+		pcd.setRespawnRequired(false);
+		pcd.savePCon();
 	}
 }

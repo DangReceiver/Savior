@@ -240,6 +240,26 @@ public class PC {
 		c.set("Statistics.Locations.LogOut", l);
 	}
 
+	public boolean hasDeathLocation() {
+		return c.isSet("Statistics.Locations.Death");
+	}
+
+	public Location getDeathLocation() {
+		return c.getLocation("Statistics.Locations.Death");
+	}
+
+	public void setDeathLocation(Location l) {
+		c.set("Statistics.Locations.Death", l);
+	}
+
+	public boolean getRespawnRequired() {
+		return c.getBoolean("Mechanics.RespawnRequired");
+	}
+
+	public void setRespawnRequired(boolean required) {
+		c.set("Mechanics.RespawnRequired", required);
+	}
+
 	public void savePCon() {
 		try {
 			c.save(this.f);

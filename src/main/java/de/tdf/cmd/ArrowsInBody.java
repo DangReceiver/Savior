@@ -46,8 +46,8 @@ public class ArrowsInBody implements CommandExecutor {
 					return true;
 				}
 
-				p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "change_attribute"), p.getArrowsInBody(), "0"));
-				t.sendMessage(Language.PRE + String.format(Language.getMessage(l, "change_attribute_target"), t.getArrowsInBody(), "0"));
+				p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "change_attribute"), p.getArrowsInBody(), 0));
+				t.sendMessage(Language.PRE + String.format(Language.getMessage(l, "change_attribute_target"), t.getArrowsInBody(), 0));
 				t.setArrowsInBody(0);
 			}
 

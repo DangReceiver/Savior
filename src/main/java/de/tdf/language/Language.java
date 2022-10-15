@@ -102,14 +102,14 @@ public class Language {
 		return !settings.isEmpty() && settings.get(p) != null ? settings.get(p) : getServerLang();
 	}
 
-	public static boolean setServerLang(File language) {
+	public static void setServerLang(File language) {
 		Plugin s = Savior.getSavior();
 		FileConfiguration c = s.getConfig();
 
 		List<String> langFiles = new ArrayList<>();
 		File folder = new File(df + "/language");
 
-		if (folder.listFiles() == null) return false;
+		if (folder.listFiles() == null) return;
 		for (File file : folder.listFiles())
 			langFiles.add(file.getName());
 
@@ -120,12 +120,12 @@ public class Language {
 				s.saveConfig();
 			}
 
-			if (!langFiles.contains(c.getString("server_language") + ".yml")) return false;
+			if (!langFiles.contains(c.getString("server_language") + ".yml")) return;
 			sLang = new File(df + "/language", c.getString("server_language") + ".yml");
 
 		} else if (langFiles.contains(language.getName())) sLang = language;
 
-		return sLang.exists();
+		return;
 	}
 
 	public static void setLang(Player p, File file) {

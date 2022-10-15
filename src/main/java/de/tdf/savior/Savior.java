@@ -78,6 +78,7 @@ public final class Savior extends JavaPlugin {
 		Objects.requireNonNull(getCommand("Speed")).setExecutor(new Speed());
 		Objects.requireNonNull(getCommand("TpExact")).setExecutor(new TpExact());
 		Objects.requireNonNull(getCommand("TpWorld")).setExecutor(new TpWorld());
+		Objects.requireNonNull(getCommand("Health")).setExecutor(new Health());
 
 		for (Player ap : Bukkit.getOnlinePlayers())
 			Language.setLang(ap, Language.getLangFile("en"));
