@@ -51,7 +51,8 @@ public class Ench implements CommandExecutor, TabCompleter {
 				}
 
 			} catch (NumberFormatException e) {
-				p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "not_a_number"));
+				p.sendMessage(Language.PRE + String.format(Language.getMessage(Language.getLang(p),
+						"argument_specifics"), 1, "integer"));
 				return true;
 			}
 
@@ -69,9 +70,10 @@ public class Ench implements CommandExecutor, TabCompleter {
 				p.getInventory().setItemInMainHand(item);
 				return true;
 			}
-
 			p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "ench_result_invalid"));
-		} else p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "arg_length"));
+
+		} else
+			p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "arg_length"));
 		return false;
 	}
 

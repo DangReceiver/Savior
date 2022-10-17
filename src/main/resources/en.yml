@@ -24,6 +24,16 @@ errors:
 system_messages:
   welcome_back: "§7Welcome back §3%s §c❤"
   healed_title: "§7You were healed§8."
+  speed_updated_flight: ""
+  speed_updated_walk: ""
+  chat_cleared: ""
+  ench_level_zero_hide_enchants: ""
+  ench_added: ""
+  ench_result_invalid: ""
+  flight_updated: ""
+  flight_updated_target: ""
+  tp_exact_successful: ""
+  invalid_world: "The world %s could not be found."
   join_teleport_spawn: "You were teleported to the §bSpawn§8."
   login_location_broadcast_warning: "Your original logout location will be broadcast in §620 seconds§8."
   login_location_broadcast: "@%s's login location§8: §ex: %s, y: %s, z: %s§8."
@@ -41,7 +51,7 @@ system_messages:
   change_attribute: "Your attribute was changed from %s to %s successfully."
 
 player_feedback:
-  spawn_location_bossbar: "§6Login location broadcast timer"
+  spawn_location_bossbar: "Login location broadcast timer"
   health_updated: "Your health has been set from %s to %s."
   firework_jump_hint: "§7Right click on a block while sneaking to be boosted§8."
   player_death_0: "%s took the easy way out§8. "
@@ -58,8 +68,12 @@ player_feedback:
   player_death_info: "Your recent deaths location§8: §e%s, %s, %s§8§8."
   lang_missing_strings_warning: "Be aware: this language is apparently missing translations§8."
   tps_insert: "Current server §eTPS§8: §71 minute§8: §6%s §8- §75 minutes§8: §6%s §8- §715 minutes§8: §6%s \n %s"
+  player_death_respawn_required: "You are required to respawn.
+   If you do not respawn, your location will be broadcast in 28 seconds."
+  player_death_did_not_respawn: "You did not respawn in time, your location will be broadcast."
 
 broadcasts:
+  death_location_broadcast: "%s died in the world %s at x: %s, y: %s, z: %s"
   player_first_join: "%s joined us for the first time!"
   player_join_0: "%s just hopped in§8. ⌈§a»§8⌋"
   player_join_1: "%s is now with us§8. ⌈§a»§8⌋"

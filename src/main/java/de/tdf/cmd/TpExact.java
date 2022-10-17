@@ -1,6 +1,7 @@
 package de.tdf.cmd;
 
 import de.tdf.language.Language;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,7 +27,6 @@ public class TpExact implements CommandExecutor {
 		}
 
 		if (args.length != 0) {
-			p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "insufficient_permissions"), "Savior.TpExact"));
 			p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "usage"), cmd + " [<boolean: yaw/pitch correction>]"));
 			return true;
 		}
@@ -38,7 +38,7 @@ public class TpExact implements CommandExecutor {
 		loc.setYaw((float) Math.round(loc.getYaw()));
 
 		p.teleport(loc);
-		p.sendMessage(Language.PRE + Language.getMessage(l, "tpexact_successful"));
+		p.sendActionBar(Component.text(Language.PRE + Language.getMessage(l, "tp_exact_successful")));
 		return false;
 	}
 }

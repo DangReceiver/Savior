@@ -51,7 +51,7 @@ public class Speed implements CommandExecutor {
 
 			final float ns = Float.parseFloat(args[0]);
 			if (ns < 0.0f || ns > 1.0f) {
-				p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "arg_specifics"), "#0: float (0 - 1)"));
+				p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "argument_specifics"), 0, "float: 0 - 1"));
 				return false;
 			}
 
@@ -66,7 +66,7 @@ public class Speed implements CommandExecutor {
 			}
 
 		} catch (NumberFormatException e) {
-			p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "arg_specifics"), 1, "float (0 - 2)"));
+			p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "argument_specifics"), 1, "float: 0 - 2"));
 			return true;
 		}
 

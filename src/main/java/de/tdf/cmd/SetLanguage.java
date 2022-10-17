@@ -34,15 +34,14 @@ public class SetLanguage implements CommandExecutor, TabCompleter {
 
 		if (args.length == 0) {
 			p.sendMessage(Language.PRE + String.format(Language.getMessage(pl, "lang_current"), pls));
-			p.sendMessage(Language.PRE + Language.getMessage(pl,
-					"lang_how_to_change"));
+			p.sendMessage(Language.PRE + Language.getMessage(pl, "lang_how_to_change"));
 			return false;
 		}
 
 		String lang = args[0];
 		File lf = Language.getLangFile(lang);
 
-		if(!validLangInputFeedback(p, args[0], lf)) return false;
+		if (!validLangInputFeedback(p, args[0], lf)) return false;
 
 		Language.setLang(p, lf);
 
@@ -86,7 +85,7 @@ public class SetLanguage implements CommandExecutor, TabCompleter {
 
 		if (args.length != 1) return null;
 		if (Language.getLanguages() == null) return null;
-		
+
 		for (File f : Language.getLanguages())
 			if (args[0].isEmpty() || f.getName().charAt(0) == args[0].charAt(0))
 				tab.add(f.getName().split(".yml")[0]);

@@ -1,5 +1,6 @@
 package de.tdf.listener;
 
+import de.tdf.savior.Savior;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -23,39 +24,35 @@ import java.util.logging.Level;
 public class Doors implements Listener {
 	@EventHandler
 	public void onDoorInteract(final PlayerInteractEvent e) {
-		if (e.isCancelled()) {
+		if (e.isCancelled())
 			return;
-		}
+
 		final Player p = e.getPlayer();
-		if (!e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && !e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+		if (!e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && !e.getAction().equals(Action.LEFT_CLICK_BLOCK))
 			return;
-		}
+
 		final Block b = e.getClickedBlock();
-		if (b.equals(null) || !(b.getBlockData() instanceof Door)) {
+		if (b.equals(null) || !(b.getBlockData() instanceof Door))
 			return;
-		}
+
 		if (p.getGameMode() != GameMode.SPECTATOR) {
-			
-			File file = new File("plugins/Savior/Settings.yml");
-			YamlConfiguration settings = YamlConfiguration.loadConfiguration(file);
-			
-			if (settings.getBoolean("Settings.Permission.DoorClick") && !p.hasPermission("nte.legende")) {
+			if (Savior.DoubleDoorsPermission && !p.hasPermission("Savior.DoubleDoor"))
 				return;
-			}
+
 			if (e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
-				if (b.getType() == Material.IRON_DOOR) {
+				if (b.getType() == Material.IRON_DOOR)
 					p.playSound(b.getLocation(), Sound.BLOCK_CHAIN_FALL, 2.25f, 0.0f);
-				} else {
+
+				else
 					p.playSound(b.getLocation(), Sound.BLOCK_LADDER_PLACE, 1.85f, 0.0f);
-				}
 				return;
 			}
-			if (b.getType() == Material.IRON_DOOR) {
+
+			if (b.getType() == Material.IRON_DOOR)
 				return;
-			}
-			if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+
+			if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 				this.matchDoubleDoor(b);
-			}
 		}
 	}
 

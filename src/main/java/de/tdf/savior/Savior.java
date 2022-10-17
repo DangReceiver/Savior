@@ -7,6 +7,7 @@ import de.tdf.worlds.Spawn;
 import org.bukkit.*;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -23,6 +24,8 @@ public final class Savior extends JavaPlugin {
 
 	private static Savior savior;
 	public static String version;
+
+	public static boolean DoubleDoorsPermission = false;
 
 	@Override
 	public void onEnable() {
@@ -42,6 +45,12 @@ public final class Savior extends JavaPlugin {
 			cs.sendMessage(Language.PRE + "The server language could not be estimated. Stopping plugin load process.");
 			return;
 		}
+
+		File file = new File("plugins/Savior/Settings.yml");
+		YamlConfiguration settings = YamlConfiguration.loadConfiguration(file);
+
+		DoubleDoorsPermission = settings.isSet("Settings.RequirePermission.DoorClick") ?
+				settings.getBoolean("Settings.RequirePermission.DoorClick") : false;
 
 		Language.loadMessages();
 

@@ -49,20 +49,22 @@ public class Fly implements CommandExecutor {
 							t.setFlying(true);
 
 							t.sendMessage(Language.PRE + Language.getMessage(Language.getLang(t), "flight_updated"));
-							p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "flight_updated"));
+							p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "flight_updated_target"));
 
 						} else if (Fly.fly.contains(p.getName())) {
 							Fly.fly.remove(t.getName());
 
 							t.sendMessage(Language.PRE + Language.getMessage(Language.getLang(t), "flight_updated"));
-							p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "flight_updated"));
+							p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "flight_updated_target"));
 
 							t.setAllowFlight(false);
 							t.setFlying(false);
 						}
 					} else
 						p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "target_invalid"));
-				}
+				} else
+					p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "insufficient_permission"));
+
 			} else {
 				p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "arg_length"));
 				p.sendMessage(Language.PRE + String.format(Language.getMessage(Language.getLang(p), "usage"),
@@ -74,6 +76,6 @@ public class Fly implements CommandExecutor {
 	}
 
 	static {
-		Fly.fly = new ArrayList<String>();
+		Fly.fly = new ArrayList<>();
 	}
 }

@@ -59,7 +59,8 @@ public class ConnectionManager implements Listener {
 
 	public void timeToBroadcastBar(Player p) {
 		BossBar b = Bukkit.createBossBar(Language.getMessage(Language.getLang(p),
-				"spawn_location_bossbar"), BarColor.BLUE, BarStyle.SOLID);
+						Language.colorFromRGB(180, 150, 20) + "spawn_location_bossbar"),
+				BarColor.BLUE, BarStyle.SOLID);
 
 		b.setProgress(0);
 		b.setVisible(true);

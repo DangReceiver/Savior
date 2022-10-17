@@ -37,17 +37,22 @@ public class Gm implements CommandExecutor {
 				return false;
 			}
 
-			if (args[0].equals("0") || args[0].equalsIgnoreCase("SURVIVAL"))
-				t.setGameMode(GameMode.SURVIVAL);
-			else if (args[0].equals("1") || args[0].equalsIgnoreCase("CREATIVE"))
-				t.setGameMode(GameMode.CREATIVE);
+			GameMode gm = GameMode.valueOf(args[0]);
 
-			else if (args[0].equals("3") || args[0].equalsIgnoreCase("SPECTATOR"))
-				t.setGameMode(GameMode.SPECTATOR);
-			else if (args[0].equals("2") || args[0].equalsIgnoreCase("ADVENTURE"))
-				t.setGameMode(GameMode.ADVENTURE);
+			if (gm == null) {
+				try {
+					int i = Integer.valueOf(args[0]);
+					gm = GameMode.getByValue(i);
 
-			else {
+				} catch (NumberFormatException ex) {
+					p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "usage"), cmd,
+							"[<int: 0 - 3, String: GameMode>] [<Target>]"));
+					return true;
+				}
+
+				t.setGameMode(gm);
+
+			} else {
 				p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "usage"), cmd));
 				return false;
 			}
@@ -97,17 +102,22 @@ public class Gm implements CommandExecutor {
 
 		} else if (args.length == 1) {
 
-			if (args[0].equals("0") || args[0].equalsIgnoreCase("SURVIVAL"))
-				p.setGameMode(GameMode.SURVIVAL);
-			else if (args[0].equals("1") || args[0].equalsIgnoreCase("CREATIVE"))
-				p.setGameMode(GameMode.CREATIVE);
+			GameMode gm = GameMode.valueOf(args[0]);
 
-			else if (args[0].equals("3") || args[0].equalsIgnoreCase("SPECTATOR"))
-				p.setGameMode(GameMode.SPECTATOR);
-			else if (args[0].equals("2") || args[0].equalsIgnoreCase("ADVENTURE"))
-				p.setGameMode(GameMode.ADVENTURE);
+			if (gm == null) {
+				try {
+					int i = Integer.valueOf(args[0]);
+					gm = GameMode.getByValue(i);
 
-			else {
+				} catch (NumberFormatException ex) {
+					p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "usage"), cmd,
+							"[<int: 0 - 3, String: GameMode>] [<Target>]"));
+					return true;
+				}
+
+				p.setGameMode(gm);
+
+			} else {
 				p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "usage"), cmd));
 				return false;
 			}

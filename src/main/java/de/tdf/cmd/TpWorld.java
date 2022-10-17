@@ -43,7 +43,8 @@ public class TpWorld implements CommandExecutor {
 				p.playSound(p.getLocation(), Sound.ENTITY_SHULKER_SHOOT, 0.25f, 1.1f);
 
 			} else
-				sen.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "invalid_world"));
+				sen.sendMessage(Language.PRE + String.format(Language.getMessage(
+						Language.getServerLang(), "invalid_world"), s));
 		}
 		return false;
 	}
