@@ -27,7 +27,6 @@ public class FireWorkJump implements Listener {
 		Material m = i.getType();
 
 		if (m == Material.FIREWORK_ROCKET && p.isSneaking()) {
-
 			if (e.getClickedBlock() == null) return;
 			FireworkMeta fwm = (FireworkMeta) i.getItemMeta();
 

@@ -114,14 +114,13 @@ public class Language {
 			langFiles.add(file.getName());
 
 		if (language == null) {
-
-			if (!c.isSet("server_language")) {
-				c.set("server_language", "en");
+			if (!c.isSet("Language")) {
+				c.set("Language", "en");
 				s.saveConfig();
 			}
 
-			if (!langFiles.contains(c.getString("server_language") + ".yml")) return;
-			sLang = new File(df + "/language", c.getString("server_language") + ".yml");
+			if (!langFiles.contains(c.getString("Language") + ".yml")) return;
+			sLang = new File(df + "/language", c.getString("Language") + ".yml");
 
 		} else if (langFiles.contains(language.getName())) sLang = language;
 
@@ -145,13 +144,13 @@ public class Language {
 
 	public static boolean updateServerLang() {
 		FileConfiguration c = Savior.getSavior().getConfig();
-		File sl = getLangFile(c.getString("server_language"));
+		File sl = getLangFile(c.getString("Language"));
 
 		if (sl == null) {
-			c.set("server_language", "en");
+			c.set("Language", "en");
 			Savior.getSavior().saveConfig();
 
-			sLang = getLangFile(c.getString("server_language"));
+			sLang = getLangFile(c.getString("Language"));
 			return true;
 		}
 

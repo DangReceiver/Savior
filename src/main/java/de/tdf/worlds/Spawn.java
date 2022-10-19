@@ -7,6 +7,7 @@ import org.bukkit.WorldCreator;
 import org.bukkit.block.Biome;
 import org.bukkit.generator.ChunkGenerator;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 import java.util.Random;
@@ -30,16 +31,19 @@ public class Spawn extends ChunkGenerator {
 		World w = Bukkit.getWorld("Spawn");
 
 		if (w == null) {
-			Bukkit.broadcastMessage("Spawn: 0");
 			WorldCreator creator = new WorldCreator("Spawn");
 			creator.generator(new Spawn());
 			creator.createWorld();
 
 			setGameRules(Objects.requireNonNull(w = Bukkit.getWorld("Spawn")));
-			Bukkit.broadcastMessage("Spawn: 1");
 			return w != null;
 		}
 		return true;
+	}
+
+	@Nullable
+	public static World getWorld() {
+		return checkExists() ? Bukkit.getWorld("Spawn") : null;
 	}
 
 	public static void setGameRules(World w) {

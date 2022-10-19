@@ -4,17 +4,41 @@ values:
   has_resource: true
 
 prefixes:
+  broadcast: "§3Broadcast §8‖ §7"
   info: "§9Info §8‖ §7"
   error: "§cFehler §8‖ §7"
   warn: "§6Warnung §8‖ §7"
 
 errors:
+  argument_specifics: "The argument #%s must be of the type %s§8."
+  argument_range: "The argument #%s should be between %s and %s§8."
+  insufficient_permission: "You do not have the required permission %s to perform this action."
+  usage: "The usage of the command %s is %s"
+  target_invalid: "The specified target is invalid."
   string_not_found: "Der string %s konnte nicht gefunden werden§8."
   arg_length_desired: "Die gewünschte Argumenten-Länge ist %s§8."
   lang_load_error: "Diese Sprache kann nicht angewandt werden, sie hat essenzielle Strings nicht§8."
   no_player: "Diese Aktion ist unseren Spieler:innen vorbehalten§8."
+  no_death_location: "You do not have a valid death location."
+  door_reset: "Double door set was reset."
 
 system_messages:
+  spawn_world_invalid: "The world \"Spawn\" is invalid."
+  welcome_back: "§7Welcome back §3%s §c❤"
+  healed_title: "§7You were healed§8."
+  speed_updated_flight: "Your flight speed was updated from %s to %s."
+  speed_updated_walk: "Your walk speed was updated from %s to %s."
+  chat_cleared: "The chat was cleared."
+  ench_level_zero_hide_enchants: "Enchants on your item will be hidden."
+  ench_added: "The enchantment %s, level %s was successfully added."
+  ench_result_invalid: "The enchantment you chose is not valid."
+  flight_updated: "Your target's flight mode was toggled."
+  flight_updated_target: "Your flight mode was toggled."
+  tp_exact_successful: "You were teleported to the exact block position."
+  invalid_world: "The world %s could not be found."
+  join_teleport_spawn: "You were teleported to the §bSpawn§8."
+  login_location_broadcast_warning: "Your original logout location will be broadcast in §620 seconds§8."
+  login_location_broadcast: "@%s's login location§8: §ex: %s, y: %s, z: %s§8."
   language_loaded: "Die Sprache %s wurde geladen§8."
   plugin_loaded: "Das Plugin wurde erfolgreich geladen§8."
   plugin_unloaded: "Das Plugin wurde erfolgreich deaktiviert§8."
@@ -25,8 +49,15 @@ system_messages:
   replacing_lang_file: "Die Sprach-Datei %s wurde von ihrer Resource ersetzt, da angenommen wird, dass sie aktueller ist§8."
   creating_lang_resource: "Die Sprach-Datei %s wurde per Resource erstellt§8."
   invalid_lang_resource: "The provided language resource file %s could not be accessed."
+  change_attribute_target: "The target's attribute was changed from %s to %s successfully."
+  change_attribute: "Your attribute was changed from %s to %s successfully."
 
 player_feedback:
+  spawn_action_cancelled: "This action cannot be performed here."
+  death_action_cancel_teleport: "You cannot teleport during death."
+  active_potion_effect: "Currently active potion effect: %s"
+  spawn_location_bossbar: "Login location broadcast timer"
+  health_updated: "Your health has been set from %s to %s."
   firework_jump_hint: "§7Rechts klicke auf einen Block während du die Raketen hältst, um geboostet zu werden§8."
   player_death_0: "%s hat den einfachen Ausweg gewählt§8. "
   player_death_1: "%s findet vielleicht mehr Glück in einem anderen Leben§8. "
@@ -41,8 +72,13 @@ player_feedback:
   player_death_10: "%s hat aus diesem scheiß einen einfacheren Ausweg gefunden§8. "
   player_death_info: "Deine kürzliche Todesposition§8: §e%s, %s, %s§8§8."
   lang_missing_strings_warning: "Vorsicht: diese Sprache hat scheinbar nicht alle nötigen Übersetzungen§8."
+  tps_insert: "Current server §eTPS§8: §71 minute§8: §6%s §8- §75 minutes§8: §6%s §8- §715 minutes§8: §6%s \n %s"
+  player_death_respawn_required: "You are required to respawn.
+   If you do not respawn, your location will be broadcast in 28 seconds."
+  player_death_did_not_respawn: "You did not respawn in time, your location will be broadcast."
 
 broadcasts:
+  death_location_broadcast: "%s died in the world %s at x: %s, y: %s, z: %s"
   player_join_0: "%s ist gerade reingehüpft§8. ⌈§a»§8⌋"
   player_join_1: "%s ist nun bei uns§8. ⌈§a»§8⌋"
   player_join_2: "Hallo %s, du siehst heute gut aus§8! ⌈§a»§8⌋"

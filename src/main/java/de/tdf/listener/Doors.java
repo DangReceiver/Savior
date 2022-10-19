@@ -1,5 +1,6 @@
 package de.tdf.listener;
 
+import de.tdf.language.Language;
 import de.tdf.savior.Savior;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -91,7 +92,8 @@ public class Doors implements Listener {
 				break;
 			}
 			default: {
-				Bukkit.getLogger().log(Level.WARNING, "[Savior] Construction was reset.");
+				Bukkit.getConsoleSender().sendMessage(Language.PRE +
+						Language.getMessage(Language.getServerLang(), "door_reset"));
 				return;
 			}
 		}
@@ -106,7 +108,8 @@ public class Doors implements Listener {
 			if (((Door) blockTop.getBlockData()).getHinge() == ((Door) blockNearTop.getBlockData()).getHinge()) {
 				return;
 			}
-			if (((Directional) blockBottom.getBlockData()).getFacing() != ((Directional) blockNearBottom.getBlockData()).getFacing()) {
+			if (((Directional) blockBottom.getBlockData()).getFacing() !=
+					((Directional) blockNearBottom.getBlockData()).getFacing()) {
 				return;
 			}
 			this.changeDoor(blockNearBottom, blockBottom);

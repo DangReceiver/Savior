@@ -31,7 +31,8 @@ public class EffectHeadBottle implements Listener {
 			pm.addEnchant(Enchantment.BINDING_CURSE, 10, true);
 			pm.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
-			pm.displayName(Component.text(Language.PRE + Language.getMessage(Language.getLang(p), "active_potion_effect")));
+			pm.displayName(Component.text(Language.colorFromRGB(20, 160, 255) +
+					String.format(Language.getMessage(Language.getLang(p), "active_potion_effect"), e.getNewEffect())));
 			pm.setColor(Color.fromRGB(200, 200, 200));
 
 			ItemStack h = p.getInventory().getHelmet();

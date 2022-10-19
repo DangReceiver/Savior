@@ -11,6 +11,5 @@ public class ToSaviorCommand implements Listener {
 
 		if (e.getMessage().split(" ")[0].equalsIgnoreCase("tps"))
 			e.setMessage("/Savior:Tps");
-
 	}
 }

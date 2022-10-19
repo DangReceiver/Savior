@@ -24,7 +24,6 @@ public final class Savior extends JavaPlugin {
 
 	private static Savior savior;
 	public static String version;
-
 	public static boolean DoubleDoorsPermission = false;
 
 	@Override
@@ -35,8 +34,10 @@ public final class Savior extends JavaPlugin {
 		ConsoleCommandSender cs = Bukkit.getConsoleSender();
 		Bukkit.getWorld("world").setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
 
+		Language.loadMessages();
+
 		if (!Spawn.checkExists()) {
-			cs.sendMessage(Language.PRE + "The world \"Spawn\" could not be loaded. The plugin will be disabled.");
+			cs.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "spawn_world_invalid") );
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
@@ -51,8 +52,6 @@ public final class Savior extends JavaPlugin {
 
 		DoubleDoorsPermission = settings.isSet("Settings.RequirePermission.DoorClick") ?
 				settings.getBoolean("Settings.RequirePermission.DoorClick") : false;
-
-		Language.loadMessages();
 
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(new ConnectionManager(), this);

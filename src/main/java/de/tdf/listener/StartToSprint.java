@@ -18,6 +18,5 @@ public class StartToSprint implements Listener {
 
 		if (new Random().nextInt(41) == 0) p.addPotionEffect(
 				new PotionEffect(PotionEffectType.SPEED, 80, 2, false, false, false));
-
 	}
 }
