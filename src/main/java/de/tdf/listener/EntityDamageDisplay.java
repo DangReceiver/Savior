@@ -28,14 +28,16 @@ public class EntityDamageDisplay implements Listener {
 		Location l = e.getLocation();
 		ArmorStand as = (ArmorStand) l.getWorld().spawnEntity(l.clone().add(0, 0.65, 0), EntityType.ARMOR_STAND);
 
+		as.setInvisible(true);
 		as.setMarker(true);
 		as.setInvulnerable(true);
-		as.setInvisible(true);
-		as.setCustomNameVisible(true);
+
 		as.setCustomName(getPercentageColor(damagePercentage(en.getMaxHealth(),
 				ev.getDamage())) + "" + ((double) Math.round(ev.getDamage() * 100) / 100));
+
+		as.setCustomNameVisible(true);
 		as.setSmall(true);
-		as.setHelmet(new ItemStack(Material.RED_TULIP));
+		as.setHelmet(new ItemStack(Material.RED_MUSHROOM));
 
 		int i = 0;
 		Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> tpAs(as, i), 4);
@@ -43,7 +45,6 @@ public class EntityDamageDisplay implements Listener {
 
 	public ChatColor getPercentageColor(double percent) {
 		double value = (percent * 1.2 <= 1 ? percent * 1.2 : 1) * 255;
-
 		int r = (int) value, g = 255 - (int) value;
 
 		return net.md_5.bungee.api.ChatColor.of(new Color(r, g, 0));

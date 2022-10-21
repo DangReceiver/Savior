@@ -37,7 +37,7 @@ public final class Savior extends JavaPlugin {
 		Language.loadMessages();
 
 		if (!Spawn.checkExists()) {
-			cs.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "spawn_world_invalid") );
+			cs.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "spawn_world_invalid"));
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
@@ -70,6 +70,7 @@ public final class Savior extends JavaPlugin {
 		pm.registerEvents(new Doors(), this);
 		pm.registerEvents(new CreeperActivateCreeper(), this);
 		pm.registerEvents(new SpawnProtection(), this);
+		pm.registerEvents(new ElytraBoost(), this);
 //		pm.registerEvents(new ToSaviorCommand(), this);
 
 		Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());
@@ -91,11 +92,10 @@ public final class Savior extends JavaPlugin {
 		for (Player ap : Bukkit.getOnlinePlayers())
 			Language.setLang(ap, Language.getLangFile("en"));
 
-
-		for (Entity as : Bukkit.getWorld("world").getEntities())
-			if (as instanceof ArmorStand) as.remove();
-		for (Entity as : Bukkit.getWorld("Spawn").getEntities())
-			if (as instanceof ArmorStand) as.remove();
+		for (Entity as : Objects.requireNonNull(Bukkit.getWorld("world")).getEntities())
+			if (as instanceof ArmorStand && as.getCustomName() != null) as.remove();
+		for (Entity as : Objects.requireNonNull(Bukkit.getWorld("Spawn")).getEntities())
+			if (as instanceof ArmorStand && as.getCustomName() != null) as.remove();
 	}
 
 	@Override
@@ -109,18 +109,24 @@ public final class Savior extends JavaPlugin {
 	public synchronized String getVersion() {
 		String v = null;
 		try {
+
 			Properties p = new Properties();
 			InputStream is = getClass().getResourceAsStream("/META-INF/maven/de.tdf/Savior/pom.properties");
+
 			if (is != null) {
 				p.load(is);
 				v = p.getProperty("version", "");
 			}
+
 		} catch (Exception ignored) {
 		}
+
 		if (v == null) {
 			Package ap = getClass().getPackage();
+
 			if (ap != null) {
 				v = ap.getImplementationVersion();
+
 				if (v == null)
 					v = ap.getSpecificationVersion();
 			}

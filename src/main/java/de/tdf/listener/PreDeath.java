@@ -49,11 +49,11 @@ public class PreDeath implements Listener {
 			p.getInventory().clear();
 
 			int i = 0;
-			boost(p, i, dl, con);
+			deathBoost(p, i, dl, con);
 		}
 	}
 
-	public void boost(Player p, int i, Location dl, ArrayList<ItemStack> con) {
+	public static void deathBoost(Player p, int i, Location dl, ArrayList<ItemStack> con) {
 
 		if (i > 24) {
 			p.setGameMode(GameMode.SURVIVAL);
@@ -64,7 +64,7 @@ public class PreDeath implements Listener {
 			p.setFlySpeed(0.15f);
 
 			int c = 0;
-			deathDrop(dl, con, c);
+			nobelItemDrop(dl, con, c);
 			return;
 		}
 
@@ -76,11 +76,11 @@ public class PreDeath implements Listener {
 
 			p.setFlySpeed(0);
 			int temp = i + 1;
-			boost(p, temp, dl, con);
+			deathBoost(p, temp, dl, con);
 		}, 2);
 	}
 
-	public void deathDrop(Location dl, ArrayList<ItemStack> con, int c) {
+	public static void nobelItemDrop(Location dl, ArrayList<ItemStack> con, int c) {
 		int cTemp = c + 1;
 		if (con.isEmpty()) return;
 
@@ -89,7 +89,7 @@ public class PreDeath implements Listener {
 			item.setVelocity(item.getVelocity().add(new Vector(0, 0.4, 0)));
 
 			con.remove(0);
-			deathDrop(dl, con, cTemp);
+			nobelItemDrop(dl, con, cTemp);
 		}, 2);
 	}
 }

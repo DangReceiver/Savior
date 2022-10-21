@@ -13,10 +13,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class SpawnButtonPush implements Listener {
 
 	@EventHandler
 	public void handle(PlayerInteractEvent e) {
+
 		Player p = e.getPlayer();
 		Block cb = e.getClickedBlock();
 

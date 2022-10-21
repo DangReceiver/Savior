@@ -16,8 +16,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class ConnectionManager implements Listener {
@@ -59,16 +62,15 @@ public class ConnectionManager implements Listener {
 			p.sendMessage(Language.PRE + Language.getMessage(lf, "login_location_broadcast_warning"));
 
 			Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> {
+				if (!(pc.hasLogoutLocation() && p.isOnline())) return;
+
 				Location lol = pc.getLogoutLocation();
+				Language.broadcastArg("login_location_broadcast", p.getName(),
+						lol.getBlockX() + "", lol.getBlockY() + "", lol.getBlockZ() + "");
 
-				if (pc.hasLogoutLocation() && p.isOnline()) {
-					Language.broadcastArg("login_location_broadcast", p.getName(),
-							lol.getBlockX() + "", lol.getBlockY() + "", lol.getBlockZ() + "");
-
-					int i = 0;
-					de.tdf.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_FLUTE, 5,
-							0.4f, 0.3f, true, 0.55f, 10, i);
-				}
+				int i = 0;
+				de.tdf.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_FLUTE, 5,
+						0.4f, 0.3f, true, 0.55f, 10, i);
 			}, 20 * 20);
 		}, 6 * 20);
 	}
@@ -83,6 +85,17 @@ public class ConnectionManager implements Listener {
 
 		if (pc.isDead()) {
 			p.damage(p.getHealth() * p.getHealth());
+
+			@Nullable ItemStack[] contents = p.getInventory().getContents().clone();
+			ArrayList<ItemStack> con = new ArrayList<>();
+			int c = 0;
+
+			for (ItemStack i : contents)
+				if (i != null) con.add(i);
+			PreDeath.nobelItemDrop(p.getLocation().clone(), con, c);
+
+			p.getInventory().clear();
+
 			Language.broadcastArg("player_unsuitable_quit", p.getName());
 			Language.broadcastArg("death_location_broadcast", l.getWorld().getName(),
 					l.getBlockX() + "", l.getBlockY() + "", l.getBlockZ() + "");
