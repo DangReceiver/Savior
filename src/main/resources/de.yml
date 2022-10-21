@@ -4,7 +4,7 @@ values:
   has_resource: true
 
 prefixes:
-  broadcast: "§3Broadcast §8‖ §7"
+  broadcast: "§3Ausruf §8‖ §7"
   info: "§9Info §8‖ §7"
   error: "§cFehler §8‖ §7"
   warn: "§6Warnung §8‖ §7"
@@ -53,11 +53,11 @@ system_messages:
   change_attribute: "Dein Attribut wurde erfolgreich von %s zu %s gesetzt."
 
 player_feedback:
-  spawn_action_cancelled: "This action cannot be performed here."
-  death_action_cancel_teleport: "You cannot teleport during death."
-  active_potion_effect: "Currently active potion effect: %s"
-  spawn_location_bossbar: "Login location broadcast timer"
-  health_updated: "Your health has been set from %s to %s."
+  spawn_action_cancelled: "Diese Aktion darfst du hier nicht ausführen."
+  death_action_cancel_teleport: "Du kannst dich während du tot bist nicht teleportieren."
+  active_potion_effect: "Derzeitig aktiver Effekt: %s"
+  spawn_location_bossbar: "Einlog-Positions-Ausruf Timer"
+  health_updated: "Deine maximalen Herzen wurden von %s zu %s gesetzt."
   firework_jump_hint: "§7Rechts klicke auf einen Block während du die Raketen hältst, um geboostet zu werden§8."
   player_death_0: "%s hat den einfachen Ausweg gewählt§8. "
   player_death_1: "%s findet vielleicht mehr Glück in einem anderen Leben§8. "
@@ -73,12 +73,12 @@ player_feedback:
   player_death_info: "Deine kürzliche Todesposition§8: §e%s, %s, %s§8§8."
   lang_missing_strings_warning: "Vorsicht: diese Sprache hat scheinbar nicht alle nötigen Übersetzungen§8."
   tps_insert: "Current server §eTPS§8: §71 minute§8: §6%s §8- §75 minutes§8: §6%s §8- §715 minutes§8: §6%s \n %s"
-  player_death_respawn_required: "You are required to respawn.
-   If you do not respawn, your location will be broadcast in 28 seconds."
-  player_death_did_not_respawn: "You did not respawn in time, your location will be broadcast."
+  player_death_respawn_required: "Du musst Respawnen.
+   Solltest du nicht respawnen, wird deine Todesposition in 28 Sekunden ausgerufen."
+  player_death_did_not_respawn: "Du bist nicht respawned, deine Todesposition wird ausgerufen."
 
 broadcasts:
-  death_location_broadcast: "%s died in the world %s at x: %s, y: %s, z: %s"
+  death_location_broadcast: "%s ist in der Welt %s bei den Koordinaten x: %s, y: %s, z: %s gestorben."
   player_join_0: "%s ist gerade reingehüpft§8. ⌈§a»§8⌋"
   player_join_1: "%s ist nun bei uns§8. ⌈§a»§8⌋"
   player_join_2: "Hallo %s, du siehst heute gut aus§8! ⌈§a»§8⌋"
