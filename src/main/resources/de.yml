@@ -27,7 +27,7 @@ system_messages:
   welcome_back: "§7Willkommen zurück §3%s §c❤"
   healed_title: "§7Du wurdest geheilt§8."
   speed_updated_flight: "Deine Fluggeschwindigkeit wurde von %s auf %s gesetzt."
-  speed_updated_walk: "Deine Laufwindigkeit wurde von %s auf %s gesetzt."
+  speed_updated_walk: "Deine Laufgeschwindigkeit wurde von %s auf %s gesetzt."
   chat_cleared: "Der Chat wurde geleert."
   ench_level_zero_hide_enchants: "Verzauberungen auf deinem Gegenstand werden versteckt."
   ench_added: "Die Verzauberung %s, Level %s wurde erfolgreich hinzugefügt."

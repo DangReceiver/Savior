@@ -260,6 +260,14 @@ public class PC {
 		c.set("Mechanics.RespawnRequired", required);
 	}
 
+	public void setDead(boolean b) {
+		c.set("Mechanics.isDead", b);
+	}
+
+	public boolean isDead() {
+		return c.isSet("Mechanics.isDead") ? c.getBoolean("Mechanics.isDead") : false;
+	}
+
 	public void savePCon() {
 		try {
 			c.save(this.f);

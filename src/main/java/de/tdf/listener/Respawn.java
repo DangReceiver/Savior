@@ -16,12 +16,11 @@ public class Respawn implements Listener {
 	@EventHandler
 	public void handle(PlayerRespawnEvent e) {
 		Player p = e.getPlayer();
+		e.setRespawnLocation(Savior.getSafeSpawnLocation());
 
 		File l = Language.getLang(p);
 		p.sendTitle(Language.getMessage(l, "you_died_title"), Language.getMessage(l,
 				"you_died_subtitle"), 20, 60, 40);
-
-		e.setRespawnLocation(Savior.getSafeSpawnLocation());
 
 		PC pcd = PC.loadConfig(p);
 		if (!pcd.hasDeathLocation()) {
@@ -29,8 +28,10 @@ public class Respawn implements Listener {
 			return;
 		}
 
+		if (pcd.getRespawnRequired()) pcd.setRespawnRequired(false);
+
 		pcd.setDeathLocation(null);
-		pcd.setRespawnRequired(false);
+		pcd.setDead(false);
 		pcd.savePCon();
 	}
 }

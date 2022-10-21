@@ -28,7 +28,7 @@ public class TpWorld implements CommandExecutor {
 
 		if (sen instanceof Player p) {
 
-			if (args.length <= 0) {
+			if (args.length == 0) {
 				sen.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "arg_length"));
 				return true;
 			}

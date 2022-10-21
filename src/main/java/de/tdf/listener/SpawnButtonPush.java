@@ -5,6 +5,7 @@ import de.tdf.savior.Savior;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,6 +30,10 @@ public class SpawnButtonPush implements Listener {
 
 		if (pc.hasLogoutLocation()) p.teleport(pc.getLogoutLocation());
 		else p.teleport(new Location(Bukkit.getWorld("world"), 0, 64, 0));
+
+		int i = 0;
+		de.tdf.methods.Sound.oneByOne(p, Sound.ENTITY_PLAYER_BREATH, 4,
+				1.2f, 0.2f, false, 0.4f, 40, i);
 
 		p.setGameMode(GameMode.SURVIVAL);
 	}

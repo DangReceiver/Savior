@@ -1,5 +1,6 @@
 package de.tdf.listener;
 
+import de.tdf.PC;
 import de.tdf.savior.Savior;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -26,6 +27,10 @@ public class PreDeath implements Listener {
 		if (e.getDamage() >= p.getHealth() &&
 				p.getLastDamageCause().getCause() != EntityDamageEvent.DamageCause.VOID) {
 			e.setCancelled(true);
+
+			PC pc = PC.loadConfig(p);
+			pc.setDead(true);
+			pc.savePCon();
 
 			Location dl = p.getLocation();
 			@Nullable ItemStack[] contents = p.getInventory().getContents();

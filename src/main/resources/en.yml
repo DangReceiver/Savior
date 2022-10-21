@@ -57,6 +57,7 @@ player_feedback:
   death_action_cancel_teleport: "You cannot teleport during death."
   active_potion_effect: "Currently active potion effect: %s"
   spawn_location_bossbar: "Login location broadcast timer"
+  death_location_bossbar: "Death location broadcast timer"
   health_updated: "Your health has been set from %s to %s."
   firework_jump_hint: "§7Right click on a block while sneaking to be boosted§8."
   player_death_0: "%s took the easy way out§8."

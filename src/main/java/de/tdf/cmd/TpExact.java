@@ -3,6 +3,7 @@ package de.tdf.cmd;
 import de.tdf.language.Language;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -39,6 +40,7 @@ public class TpExact implements CommandExecutor {
 
 		p.teleport(loc);
 		p.sendActionBar(Component.text(Language.PRE + Language.getMessage(l, "tp_exact_successful")));
+		p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 0.5f, 0.5f);
 		return false;
 	}
 }
