@@ -32,9 +32,7 @@ public final class Savior extends JavaPlugin {
 		version = getVersion();
 
 		ConsoleCommandSender cs = Bukkit.getConsoleSender();
-		Bukkit.getWorld("world").setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
-
-		Language.loadMessages();
+		Bukkit.getWorld("world").setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, false);
 
 		if (!Spawn.checkExists()) {
 			cs.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "spawn_world_invalid"));
@@ -43,9 +41,12 @@ public final class Savior extends JavaPlugin {
 		}
 
 		if (Language.updateServerLang()) if (Language.updateServerLang()) {
+			saveConfig();
 			cs.sendMessage(Language.PRE + "The server language could not be estimated. Stopping plugin load process.");
 			return;
 		}
+
+		Language.loadMessages();
 
 		File file = new File("plugins/Savior/Settings.yml");
 		YamlConfiguration settings = YamlConfiguration.loadConfiguration(file);

@@ -64,7 +64,7 @@ public class Gm implements CommandExecutor {
 			return true;
 
 		} else if (args.length == 0) {
-			if (!p.isSneaking() && p.isFlying()) {
+			if (!p.isSneaking() && !p.isFlying()) {
 
 				if (p.getGameMode() == GameMode.ADVENTURE)
 					p.setGameMode(GameMode.SURVIVAL);
@@ -76,32 +76,33 @@ public class Gm implements CommandExecutor {
 				else if (p.getGameMode() == GameMode.SPECTATOR)
 					p.setGameMode(GameMode.CREATIVE);
 
-			} else if (p.isSneaking() && p.isFlying())
-				if (p.getGameMode() == GameMode.SURVIVAL)
-					p.setGameMode(GameMode.CREATIVE);
-				else if (p.getGameMode() == GameMode.CREATIVE)
-					p.setGameMode(GameMode.SPECTATOR);
-
-				else if (p.getGameMode() == GameMode.SPECTATOR)
-					p.setGameMode(GameMode.CREATIVE);
-				else if (p.getGameMode() == GameMode.SPECTATOR)
+			} else if (p.isSneaking() && p.isFlying()) {
+				if (p.getGameMode() == GameMode.CREATIVE)
 					p.setGameMode(GameMode.SURVIVAL);
-
 				else if (p.getGameMode() == GameMode.SURVIVAL)
-					p.setGameMode(GameMode.CREATIVE);
-				else if (p.getGameMode() == GameMode.CREATIVE)
-					p.setGameMode(GameMode.SURVIVAL);
+					p.setGameMode(GameMode.SPECTATOR);
 
 				else if (p.getGameMode() == GameMode.SPECTATOR)
 					p.setGameMode(GameMode.SURVIVAL);
 				else if (p.getGameMode() == GameMode.ADVENTURE)
 					p.setGameMode(GameMode.SURVIVAL);
 
+			} else {
+				if (p.getGameMode() == GameMode.SURVIVAL)
+					p.setGameMode(GameMode.ADVENTURE);
+				else if (p.getGameMode() == GameMode.CREATIVE)
+					p.setGameMode(GameMode.ADVENTURE);
+
+				else if (p.getGameMode() == GameMode.SPECTATOR)
+					p.setGameMode(GameMode.ADVENTURE);
+				else if (p.getGameMode() == GameMode.ADVENTURE)
+					p.setGameMode(GameMode.CREATIVE);
+			}
+
 			p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "change_attribute"),
 					bg.toString().toLowerCase(), p.getGameMode().toString().toLowerCase()));
 
 		} else if (args.length == 1) {
-
 			GameMode gm = GameMode.valueOf(args[0]);
 
 			if (gm == null) {

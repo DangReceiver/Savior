@@ -39,7 +39,7 @@ public class ConnectionManager implements Listener {
 		Language.setLang(p, lf);
 
 		e.setJoinMessage(null);
-		Language.broadcastArg("player_join_" + new Random().nextInt(13), p.getName());
+		Language.broadcastArg("player_join_" + new Random().nextInt(17), p.getName());
 
 		p.setGameMode(GameMode.ADVENTURE);
 		p.teleport(Savior.getSafeSpawnLocation());
@@ -55,8 +55,8 @@ public class ConnectionManager implements Listener {
 
 	public void setupLoginLocation(Player p, PC pc) {
 		File lf = pc.getLanguage();
-		BossBar.timeToBroadcastBar(p, Language.getMessage(Language.getLang(p),
-				Language.colorFromRGB(180, 150, 20) + "spawn_location_bossbar"));
+		BossBar.timeToBroadcastBar(p, Language.colorFromRGB(180, 150, 20) +
+				Language.getMessage(Language.getLang(p), "spawn_location_bossbar"));
 
 		Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> {
 			p.sendMessage(Language.PRE + Language.getMessage(lf, "login_location_broadcast_warning"));
@@ -92,8 +92,8 @@ public class ConnectionManager implements Listener {
 
 			for (ItemStack i : contents)
 				if (i != null) con.add(i);
-			PreDeath.nobelItemDrop(p.getLocation().clone(), con, c);
 
+			PreDeath.nobelItemDrop(p.getLocation().clone(), con, c);
 			p.getInventory().clear();
 
 			Language.broadcastArg("player_unsuitable_quit", p.getName());
@@ -106,7 +106,7 @@ public class ConnectionManager implements Listener {
 			pc.savePCon();
 		}
 
-		Language.broadcastArg("player_quit_" + new Random().nextInt(13), p.getName());
+		Language.broadcastArg("player_quit_" + new Random().nextInt(17), p.getName());
 		Language.removePlayer(p);
 	}
 }

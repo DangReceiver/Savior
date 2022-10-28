@@ -26,7 +26,7 @@ public class Death implements Listener {
 		e.setDeathMessage(null);
 
 		Location dl = new Location(p.getWorld(), block.getX() + 0.5, block.getY(), block.getZ() + 0.5);
-		Language.broadcastArg("player_death_" + new Random().nextInt(11), p.getName());
+		Language.broadcastArg("player_death_" + new Random().nextInt(14), p.getName());
 
 		PC pc = PC.loadConfig(p);
 		pc.setDeathLocation(dl);

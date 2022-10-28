@@ -30,8 +30,8 @@ public class Info implements CommandExecutor {
 		if ((Bukkit.getServer().getVersion().contains("1.19")) && sen instanceof Player)
 			sen.sendMessage(String.format(Language.getMessage(l, "info_ping"), pingColor(p) + p.getPing()));
 
-		sen.sendMessage(String.format(Language.getMessage(l,
-				"info_ram_usage"), m, r.maxMemory() / s, r.freeMemory() / s));
+		sen.sendMessage(String.format(Language.getMessage(l, "info_ram_usage"),
+				m, r.maxMemory() / s, r.freeMemory() / s));
 		sen.sendMessage("§0 \n §0 ");
 		return true;
 	}

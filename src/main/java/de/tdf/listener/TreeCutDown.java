@@ -28,7 +28,7 @@ public class TreeCutDown implements Listener {
 
 		for (int t = 0; t <= 48; t++) {
 			int eTimes = t;
-			d = (short) (d + 2);
+			d = (short) (d + 3);
 
 			if (!(e.getBlock().getLocation().add(0, (eTimes + 1), 0).getBlock().getType().equals(b.getType()))) return;
 			Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
@@ -40,7 +40,7 @@ public class TreeCutDown implements Listener {
 						Block above = e.getBlock().getLocation().add(0.0D, (eTimes + 1), 0.0D).getBlock();
 
 						Bukkit.getServer().getWorld("world").playSound(above.getLocation(),
-								Sound.BLOCK_WOOD_BREAK, 0.4F + (eTimes / 100), 0.65F + (eTimes / 100));
+								Sound.BLOCK_WOOD_BREAK, 0.4F + (eTimes / 100), 0.6F + (eTimes / 100));
 						above.breakNaturally(itemHand);
 
 					} else {

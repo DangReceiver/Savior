@@ -26,25 +26,25 @@ public class FireWorkJump implements Listener {
 		if (i == null) return;
 		Material m = i.getType();
 
-		if (m == Material.FIREWORK_ROCKET && p.isSneaking()) {
-			if (e.getClickedBlock() == null) return;
-			FireworkMeta fwm = (FireworkMeta) i.getItemMeta();
+		if (!(m == Material.FIREWORK_ROCKET && p.isSneaking())) return;
+		if (e.getClickedBlock() == null) return;
 
-			if (p.getGameMode() != GameMode.CREATIVE)
-				if (i.getAmount() >= 1) i.setAmount(i.getAmount() - 1);
-				else i.setType(Material.AIR);
+		FireworkMeta fwm = (FireworkMeta) i.getItemMeta();
+
+		if (p.getGameMode() != GameMode.CREATIVE)
+			if (i.getAmount() >= 1) i.setAmount(i.getAmount() - 1);
+			else i.setType(Material.AIR);
+
+		p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0)));
+
+		BukkitScheduler bs = Bukkit.getScheduler();
+		bs.runTaskLater(Savior.getSavior(), () -> {
 
 			p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0)));
+			p.setFallDistance(p.getFallDistance() * 0.6f);
 
-			BukkitScheduler bs = Bukkit.getScheduler();
-			bs.runTaskLater(Savior.getSavior(), () -> {
-
-				p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0)));
-				p.setFallDistance(p.getFallDistance() * 0.6f);
-
-				bs.runTaskLater(Savior.getSavior(), () ->
-						p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0))), 2);
-			}, 2);
-		}
+			bs.runTaskLater(Savior.getSavior(), () ->
+					p.setVelocity(p.getVelocity().add(new Vector(0, fwm.getPower() * 0.125, 0))), 2);
+		}, 2);
 	}
 }

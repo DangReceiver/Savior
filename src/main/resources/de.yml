@@ -57,6 +57,7 @@ player_feedback:
   death_action_cancel_teleport: "Du kannst dich während du tot bist nicht teleportieren."
   active_potion_effect: "Derzeitig aktiver Effekt: %s"
   spawn_location_bossbar: "Einlog-Positions-Ausruf Timer"
+  death_location_bossbar: "Todes-Positions-Ausruf Timer"
   health_updated: "Deine maximalen Herzen wurden von %s zu %s gesetzt."
   firework_jump_hint: "§7Rechts klicke auf einen Block während du die Raketen hältst, um geboostet zu werden§8."
   player_death_0: "%s hat den einfachen Ausweg gewählt§8. "

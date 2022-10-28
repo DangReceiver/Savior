@@ -28,6 +28,7 @@ public class Fly implements CommandExecutor {
 
 					p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "flight_updated"));
 					p.setAllowFlight(true);
+					p.teleport(p.getLocation().clone().add(0, 0.001, 0));
 					p.setFlying(true);
 
 				} else if (Fly.fly.contains(p.getName())) {
@@ -38,32 +39,38 @@ public class Fly implements CommandExecutor {
 					p.setFlying(false);
 				}
 			} else if (args.length == 1) {
-				if (p.hasPermission("Savior.fly.others")) {
-					final Player t = Bukkit.getPlayer(args[0]);
+				if (!p.hasPermission("Savior.fly.others")) {
+					p.sendMessage(Language.PRE + String.format(Language.getMessage(Language.getLang(p),
+							"insufficient_permission"), "Savior.fly.others"));
+					return false;
+				}
 
-					if (t != null) {
-						if (!Fly.fly.contains(t.getName())) {
-							Fly.fly.add(t.getName());
+				final Player t = Bukkit.getPlayer(args[0]);
 
-							t.setAllowFlight(true);
-							t.setFlying(true);
+				if (t == null) {
+					p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "target_invalid"));
+					return false;
+				}
 
-							t.sendMessage(Language.PRE + Language.getMessage(Language.getLang(t), "flight_updated"));
-							p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "flight_updated_target"));
+				if (!Fly.fly.contains(t.getName())) {
+					Fly.fly.add(t.getName());
 
-						} else if (Fly.fly.contains(p.getName())) {
-							Fly.fly.remove(t.getName());
+					t.setAllowFlight(true);
+					p.teleport(p.getLocation().clone().add(0, 0.001, 0));
+					t.setFlying(true);
 
-							t.sendMessage(Language.PRE + Language.getMessage(Language.getLang(t), "flight_updated"));
-							p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "flight_updated_target"));
+					t.sendMessage(Language.PRE + Language.getMessage(Language.getLang(t), "flight_updated"));
+					p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "flight_updated_target"));
 
-							t.setAllowFlight(false);
-							t.setFlying(false);
-						}
-					} else
-						p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "target_invalid"));
-				} else
-					p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "insufficient_permission"));
+				} else if (Fly.fly.contains(t.getName())) {
+					Fly.fly.remove(t.getName());
+
+					t.sendMessage(Language.PRE + Language.getMessage(Language.getLang(t), "flight_updated"));
+					p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "flight_updated_target"));
+
+					t.setAllowFlight(false);
+					t.setFlying(false);
+				}
 
 			} else {
 				p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "arg_length"));

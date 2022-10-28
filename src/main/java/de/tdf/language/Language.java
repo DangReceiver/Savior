@@ -144,9 +144,8 @@ public class Language {
 
 	public static boolean updateServerLang() {
 		FileConfiguration c = Savior.getSavior().getConfig();
-		File sl = getLangFile(c.getString("Language"));
 
-		if (sl == null) {
+		if (!c.isSet("Language")) {
 			c.set("Language", "en");
 			Savior.getSavior().saveConfig();
 
@@ -154,7 +153,7 @@ public class Language {
 			return true;
 		}
 
-		sLang = sl;
+		sLang = getLangFile(c.getString("Language"));
 		return false;
 	}
 
