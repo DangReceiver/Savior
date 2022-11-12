@@ -20,10 +20,9 @@ public class TreeCutDown implements Listener {
 		Player p = e.getPlayer();
 
 		if (!(p.isSneaking() || p.getGameMode() == GameMode.SURVIVAL || p.getGameMode() == GameMode.ADVENTURE)) return;
-		ItemStack itemHand = p.getInventory().getItemInMainHand();
+		ItemStack ih = p.getInventory().getItemInMainHand();
 
-		if (!(itemHand.getType().toString().contains("_AXE") && e.getBlock().getType().toString().contains("LOG")))
-			return;
+		if (!(ih.getType().toString().contains("_AXE") && b.getType().toString().contains("LOG"))) return;
 		short d = 1;
 
 		for (int t = 0; t <= 48; t++) {
@@ -33,23 +32,21 @@ public class TreeCutDown implements Listener {
 			if (!(e.getBlock().getLocation().add(0, (eTimes + 1), 0).getBlock().getType().equals(b.getType()))) return;
 			Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
 
-				if (p.getInventory().getItemInMainHand().getType().toString().contains("_AXE")) {
-					itemHand.setDurability((short) (itemHand.getDurability() + 1));
+				if (!p.getInventory().getItemInMainHand().getType().toString().contains("_AXE")) return;
+				ih.setDurability((short) (ih.getDurability() + 1));
 
-					if (itemHand.getType().getMaxDurability() > itemHand.getDurability()) {
-						Block above = e.getBlock().getLocation().add(0.0D, (eTimes + 1), 0.0D).getBlock();
+				if (ih.getType().getMaxDurability() > ih.getDurability()) {
+					Block above = e.getBlock().getLocation().add(0.0D, (eTimes + 1), 0.0D).getBlock();
 
-						Bukkit.getServer().getWorld("world").playSound(above.getLocation(),
-								Sound.BLOCK_WOOD_BREAK, 0.4F + (eTimes / 100), 0.6F + (eTimes / 100));
-						above.breakNaturally(itemHand);
+					Bukkit.getServer().getWorld("world").playSound(above.getLocation(),
+							Sound.BLOCK_WOOD_BREAK, 0.4F + (eTimes / 100), 0.6F + (eTimes / 100));
+					above.breakNaturally(ih);
 
-					} else {
-						itemHand.setAmount(0);
-						p.playSound(p.getLocation(), Sound.ENTITY_ITEM_BREAK, 0.4F, 0.75F);
-						return;
-					}
-				} else
+				} else {
+					ih.setAmount(0);
+					p.playSound(p.getLocation(), Sound.ENTITY_ITEM_BREAK, 0.4F, 0.75F);
 					return;
+				}
 			}, d);
 		}
 	}

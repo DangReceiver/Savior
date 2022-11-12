@@ -72,6 +72,7 @@ public final class Savior extends JavaPlugin {
 		pm.registerEvents(new CreeperActivateCreeper(), this);
 		pm.registerEvents(new SpawnProtection(), this);
 		pm.registerEvents(new ElytraBoost(), this);
+		pm.registerEvents(new BedHandling(), this);
 //		pm.registerEvents(new ToSaviorCommand(), this);
 
 		Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());
