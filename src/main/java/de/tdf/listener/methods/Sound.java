@@ -1,4 +1,4 @@
-package de.tdf.methods;
+package de.tdf.listener.methods;
 
 import de.tdf.savior.Savior;
 import org.bukkit.Bukkit;

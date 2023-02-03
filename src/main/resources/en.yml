@@ -20,13 +20,13 @@ errors:
   lang_load_error: "This language could not be used, it is missing essential strings§8."
   no_player: "This feature is exclusively available to players§8."
   no_death_location: "You do not have a valid death location."
-  door_reset: "Double door set was reset."
+  door_reset: "A Double door set was reset."
 
 system_messages:
   info_author: "This plugins author is %s"
   info_version: " §7You are on version §e%s §7of the Savior plugin§8."
   info_ping: " §7Your current ping§8: §%s§8."
-  info_ram_usage: " §7Ram usage §8- §7In use§8: §7%smb §8/ §7%smb§8. §7Free§8: §7%smb§8."
+  info_ram_usage: " §7Ram usage §8- §7In use§8: §7%sMB §8/ §7%sMB§8. §7Free§8: §7%sMB§8."
   spawn_world_invalid: "The world \"Spawn\" is invalid."
   welcome_back: "§7Welcome back §3%s §c❤"
   healed_title: "§7You were healed§8."
@@ -122,4 +122,4 @@ broadcasts:
   player_quit_13: "%s just made poof§8. ⌈§c«§8⌋"
   player_quit_14: "%s left their trouble behind§8. ⌈§c«§8⌋"
   player_quit_15: "%s figured this is a waste of time§8. ⌈§c«§8⌋"
-  player_quit_16: "The last thing we've got left about %s is the idea of them§8. ⌈§c«§8⌋"
+  player_quit_16: "The last thing we've got left of %s is the idea of them§8. ⌈§c«§8⌋"

@@ -20,7 +20,7 @@ public class Info implements CommandExecutor {
 		final long m = r.maxMemory() / s - r.freeMemory() / s;
 
 		Player p = (Player) sen;
-		File l = sen instanceof Player ? Language.getLang(p) : Language.getServerLang();
+		File l = sen != null ? Language.getLang(p) : Language.getServerLang();
 
 		sen.sendMessage("§0 \n §0 ");
 

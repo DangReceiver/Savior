@@ -73,6 +73,7 @@ public final class Savior extends JavaPlugin {
 		pm.registerEvents(new SpawnProtection(), this);
 		pm.registerEvents(new ElytraBoost(), this);
 		pm.registerEvents(new BedHandling(), this);
+		pm.registerEvents(new ItemCooldown(), this);
 //		pm.registerEvents(new ToSaviorCommand(), this);
 
 		Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());

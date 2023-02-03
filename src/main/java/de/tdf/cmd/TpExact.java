@@ -27,13 +27,14 @@ public class TpExact implements CommandExecutor {
 			return true;
 		}
 
-		if (args.length != 0) {
+		if (args.length > 1) {
 			p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "usage"), cmd + " [<boolean: yaw/pitch correction>]"));
 			return true;
 		}
 
 		Location loc = new Location(p.getWorld(), p.getLocation().getBlockX(), p.getLocation().getBlockY(), p.getLocation().getBlockZ());
-		loc.add(0.5, 0.0, 0.5);
+
+		if(args.length == 0) loc.add(0.5, 0.0, 0.5);
 
 		loc.setPitch((float) Math.round(loc.getPitch()));
 		loc.setYaw((float) Math.round(loc.getYaw()));

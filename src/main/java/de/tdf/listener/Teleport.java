@@ -23,7 +23,7 @@ public class Teleport implements Listener {
 				"death_action_cancel_teleport")));
 
 		int i = 0;
-		de.tdf.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_BASS, 2,
+		de.tdf.listener.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_BASS, 2,
 				0.5f, 0f, true, 0.65f, 6, i);
 		e.setCancelled(true);
 	}
