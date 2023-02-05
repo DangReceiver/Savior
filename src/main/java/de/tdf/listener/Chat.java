@@ -2,6 +2,8 @@ package de.tdf.listener;
 
 import de.tdf.PC;
 import de.tdf.language.Language;
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,7 +29,17 @@ public class Chat implements Listener {
 				.replaceAll("<message>", e.getMessage());
 		f = f.replaceAll("<prefix>", Language.PRE);
 
-		if (p.hasPermission("Savior.ColorChat")) f = f.replaceAll("&", "§");
+		if (p.hasPermission("Savior.Chat.Color")) f = f.replaceAll("&", "§");
+
+		if (p.hasPermission("Savior.Chat.Tagging"))
+			for (Player ap : Bukkit.getOnlinePlayers()) {
+				if (f.contains(" " + ap.getName())) {
+					f = f.replaceAll(" " + ap.getName(), " §" + Language.colorFromRGB(20,
+							210, 80) + "§o@" + ap.getName() + "§7");
+					ap.playSound(ap.getLocation(), Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 0.4f, 1.1f);
+				}
+			}
+
 		e.setFormat(f);
 	}
 }

@@ -23,7 +23,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ConnectionManager implements Listener {
+public class CM implements Listener {
 
 	@EventHandler
 	public void handle(PlayerJoinEvent e) {
@@ -34,6 +34,9 @@ public class ConnectionManager implements Listener {
 			pc.setLanguage(Language.getServerLang());
 			pc.savePCon();
 		}
+
+		pc.setJoinTime(System.currentTimeMillis());
+		pc.savePCon();
 
 		File lf = pc.getLanguage();
 		Language.setLang(p, lf);
@@ -82,6 +85,9 @@ public class ConnectionManager implements Listener {
 
 		Location l = p.getLocation();
 		PC pc = PC.loadConfig(p);
+
+		pc.setQuitTime(System.currentTimeMillis());
+		pc.updatePlayTime();
 
 		if (pc.isDead()) {
 			p.damage(p.getHealth() * p.getHealth());

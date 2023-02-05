@@ -1,6 +1,5 @@
 package de.tdf;
 
-import com.google.errorprone.annotations.Var;
 import de.tdf.language.Language;
 import de.tdf.savior.Savior;
 import org.bukkit.Bukkit;
@@ -9,7 +8,10 @@ import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +24,11 @@ public class PC {
 	YamlConfiguration c;
 	File f;
 
+	OfflinePlayer player;
+
 	public PC(final OfflinePlayer p) {
+		player = p;
+
 		final String uuid = p.getUniqueId().toString();
 		this.f = new File("plugins/Savior/players/" + uuid + ".yml");
 		this.c = YamlConfiguration.loadConfiguration(this.f);
@@ -34,6 +40,10 @@ public class PC {
 
 	public File getFile() {
 		return this.f;
+	}
+
+	public OfflinePlayer getOfflinePlayer() {
+		return player;
 	}
 
 	public static PC loadConfig(final OfflinePlayer p) {
@@ -171,6 +181,22 @@ public class PC {
 		return c.isSet(s) ? c.getItemStack(s) : new ItemStack(Material.AIR);
 	}
 
+	public void saveInventory(final String s, Inventory inventory) {
+		c.set(s, inventory);
+	}
+
+	public Inventory getInventory(final String s) {
+		return (Inventory) c.get(s);
+	}
+
+	public void saveItemStackField(final String s, ItemStack[] items) {
+		c.set(s, items);
+	}
+
+	public ItemStack[] getItemStackField(final String s) {
+		return (ItemStack[]) c.get(s);
+	}
+
 	public boolean setDefaultMessageColor(int r, int g, int b) {
 		if (r > 255 || r < 0 || g > 255 || g < 0 || b > 255 || b < 0) return false;
 
@@ -196,7 +222,7 @@ public class PC {
 //	}
 
 	public String getLanguageString() {
-		return c.getString("Customization.Language");
+		return c.getString("Settings.Language");
 	}
 
 	public File getLanguage() {
@@ -205,7 +231,7 @@ public class PC {
 
 	public boolean setLanguage(File f) {
 		if (Language.isValidLang(f)) {
-			c.set("Customization.Language", f.getName().split("\\.")[0]);
+			c.set("Settings.Language", f.getName().split("\\.")[0]);
 			return true;
 		}
 		return false;
@@ -252,6 +278,46 @@ public class PC {
 		c.set("Statistics.Locations.Death", l);
 	}
 
+	public boolean getBuild() {
+		return c.getBoolean("Mechanics.Build.Toggle");
+	}
+
+	public void setBuild(boolean build) {
+		c.set("Mechanics.Build.Toggle", build);
+	}
+
+	public void setSaveBuild(boolean build) {
+		c.set("Mechanics.Build.Settings.Save", build);
+	}
+
+	public boolean getSaveBuild() {
+		return c.getBoolean("Mechanics.Build.Settings.Save");
+	}
+
+	public void setForceGameModeBuild(boolean build) {
+		c.set("Mechanics.Build.Settings.ForceGameMode", build);
+	}
+
+	public boolean getForceGameModeBuild() {
+		return c.getBoolean("Mechanics.Build.Settings.ForceGameMode");
+	}
+
+	public Inventory getSaveBuildInventory() {
+		return getInventory("Mechanics.Build.Inventory");
+	}
+
+	public void setSaveBuildInventory(Inventory inventory) {
+		c.set("Mechanics.Build.Inventory", inventory);
+	}
+
+	public void setSaveBuildNumbers(List<Double> numbers) {
+		c.set("Mechanics.Build.Numbers", numbers);
+	}
+
+	public List<Double> getSaveBuildNumbers() {
+		return c.getDoubleList("Mechanics.Build.Numbers");
+	}
+
 	public boolean getRespawnRequired() {
 		return c.getBoolean("Mechanics.RespawnRequired");
 	}
@@ -260,12 +326,53 @@ public class PC {
 		c.set("Mechanics.RespawnRequired", required);
 	}
 
+	public void updatePlayTime() {
+		setTotalPlayTime(getTotalPlayTime() + getQuitTime() - getJoinTime());
+		setJoinTime(-1);
+	}
+
+	public void setTotalPlayTime(long millis) {
+		c.set("Mechanics.Time.TotalPlayTime", millis);
+	}
+
+	public long getTotalPlayTime() {
+		return c.getLong("Mechanics.Time.TotalPlayTime");
+	}
+
+	public long getCurrentPlayTIme() {
+		return c.getLong("Mechanics.Time.TotalPlayTime") + System.currentTimeMillis() - getJoinTime();
+	}
+
+	public void setQuitTime(long millis) {
+		c.set("Mechanics.Time.QuitTime", millis);
+	}
+
+	public long getQuitTime() {
+		return c.getLong("Mechanics.Time.QuitTime");
+	}
+
+	public void setJoinTime(long millis) {
+		c.set("Mechanics.Time.JoinTime", millis);
+	}
+
+	public long getJoinTime() {
+		return c.getLong("Mechanics.Time.JoinTime");
+	}
+
 	public void setDead(boolean b) {
 		c.set("Mechanics.isDead", b);
 	}
 
 	public boolean isDead() {
 		return c.isSet("Mechanics.isDead") ? c.getBoolean("Mechanics.isDead") : false;
+	}
+
+	public int getPronouns() {
+		return c.getInt("Settings.Pronouns", 0);
+	}
+
+	public void setPronouns(int i) {
+		c.set("Settings.Pronouns", i <= 4 ? i : 0);
 	}
 
 	public void savePCon() {

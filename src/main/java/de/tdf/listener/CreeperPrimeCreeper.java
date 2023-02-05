@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
 
-public class CreeperActivateCreeper implements Listener {
+public class CreeperPrimeCreeper implements Listener {
 
 	@EventHandler(priority = EventPriority.LOW)
 	public void onEntityDamage(final EntityDamageByEntityEvent ev) {

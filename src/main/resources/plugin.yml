@@ -68,3 +68,13 @@ commands:
     description: Set your or a target's max health.
     aliases:
       - MaxHealth
+  Build:
+    description: Abuse your permissions to modify and improve the landscapes and buildings.
+  Hologram:
+    description: Set up, modify, move, remove and modify holograms.
+    aliases:
+      - Holo
+  Spawn:
+    description: Teleport to the spawn, or modify it.
+    aliases:
+      - TpSpawn

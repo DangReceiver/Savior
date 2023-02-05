@@ -1,6 +1,8 @@
 package de.tdf.savior;
 
 import de.tdf.cmd.*;
+import de.tdf.cmd.manage.Build;
+import de.tdf.cmd.manage.Hologram;
 import de.tdf.listener.*;
 import de.tdf.language.Language;
 import de.tdf.worlds.Spawn;
@@ -9,6 +11,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -55,7 +58,7 @@ public final class Savior extends JavaPlugin {
 				settings.getBoolean("Settings.RequirePermission.DoorClick") : false;
 
 		PluginManager pm = Bukkit.getPluginManager();
-		pm.registerEvents(new ConnectionManager(), this);
+		pm.registerEvents(new CM(), this);
 		pm.registerEvents(new FireWorkJump(), this);
 		pm.registerEvents(new SneakEvent(), this);
 		pm.registerEvents(new Chat(), this);
@@ -69,10 +72,13 @@ public final class Savior extends JavaPlugin {
 		pm.registerEvents(new EntityDamageDisplay(), this);
 		pm.registerEvents(new TreeCutDown(), this);
 		pm.registerEvents(new Doors(), this);
-		pm.registerEvents(new CreeperActivateCreeper(), this);
+		pm.registerEvents(new CreeperPrimeCreeper(), this);
 		pm.registerEvents(new SpawnProtection(), this);
 		pm.registerEvents(new ElytraBoost(), this);
 		pm.registerEvents(new BedHandling(), this);
+		pm.registerEvents(new Build(), this);
+		pm.registerEvents(new WorldChanged(), this);
+
 //		pm.registerEvents(new ToSaviorCommand(), this);
 
 		Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());
@@ -90,6 +96,10 @@ public final class Savior extends JavaPlugin {
 		Objects.requireNonNull(getCommand("TpExact")).setExecutor(new TpExact());
 		Objects.requireNonNull(getCommand("TpWorld")).setExecutor(new TpWorld());
 		Objects.requireNonNull(getCommand("Health")).setExecutor(new Health());
+		Objects.requireNonNull(getCommand("Build")).setExecutor(new Build());
+		Objects.requireNonNull(getCommand("Hologram")).setExecutor(new Hologram());
+		Objects.requireNonNull(getCommand("Spawn")).setExecutor(new de.tdf.cmd.manage.Spawn());
+		Objects.requireNonNull(getCommand("Spawn")).setTabCompleter(new de.tdf.cmd.manage.Spawn());
 
 		for (Player ap : Bukkit.getOnlinePlayers())
 			Language.setLang(ap, Language.getLangFile("en"));

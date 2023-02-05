@@ -55,6 +55,14 @@ system_messages:
   invalid_lang_resource: "The provided language resource file %s could not be accessed."
   change_attribute_target: "The target's attribute was changed from %s to %s successfully."
   change_attribute: "Your attribute was changed from %s to %s successfully."
+  # "name" "they", "them", "their", "theirs", "themselves"
+  pronouns_example_pre: "You've changed your pronouns§8. §7§oExample sentence§8: "
+  pronouns_example_sentence_0: "This is %pn. %p0 are xy years old. I like %p1 very much, because %p2 hair is fluffy.
+  This jacket is %p3, and %pn bought it %p4, it looks amazing!!"
+  pronouns_example_sentence_1: "%pn is new on the server. Welcome %p1, I'd bet %p0 are nice! Also, %p2 skin looks fancy.
+  I'm excited for %pn to introduce §p4. This whole effort of xy is %p3!"
+  pronouns_example_sentence_2: "Huh, %p0 seem interesting... %pn...? I'm sure it's not %p2 way to invite you to something
+   and make you pay for it. Give %p1 a price already! They did the whole work %p4. This affection of motivation is %p3."
 
 player_feedback:
   spawn_action_cancelled: "This action cannot be performed here."
@@ -123,3 +131,6 @@ broadcasts:
   player_quit_14: "%s left their trouble behind§8. ⌈§c«§8⌋"
   player_quit_15: "%s figured this is a waste of time§8. ⌈§c«§8⌋"
   player_quit_16: "The last thing we've got left about %s is the idea of them§8. ⌈§c«§8⌋"
+  player_rejoin_0: "%s just hopped in§8. ⌈§a»§8⌋"
+  player_rejoin_1: "%s is now with us§8. ⌈§a»§8⌋"
+  player_rejoin_2: "Hey %s, lookin' good today§8! ⌈§a»§8⌋"
