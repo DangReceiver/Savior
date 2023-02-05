@@ -1,7 +1,7 @@
 package de.tdf.listener;
 
 import com.destroystokyo.paper.event.player.PlayerElytraBoostEvent;
-import de.tdf.methods.Sound;
+import de.tdf.listener.methods.Sound;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

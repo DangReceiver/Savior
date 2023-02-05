@@ -10,11 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class SpawnButtonPush implements Listener {
 
@@ -36,7 +32,7 @@ public class SpawnButtonPush implements Listener {
 		else p.teleport(new Location(Bukkit.getWorld("world"), 0, 64, 0));
 
 		int i = 0;
-		de.tdf.methods.Sound.oneByOne(p, Sound.ENTITY_PLAYER_BREATH, 4,
+		de.tdf.listener.methods.Sound.oneByOne(p, Sound.ENTITY_PLAYER_BREATH, 4,
 				1.2f, 0.2f, false, 0.4f, 40, i);
 
 		p.setGameMode(GameMode.SURVIVAL);
