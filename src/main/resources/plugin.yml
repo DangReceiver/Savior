@@ -78,3 +78,5 @@ commands:
     description: Teleport to the spawn, or modify it.
     aliases:
       - TpSpawn
+  Pronouns:
+    description: Change your preferred pronouns, that are used server sided.

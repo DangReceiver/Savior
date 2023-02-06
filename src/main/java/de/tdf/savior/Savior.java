@@ -79,6 +79,8 @@ public final class Savior extends JavaPlugin {
 		pm.registerEvents(new Build(), this);
 		pm.registerEvents(new WorldChanged(), this);
 		pm.registerEvents(new ItemCooldown(), this);
+		pm.registerEvents(new AddItemCooldown(), this);
+		pm.registerEvents(new EnderPearl(), this);
 //		pm.registerEvents(new ToSaviorCommand(), this);
 
 		Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());
