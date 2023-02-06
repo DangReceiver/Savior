@@ -29,6 +29,7 @@ public class Hologram implements CommandExecutor {
 		if (args.length >= 3) {
 			// Does not make sense currently lol
 			ArmorStand as = (ArmorStand) p.getWorld().spawnEntity(p.getLocation(), EntityType.ARMOR_STAND);
+
 			UUID uuid = as.getUniqueId();
 			Holo h = Holo.loadConfig(uuid);
 
@@ -51,7 +52,7 @@ public class Hologram implements CommandExecutor {
 				h.rename(args[1]);
 
 			} else if (args[0].equalsIgnoreCase("reset")) {
-
+				h.setDefault();
 
 			} else if (args[0].equalsIgnoreCase("addLine")) {
 
