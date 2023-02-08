@@ -22,94 +22,95 @@ import java.util.Random;
 
 public class CM implements Listener {
 
-	@EventHandler
-	public void handle(PlayerJoinEvent e) {
-		Player p = e.getPlayer();
-		PC pc = PC.loadConfig(p);
+    @EventHandler
+    public void handle(PlayerJoinEvent e) {
+        Player p = e.getPlayer();
+        PC pc = PC.loadConfig(p);
 
-		if (pc.getLanguageString() == null) {
-			pc.setLanguage(Language.getServerLang());
-			pc.savePCon();
-		}
+        if (pc.getLanguageString() == null) {
+            pc.setLanguage(Language.getServerLang());
+            pc.savePCon();
+        }
 
-		pc.setJoinTime(System.currentTimeMillis());
-		pc.savePCon();
+        pc.setJoinTime(System.currentTimeMillis());
+        pc.savePCon();
 
-		File lf = pc.getLanguage();
-		Language.setLang(p, lf);
+        File lf = pc.getLanguage();
+        Language.setLang(p, lf);
 
-		e.setJoinMessage(null);
-		Language.broadcastArg("player_join_" + new Random().nextInt(17), p.getName());
+        e.setJoinMessage(null);
+        if (p.hasPlayedBefore()) Language.broadcastArg("player_join_"
+                + new Random().nextInt(17), p.getName());
 
-		p.setGameMode(GameMode.ADVENTURE);
-		p.teleport(Savior.getSafeSpawnLocation());
+        p.setGameMode(GameMode.ADVENTURE);
+        p.teleport(Savior.getSafeSpawnLocation());
 
-		setupLoginLocation(p, pc);
-		p.sendTitle(Language.PRE, String.format(Language.getMessage(lf, "welcome_back"), p.getName()), 30, 50, 50);
-		p.sendMessage(Language.PRE + Language.getMessage(lf, "join_teleport_spawn"));
+        setupLoginLocation(p, pc);
+        p.sendTitle(Language.PRE, String.format(Language.getMessage(lf, "welcome_back"), p.getName()), 30, 50, 50);
+        p.sendMessage(Language.PRE + Language.getMessage(lf, "join_teleport_spawn"));
 
-		int i = 0;
-		de.tdf.listener.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_CHIME, 4,
-				0.225f, 0.225f, true, 0.55f, 3, i);
-	}
+        int i = 0;
+        de.tdf.listener.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_CHIME, 4,
+                0.225f, 0.225f, true, 0.55f, 3, i);
+    }
 
-	public void setupLoginLocation(Player p, PC pc) {
-		File lf = pc.getLanguage();
-		BossBar.timeToBroadcastBar(p, Language.colorFromRGB(180, 150, 20) +
-				Language.getMessage(Language.getLang(p), "spawn_location_bossbar"));
+    public void setupLoginLocation(Player p, PC pc) {
+        File lf = pc.getLanguage();
+        BossBar.timeToBroadcastBar(p, Language.colorFromRGB(180, 150, 20) +
+                Language.getMessage(Language.getLang(p), "spawn_location_bossbar"));
 
-		Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> {
-			p.sendMessage(Language.PRE + Language.getMessage(lf, "login_location_broadcast_warning"));
+        Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> {
+            p.sendMessage(Language.PRE + Language.getMessage(lf, "login_location_broadcast_warning"));
 
-			Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> {
-				if (!(pc.hasLogoutLocation() && p.isOnline())) return;
+            Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> {
+                if (!(pc.hasLogoutLocation() && p.isOnline())) return;
 
-				Location lol = pc.getLogoutLocation();
-				Language.broadcastArg("login_location_broadcast", p.getName(),
-						lol.getBlockX() + "", lol.getBlockY() + "", lol.getBlockZ() + "");
+                Location lol = pc.getLogoutLocation();
+                Language.broadcastArg("login_location_broadcast", p.getName(),
+                        lol.getBlockX() + "", lol.getBlockY() + "", lol.getBlockZ() + "");
 
-				int i = 0;
-				de.tdf.listener.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_FLUTE, 5,
-						0.4f, 0.3f, true, 0.55f, 10, i);
-			}, 20 * 20);
-		}, 6 * 20);
-	}
+                int i = 0;
+                de.tdf.listener.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_FLUTE, 5,
+                        0.4f, 0.3f, true, 0.55f, 10, i);
+            }, 20 * 20);
+        }, 6 * 20);
+    }
 
-	@EventHandler
-	public void handle(PlayerQuitEvent e) {
-		Player p = e.getPlayer();
-		e.setQuitMessage(null);
+    @EventHandler
+    public void handle(PlayerQuitEvent e) {
+        Player p = e.getPlayer();
+        e.setQuitMessage(null);
 
-		Location l = p.getLocation();
-		PC pc = PC.loadConfig(p);
+        Location l = p.getLocation();
+        PC pc = PC.loadConfig(p);
 
-		pc.setQuitTime(System.currentTimeMillis());
-		pc.updatePlayTime();
+        pc.setQuitTime(System.currentTimeMillis());
+        pc.updatePlayTime();
 
-		if (pc.isDead()) {
-			p.damage(p.getHealth() * p.getHealth());
+        if (pc.isDead()) {
+            p.damage(p.getHealth() * p.getHealth());
 
-			@Nullable ItemStack[] contents = p.getInventory().getContents().clone();
-			ArrayList<ItemStack> con = new ArrayList<>();
-			int c = 0;
+            @Nullable ItemStack[] contents = p.getInventory().getContents().clone();
+            ArrayList<ItemStack> con = new ArrayList<>();
+            int c = 0;
 
-			for (ItemStack i : contents)
-				if (i != null) con.add(i);
+            for (ItemStack i : contents)
+                if (i != null) con.add(i);
 
-			PreDeath.nobelItemDrop(p.getLocation().clone(), con, c);
-			p.getInventory().clear();
+            PreDeath.nobelItemDrop(p.getLocation().clone(), con, c);
+            p.getInventory().clear();
 
-			Language.broadcastArg("player_unsuitable_quit", p.getName());
-			Language.broadcastArg("death_location_broadcast", l.getWorld().getName(),
-					l.getBlockX() + "", l.getBlockY() + "", l.getBlockZ() + "");
-		}
+            Language.broadcastArg("player_unsuitable_quit", p.getName());
+            Language.broadcastArg("death_location_broadcast", l.getWorld().getName(),
+                    l.getBlockX() + "", l.getBlockY() + "", l.getBlockZ() + "");
+        }
 
-		if (!p.getWorld().getName().equalsIgnoreCase("Spawn")) {
-			pc.setLogoutLocation(l);
-			pc.savePCon();
-		}
+        if (!p.getWorld().getName().equalsIgnoreCase("Spawn")) {
+            pc.setLogoutLocation(l);
+            pc.savePCon();
+        }
 
-		Language.broadcastArg("player_quit_" + new Random().nextInt(17), p.getName());
-		Language.removePlayer(p);
-	}
+        Language.broadcastArg("player_quit_" + new Random().nextInt(17), p.getName());
+        Language.removePlayer(p);
+    }
 }
