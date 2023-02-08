@@ -102,6 +102,7 @@ public final class Savior extends JavaPlugin {
 		Objects.requireNonNull(getCommand("Hologram")).setExecutor(new Hologram());
 		Objects.requireNonNull(getCommand("Spawn")).setExecutor(new de.tdf.cmd.manage.Spawn());
 		Objects.requireNonNull(getCommand("Spawn")).setTabCompleter(new de.tdf.cmd.manage.Spawn());
+		Objects.requireNonNull(getCommand("Pronouns")).setExecutor(new Pronouns());
 
 		for (Player ap : Bukkit.getOnlinePlayers())
 			Language.setLang(ap, Language.getLangFile("en"));

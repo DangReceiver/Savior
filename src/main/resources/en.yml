@@ -56,7 +56,7 @@ system_messages:
   change_attribute_target: "The target's attribute was changed from %s to %s successfully."
   change_attribute: "Your attribute was changed from %s to %s successfully."
   # "name" "they", "them", "their", "theirs", "themselves"
-  pronouns_example_pre: "You've changed your pronouns§8. §7§oExample sentence§8: "
+  pronouns_example_pre: "You've changed your pronouns§8. §7§oExample sentence§8: \n"
   pronouns_example_sentence_0: "This is %pn. %p0 are xy years old. I like %p1 very much, because %p2 hair is fluffy.
   This jacket is %p3, and %pn bought it %p4, it looks amazing!!"
   pronouns_example_sentence_1: "%pn is new on the server. Welcome %p1, I'd bet %p0 are nice! Also, %p2 skin looks fancy.
