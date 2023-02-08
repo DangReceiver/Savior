@@ -39,8 +39,16 @@ public class CM implements Listener {
         Language.setLang(p, lf);
 
         e.setJoinMessage(null);
-        if (p.hasPlayedBefore()) Language.broadcastArg("player_join_"
-                + new Random().nextInt(17), p.getName());
+        if (!p.hasPlayedBefore())
+            Language.broadcastArg("player_first_join", p.getName());
+
+        else {
+            if (pc.getJoinTime() - pc.getQuitTime() <= 15000)
+                Language.broadcastArg("player_rejoin_"
+                        + new Random().nextInt(4), p.getName());
+            else Language.broadcastArg("player_join_"
+                    + new Random().nextInt(17), p.getName());
+        }
 
         p.setGameMode(GameMode.ADVENTURE);
         p.teleport(Savior.getSafeSpawnLocation());
