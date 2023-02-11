@@ -41,8 +41,8 @@ public class Ench implements CommandExecutor, TabCompleter {
 
 				if (level < 1 || level >= 16001) {
 					if (level != 0) {
-						p.sendMessage(Language.PRE + String.format(Language.getMessage(Language.getLang(p),
-								"argument_integer_range"), "1 → 16.000"));
+						p.sendMessage(Language.PRE + String.format(Language.getMessage(
+								Language.getLang(p), "argument_range"), "1", "16.000"));
 						return true;
 					}
 

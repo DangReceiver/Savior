@@ -41,7 +41,7 @@ public class Invsee implements CommandExecutor {
 			return true;
 		}
 
-		p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "invsee_open"), t.getName()));
+		p.sendMessage(Language.PRE + String.format(Language.getMessage(l, "invsee"), t.getName()));
 		p.openInventory(t.getInventory());
 		return false;
 	}

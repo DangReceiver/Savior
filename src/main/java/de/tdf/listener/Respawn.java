@@ -13,25 +13,25 @@ import java.io.File;
 
 public class Respawn implements Listener {
 
-	@EventHandler
-	public void handle(PlayerRespawnEvent e) {
-		Player p = e.getPlayer();
-		e.setRespawnLocation(Savior.getSafeSpawnLocation());
+    @EventHandler
+    public void handle(PlayerRespawnEvent e) {
+        Player p = e.getPlayer();
+        e.setRespawnLocation(Savior.getSafeSpawnLocation());
 
-		File l = Language.getLang(p);
-		p.sendTitle(Language.getMessage(l, "you_died_title"), Language.getMessage(l,
-				"you_died_subtitle"), 20, 60, 40);
+        File l = Language.getLang(p);
+        p.sendTitle(Language.colorFromRGB(220, 10, 30) + Language.getMessage(l, "you_died_title"), Language.getMessage(l,
+                "you_died_subtitle"), 20, 60, 40);
 
-		PC pcd = PC.loadConfig(p);
-		if (!pcd.hasDeathLocation()) {
-			p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "no_death_location"));
-			return;
-		}
+        PC pcd = PC.loadConfig(p);
+        if (!pcd.hasDeathLocation()) {
+            p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "no_death_location"));
+            return;
+        }
 
-		if (pcd.getRespawnRequired()) pcd.setRespawnRequired(false);
+        if (pcd.getRespawnRequired()) pcd.setRespawnRequired(false);
 
-		pcd.setDeathLocation(null);
-		pcd.setDead(false);
-		pcd.savePCon();
-	}
+        pcd.setDeathLocation(null);
+        pcd.setDead(false);
+        pcd.savePCon();
+    }
 }

@@ -12,18 +12,19 @@ import java.util.Random;
 
 public class StartToSprint implements Listener {
 
-	@EventHandler
-	public void handle(PlayerToggleSprintEvent e) {
-		Player p = e.getPlayer();
-		if (p.isSprinting()) return;
+    @EventHandler
+    public void handle(PlayerToggleSprintEvent e) {
+        Player p = e.getPlayer();
 
-		if (new Random().nextInt(41) == 0) {
-			p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 80,
-					2, false, false, false));
+        if (new Random().nextInt(41) != 0) return;
+        if (p.isSprinting()) return;
 
-			int i = 0;
-			de.tdf.listener.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_GUITAR, 2,
-					1f, 0.4f, true, 0.65f, 8, i);
-		}
-	}
+        p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 80,
+                2, false, false, false));
+
+        int i = 0;
+        de.tdf.listener.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_GUITAR, 2,
+                1f, 0.4f, true, 0.65f, 8, i);
+
+    }
 }

@@ -1,5 +1,9 @@
 package de.tdf.listener;
 
+import de.tdf.language.Language;
+import de.tdf.savior.Savior;
+import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -9,6 +13,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.projectiles.ProjectileSource;
 
 public class EnderPearl implements Listener {
@@ -26,6 +31,7 @@ public class EnderPearl implements Listener {
 
         if (p.isSneaking())
             p.setCooldown(i.getType(), 3);
+
         else
             p.setCooldown(i.getType(), 7);
     }
@@ -40,7 +46,7 @@ public class EnderPearl implements Listener {
         if (!(s instanceof Player p)) return;
         if (p.isFlying()) e.setVelocity(e.getVelocity().multiply(2));
 
-        if (p.isSneaking()) e.setVelocity(e.getVelocity().multiply(0.65));
-        else e.setVelocity(e.getVelocity().multiply(1.25));
+        if (p.isSneaking()) e.setVelocity(e.getVelocity().multiply(0.6));
+        else e.setVelocity(e.getVelocity().multiply(1.2));
     }
 }

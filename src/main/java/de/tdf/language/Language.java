@@ -21,238 +21,246 @@ import java.util.List;
 
 public class Language {
 
-	// ⌈⌋ | ⌜⌟ | ⌞⌝ | ⌊⌉
+    // ⌈⌋ | ⌜⌟ | ⌞⌝ | ⌊⌉
 
-	public static String PRE = "§8⌊" + colorFromRGB(245, 25, 125) + "Savior§8⌉ §7";
+    public static String PRE = "§8⌊" + colorFromRGB(245, 25, 125) + "Savior§8⌉ §7";
 
-	public static File sLang;
-	private static final File df = Savior.getSavior().getDataFolder();
+    public static File sLang;
+    private static final File df = Savior.getSavior().getDataFolder();
 
-	private static final Map<Player, File> settings = new HashMap<>();
-	private static final Map<File, Map<String, String>> messages = new HashMap<>();
+    private static final Map<Player, File> settings = new HashMap<>();
+    private static final Map<File, Map<String, String>> messages = new HashMap<>();
 
-	public static net.md_5.bungee.api.ChatColor colorFromRGB(int r, int g, int b) {
-		return net.md_5.bungee.api.ChatColor.of(new Color(r, g, b));
-	}
+    public static net.md_5.bungee.api.ChatColor colorFromRGB(int r, int g, int b) {
+        return net.md_5.bungee.api.ChatColor.of(new Color(r, g, b));
+    }
 
-	public static boolean isLangFile(String lang) {
-		return new File(df + "/language", lang + ".yml").exists();
-	}
+    public static boolean isLangFile(String lang) {
+        return new File(df + "/language", lang + ".yml").exists();
+    }
 
-	public static File getLangFile(String lang) {
-		return new File(df + "/language", lang + ".yml");
-	}
+    public static File getLangFile(String lang) {
+        return new File(df + "/language", lang + ".yml");
+    }
 
-	public static boolean validString(File lang, String key) {
-		return messages.get(lang) != null && messages.get(lang).get(key) != null;
-	}
+    public static boolean validString(File lang, String key) {
+        return messages.get(lang) != null && messages.get(lang).get(key) != null;
+    }
 
-	public static String getMessage(File f, String key) {
-		return validString(f, key) ? messages.get(f).get(key)
-				: validString(getServerLang(), key) ? messages.get(getServerLang()).get(key)
-				: validString(f, "string_not_found")
-				? String.format(messages.get(f).get("string_not_found"), key) :
-				String.format(messages.get(getServerLang()).get("string_not_found"), key);
-	}
+    public static String getMessage(File f, String key) {
+        return validString(f, key) ? messages.get(f).get(key) : validString(getServerLang(),
+                key) ? messages.get(getServerLang()).get(key) : validString(f, "string_not_found")
+                ? String.format(messages.get(f).get("string_not_found"), key) : invalidString(key);
+    }
 
-	public static String getMessage(String fName, String key) {
-		File lf = getLangFile(fName);
-		return messages.get(lf) != null && messages.get(lf).get(key) != null ? messages.get(lf).get(key) :
-				validString(getServerLang(), key) ? messages.get(getServerLang()).get(key) :
-						validString(lf, "string_not_found") ? messages.get(lf).get("string_not_found") :
-								String.format(messages.get(getServerLang()).get("string_not_found"), key);
-	}
+    public static String getMessage(String fName, String key) {
+        File lf = getLangFile(fName);
+        return messages.get(lf) != null && messages.get(lf).get(key) != null ? messages.get(lf).get(key) :
+                validString(getServerLang(), key) ? messages.get(getServerLang()).get(key) : validString(lf,
+                        "string_not_found") ? messages.get(lf).get("string_not_found") : invalidString(key);
+    }
 
-	public static File getServerLang() {
-		return sLang;
-	}
+    public static String invalidString(String key) {
+        try {
+            return messages.get(getServerLang()).get(key);
 
-	public static List<File> getLanguages() {
-		List<File> lf = new ArrayList<>();
+        } catch (InvalidStringException ex) {
+            ex.printStackTrace();
+        }
 
-		if (new File(df + "/language").listFiles() == null) return null;
-		Collections.addAll(lf, new File(df + "/language").listFiles());
+        return String.format(messages.get(getServerLang()).get("string_not_found"), key);
+    }
 
-		return lf;
-	}
+    public static File getServerLang() {
+        return sLang;
+    }
 
-	public static void broadcast(String key) {
-		Bukkit.getConsoleSender().sendMessage(getMessage(getServerLang(), "info") +
-				getMessage(getServerLang(), key));
+    public static List<File> getLanguages() {
+        List<File> lf = new ArrayList<>();
 
-		for (Player ap : Bukkit.getOnlinePlayers())
-			ap.sendMessage(PRE + getMessage(getLang(ap), key));
-	}
+        if (new File(df + "/language").listFiles() == null) return null;
+        Collections.addAll(lf, new File(df + "/language").listFiles());
 
-	public static void broadcastArg(String key, String... arg) {
-		Bukkit.getConsoleSender().sendMessage(getMessage(getServerLang(), "broadcast") +
-				String.format(getMessage(getServerLang(), key), arg));
+        return lf;
+    }
 
-		for (Player ap : Bukkit.getOnlinePlayers()) {
-			String format = String.format(getMessage(getLang(ap), key), arg);
-			ap.sendMessage(PRE + format);
-		}
-	}
+    public static void broadcast(String key) {
+        Bukkit.getConsoleSender().sendMessage(getMessage(getServerLang(), "info") +
+                getMessage(getServerLang(), key));
 
-	public static boolean hasLang(Player p) {
-		return settings.get(p) != null;
-	}
+        for (Player ap : Bukkit.getOnlinePlayers())
+            ap.sendMessage(PRE + getMessage(getLang(ap), key));
+    }
 
-	public static File getLang(Player p) {
-		return !settings.isEmpty() && settings.get(p) != null ? settings.get(p) : getServerLang();
-	}
+    public static void broadcastArg(String key, String... arg) {
+        Bukkit.getConsoleSender().sendMessage(getMessage(getServerLang(), "broadcast") +
+                String.format(getMessage(getServerLang(), key), arg));
 
-	public static void setServerLang(File language) {
-		Plugin s = Savior.getSavior();
-		FileConfiguration c = s.getConfig();
+        for (Player ap : Bukkit.getOnlinePlayers()) {
+            String format = String.format(getMessage(getLang(ap), key), arg);
+            ap.sendMessage(PRE + format);
+        }
+    }
 
-		List<String> langFiles = new ArrayList<>();
-		File folder = new File(df + "/language");
+    public static boolean hasLang(Player p) {
+        return settings.get(p) != null;
+    }
 
-		if (folder.listFiles() == null) return;
-		for (File file : folder.listFiles())
-			langFiles.add(file.getName());
+    public static File getLang(Player p) {
+        return !settings.isEmpty() && settings.get(p) != null ? settings.get(p) : getServerLang();
+    }
 
-		if (language == null) {
-			if (!c.isSet("Language")) {
-				c.set("Language", "en");
-				s.saveConfig();
-			}
+    public static void setServerLang(File language) {
+        Plugin s = Savior.getSavior();
+        FileConfiguration c = s.getConfig();
 
-			if (!langFiles.contains(c.getString("Language") + ".yml")) return;
-			sLang = new File(df + "/language", c.getString("Language") + ".yml");
+        List<String> langFiles = new ArrayList<>();
+        File folder = new File(df + "/language");
 
-		} else if (langFiles.contains(language.getName())) sLang = language;
+        if (folder.listFiles() == null) return;
+        for (File file : folder.listFiles())
+            langFiles.add(file.getName());
 
-		return;
-	}
+        if (language == null) {
+            if (!c.isSet("Language")) {
+                c.set("Language", "en");
+                s.saveConfig();
+            }
 
-	public static void setLang(Player p, File file) {
-		removePlayer(p);
+            if (!langFiles.contains(c.getString("Language") + ".yml")) return;
+            sLang = new File(df + "/language", c.getString("Language") + ".yml");
 
-		if (!file.exists()) {
-			File lang = getLangFile("en");
-			settings.put(p, lang);
+        } else if (langFiles.contains(language.getName())) sLang = language;
 
-		} else
-			settings.put(p, file);
-	}
+        return;
+    }
 
-	public static void removePlayer(Player p) {
-		settings.remove(p);
-	}
+    public static void setLang(Player p, File file) {
+        removePlayer(p);
 
-	public static boolean updateServerLang() {
-		FileConfiguration c = Savior.getSavior().getConfig();
+        if (!file.exists()) {
+            File lang = getLangFile("en");
+            settings.put(p, lang);
 
-		if (!c.isSet("Language")) {
-			c.set("Language", "en");
-			Savior.getSavior().saveConfig();
+        } else
+            settings.put(p, file);
+    }
 
-			sLang = getLangFile(c.getString("Language"));
-			return true;
-		}
+    public static void removePlayer(Player p) {
+        settings.remove(p);
+    }
 
-		sLang = getLangFile(c.getString("Language"));
-		return false;
-	}
+    public static boolean updateServerLang() {
+        FileConfiguration c = Savior.getSavior().getConfig();
 
-	public static File langFolder() {
-		Plugin s = Savior.getSavior();
-		File langFolder = new File(s.getDataFolder() + "/language");
+        if (!c.isSet("Language")) {
+            c.set("Language", "en");
+            Savior.getSavior().saveConfig();
 
-		if (!langFolder.exists()) {
-			s.getDataFolder().mkdir();
-			langFolder.mkdir();
-		}
+            sLang = getLangFile(c.getString("Language"));
+            return true;
+        }
 
-		return langFolder;
-	}
+        sLang = getLangFile(c.getString("Language"));
+        return false;
+    }
 
-	public static void loadResources(Plugin sa, File langF) {
-		List<String> resources = new ArrayList<>(Arrays.asList("en.yml", "de.yml"));
+    public static File langFolder() {
+        Plugin s = Savior.getSavior();
+        File langFolder = new File(s.getDataFolder() + "/language");
 
-		for (String s : resources) {
+        if (!langFolder.exists()) {
+            s.getDataFolder().mkdir();
+            langFolder.mkdir();
+        }
 
-			File rf = new File(langF, s);
-			Path target = rf.toPath();
-			InputStream in = sa.getResource(s);
+        return langFolder;
+    }
 
-			ConsoleCommandSender cs = Bukkit.getConsoleSender();
-			File sl = Language.getLangFile(s.split(".yml")[0]);
+    public static void loadResources(Plugin sa, File langF) {
+        List<String> resources = new ArrayList<>(Arrays.asList("en.yml", "oldde.yml"));
 
-			if (in == null) {
-				Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> cs.sendMessage(
-						Language.getMessage(sl, "error") + Language.getMessage(sl, "invalid_lang_resource")), 1);
-				return;
-			}
+        for (String s : resources) {
 
-			try {
-				if (rf.length() < sa.getResource(s).available() &&
-						sa.getResource(s).available() - rf.length() >= 25) {
-					Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
+            File rf = new File(langF, s);
+            Path target = rf.toPath();
+            InputStream in = sa.getResource(s);
 
-					Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () ->
-							cs.sendMessage(Language.getMessage(sl, "info") + String.format(
-									Language.getMessage(sl, "replacing_lang_file"), s)), 1);
-					continue;
-				}
+            ConsoleCommandSender cs = Bukkit.getConsoleSender();
+            File sl = Language.getLangFile(s.split(".yml")[0]);
 
-				Files.copy(in, target);
-				Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> cs.sendMessage(
-						Language.getMessage(sl, "info") + Language.getMessage(sl, "creating_lang_resource")), 1);
+            if (in == null) {
+                Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> cs.sendMessage(
+                        Language.getMessage(sl, "error") + Language.getMessage(sl, "invalid_lang_resource")), 1);
+                return;
+            }
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+            try {
+                if (rf.length() < sa.getResource(s).available() &&
+                        sa.getResource(s).available() - rf.length() >= 25) {
+                    Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
 
-	public static void loadCustomLanguages(Plugin s, File langF) {
+                    Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () ->
+                            cs.sendMessage(Language.getMessage(sl, "info") + String.format(
+                                    Language.getMessage(sl, "replacing_lang_file"), s)), 1);
+                    continue;
+                }
 
-		if (langF.listFiles() == null || langF.listFiles().length == 0)
-			loadResources(s, new File(s.getDataFolder() + "/language"));
+                Files.copy(in, target);
+                Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> cs.sendMessage(
+                        Language.getMessage(sl, "info") + Language.getMessage(sl, "creating_lang_resource")), 1);
 
-		for (File file : langF.listFiles()) {
-			Map<String, String> lm = new HashMap<>();
-			FileConfiguration lang = YamlConfiguration.loadConfiguration(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-			for (String key : lang.getKeys(false)) {
-				for (String messName : lang.getConfigurationSection(key).getKeys(false)) {
+    public static void loadCustomLanguages(Plugin s, File langF) {
 
-					String message = ChatColor.translateAlternateColorCodes('§', lang.getString(key + "." + messName));
-					lm.put(messName, message);
-				}
-			}
+        if (langF.listFiles() == null || langF.listFiles().length == 0)
+            loadResources(s, new File(s.getDataFolder() + "/language"));
 
-			messages.put(file, lm);
-			if (!isValidLang(file)) continue;
+        for (File file : langF.listFiles()) {
+            Map<String, String> lm = new HashMap<>();
+            FileConfiguration lang = YamlConfiguration.loadConfiguration(file);
 
-			Bukkit.getConsoleSender().sendMessage(PRE +
-					String.format(getMessage(file, "language_loaded"), file.getName()));
-		}
-	}
+            for (String key : lang.getKeys(false)) {
+                for (String messName : lang.getConfigurationSection(key).getKeys(false)) {
 
-	public static void loadMessages() {
-		Plugin s = Savior.getSavior();
-		File langF = langFolder();
+                    String message = ChatColor.translateAlternateColorCodes('§', lang.getString(key + "." + messName));
+                    lm.put(messName, message);
+                }
+            }
 
-		loadCustomLanguages(s, langF);
+            messages.put(file, lm);
+            if (!isValidLang(file)) continue;
 
-		if (getServerLang() == null) setServerLang(new File(langF, "en.yml"));
-	}
+            Bukkit.getConsoleSender().sendMessage(PRE +
+                    String.format(getMessage(file, "language_loaded"), file.getName()));
+        }
+    }
 
-	public static boolean isValidLang(File lang) {
-		if (!validString(lang, "string_not_found")) {
-			Bukkit.getConsoleSender().sendMessage(PRE + String.format(
-					"The language %s could not be loaded. There might be missing Strings!", lang.getName()));
-			return false;
-		}
-		return true;
-	}
+    public static void loadMessages() {
+        Plugin s = Savior.getSavior();
+        File langF = langFolder();
 
-	public static boolean compareLanguages(File main, File comp) {
-		long ms = main.getTotalSpace(), cs = comp.getTotalSpace();
-		return ((ms - cs) <= 250);
-	}
+        loadCustomLanguages(s, langF);
+
+        if (getServerLang() == null) setServerLang(new File(langF, "en.yml"));
+    }
+
+    public static boolean isValidLang(File lang) {
+        if (!validString(lang, "string_not_found")) {
+            Bukkit.getConsoleSender().sendMessage(PRE + String.format(
+                    "The language %s could not be loaded. There might be missing Strings!", lang.getName()));
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean compareLanguages(File main, File comp) {
+        long ms = main.getTotalSpace(), cs = comp.getTotalSpace();
+        return ((ms - cs) <= 250);
+    }
 }

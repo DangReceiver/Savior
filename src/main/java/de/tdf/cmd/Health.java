@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class Health implements CommandExecutor {
+
 	@Override
 	public boolean onCommand(final CommandSender sen, final Command cmd, final String label, final String[] args) {
 		if (!(sen instanceof Player p)) {

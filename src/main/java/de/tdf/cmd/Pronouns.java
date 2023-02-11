@@ -68,18 +68,18 @@ public class Pronouns implements CommandExecutor {
         int pn = pc.getPronouns();
         List current = lists[pn];
 
-        String pName = pc.getOfflinePlayer().getName();
+        String pName = pc.getOfflinePlayer().getName(),
+                verb = !isSingular(pn) ? "are" : "is";
 
-        if (isSingular(pn))
-            for (int i = 0; i < current.size(); i++)
-                text = text.replaceAll("%p" + i + " are", "%p" + i + " is");
+        for (int i = 0; i < current.size(); i++)
+            text = text.replaceAll("%pv", verb);
+
         text = text.replaceAll("%pn", pName);
 
         for (int i = 0; i < current.size(); i++)
             text = text.replaceAll("%p" + i, current.get(i).toString());
 
-        if (isDynamic(pn))
-            text = text.replaceAll("@pn", pName);
+        text = text.replaceAll("@pn", pName);
 
         return text;
     }

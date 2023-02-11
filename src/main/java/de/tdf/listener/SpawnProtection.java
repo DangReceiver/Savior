@@ -21,7 +21,8 @@ public class SpawnProtection implements Listener {
 			if (ev.getDamager().hasPermission("Savior.SpawnProtection.Bypass")) return;
 
 		e.setCancelled(true);
-		p.sendActionBar(Component.text(Language.PRE + Language.getMessage(Language.getLang(p), "spawn_action_cancelled")));
+		p.sendActionBar(Component.text(Language.PRE +
+				Language.getMessage(Language.getLang(p), "spawn_action_cancelled")));
 
 		int i = 0;
 		de.tdf.listener.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_BASS, 2,

@@ -63,7 +63,7 @@ public class Heal implements CommandExecutor {
 
 				t.sendTitle(Language.PRE, Language.getMessage(Language.getLang(t), "healed_title"),
 						8, 15, 30);
-				send.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "healed_successfully"));
+				send.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "target_healed"));
 
 			} else
 				send.sendMessage(Language.PRE + String.format(Language.getMessage(Language.getServerLang(),

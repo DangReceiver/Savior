@@ -9,92 +9,128 @@ prefixes:
   error: "§cError §8‖ §7"
   warn: "§6Warn §8‖ §7"
 
-errors:
+savior:
+  plugin_loaded: "The plugin was loaded successfully§8."
+  plugin_unloaded: "The plugin was disabled successfully§8."
+  spawn_world_invalid: "The world \"Spawn\" is invalid."
+
+language:
+  string_not_found: "The string %s could not be determined§8."
+  language_loaded: "The language %s was loaded§8."
+  replacing_lang_file: "The language file %s was replaced by its resource, since it was estimated more up to date§8."
+  creating_lang_resource: "The language file %s was created from the resource§8."
+  invalid_lang_resource: "The provided language resource file %s could not be accessed."
+
+frequent:
+  not_implemented_yet: "You are looking into the future! This feature has not been implemented yet!"
+  arg_invalid: "The provided argument (%s) is invalid§8."
   argument_specifics: "The argument #%s must be of the type %s§8."
   argument_range: "The argument #%s should be between %s and %s§8."
+  arg_length_required: "The required argument length for this command is %s§8."
   insufficient_permission: "You do not have the required permission %s to perform this action."
   usage: "The usage of the command %s is %s"
   target_invalid: "The specified target is invalid."
-  string_not_found: "The string %s could not be determined§8."
-  arg_length_desired: "The required argument length for this command is %s§8."
-  lang_load_error: "This language could not be used, it is missing essential strings§8."
   no_player: "This feature is exclusively available to players§8."
-  no_death_location: "You do not have a valid death location."
-  door_reset: "A Double door set was reset."
+  change_attribute_target: "The target's attribute was changed from %s to %s successfully."
+  change_attribute: "Your attribute was changed from %s to %s successfully."
 
-system_messages:
+
+build:
+  build_prohibited_world: "Build cannot be used in this world."
+
+hologram:
+# yet empty
+
+spawn:
+  teleported_successfully: "You were teleported successfully"
+  spawn_set_current_position: "The spawn was set to your current position"
+  spawn_set_default: "The spawn was set to its original position"
+
+arrowsinbody:
+# yet empty
+
+clearchat:
+  chat_cleared: "The chat was cleared."
+
+ench:
+  ench_level_zero_hide_enchants: "Enchants on your item will be hidden."
+  ench_added: "The enchantment %s, level %s was successfully added."
+  ench_result_invalid: "The enchantment you chose is not valid."
+
+fly:
+  flight_updated: "Your target's flight mode was toggled."
+  flight_updated_target: "Your flight mode was toggled."
+
+gm:
+# yet empty
+
+heal:
+  healed_title: "§7You were healed§8."
+  healed_everyone: "Everyone was healed"
+  target_healed: "The target was healed"
+
+health:
+  health_updated: "Your health has been set from %s to %s."
+
+info:
   info_author: "This plugins author is %s"
   info_version: " §7You are on version §e%s §7of the Savior plugin§8."
   info_ping: " §7Your current ping§8: §%s§8."
   info_ram_usage: " §7Ram usage §8- §7In use§8: §7%sMB §8/ §7%sMB§8. §7Free§8: §7%sMB§8."
-  spawn_world_invalid: "The world \"Spawn\" is invalid."
-  welcome_back: "§7Welcome back §3%s §c❤"
-  healed_title: "§7You were healed§8."
-  speed_updated_flight: "Your flight speed was updated from %s to %s."
-  speed_updated_walk: "Your walk speed was updated from %s to %s."
-  chat_cleared: "The chat was cleared."
-  ench_level_zero_hide_enchants: "Enchants on your item will be hidden."
-  ench_added: "The enchantment %s, level %s was successfully added."
-  ench_result_invalid: "The enchantment you chose is not valid."
-  flight_updated: "Your target's flight mode was toggled."
-  flight_updated_target: "Your flight mode was toggled."
-  tp_exact_successful: "You were teleported to the exact block position."
-  invalid_world: "The world %s could not be found."
-  join_teleport_spawn: "You were teleported to the §bSpawn§8."
-  login_location_broadcast_warning: "Your original logout location will be broadcast in §620 seconds§8."
-  login_location_broadcast: "@%s's login location§8: §ex: %s, y: %s, z: %s§8."
-  language_loaded: "The language %s was loaded§8."
-  plugin_loaded: "The plugin was loaded successfully§8."
-  plugin_unloaded: "The plugin was disabled successfully§8."
-  lang_updated: "Your language has been updated from %s to %s"
-  lang_current: "Your current language is %s"
-  lang_how_to_change: "Use '/SetLanguage <Language acronym>' to change your language§8."
-  arg_invalid: "The provided argument (%s) is invalid§8."
-  replacing_lang_file: "The language file %s was replaced by its resource, since it was estimated more up to date§8."
-  creating_lang_resource: "The language file %s was created from the resource§8."
-  invalid_lang_resource: "The provided language resource file %s could not be accessed."
-  change_attribute_target: "The target's attribute was changed from %s to %s successfully."
-  change_attribute: "Your attribute was changed from %s to %s successfully."
-  # "name" "they", "them", "their", "theirs", "themselves"
+
+invsee:
+  invsee: "You are viewing %s's Inventory"
+
+pronouns:
   pronouns_example_pre: "You've changed your pronouns§8. §7§oExample sentence§8: \n"
-  pronouns_example_sentence_0: "This is %pn. %p0 are xy years old. I like %p1 very much, because %p2 hair is fluffy.
+  pronouns_example_sentence_0: "This is %pn. %p0 %pv xy years old. I like %p1 very much, because %p2 hair is fluffy.
   This jacket is %p3, and %pn bought it %p4, it looks amazing!!"
-  pronouns_example_sentence_1: "%pn is new on the server. Welcome %p1, I'd bet %p0 are nice! Also, %p2 skin looks fancy.
+  pronouns_example_sentence_1: "%pn %pv new on the server. Welcome %p1, I'd bet %p0 %pv nice! Also, %p2 skin looks fancy.
   I'm excited for %pn to introduce §p4. This whole effort of xy is %p3!"
-  pronouns_example_sentence_2: "Huh, %p0 seem interesting... %pn...? I'm sure it's not %p2 way to invite you to something
+  pronouns_example_sentence_2: "Huh, %p0 %pv interesting... %pn...? I'm sure it's not %p2 way to invite you to something
    and make you pay for it. Give %p1 a price already! They did the whole work %p4. This affection of motivation is %p3."
 
-player_feedback:
-  spawn_action_cancelled: "This action cannot be performed here."
-  death_action_cancel_teleport: "You cannot teleport during death."
-  active_potion_effect: "Currently active potion effect: %s"
-  spawn_location_bossbar: "Login location broadcast timer"
-  death_location_bossbar: "Death location broadcast timer"
-  health_updated: "Your health has been set from %s to %s."
-  firework_jump_hint: "§7Right click on a block while sneaking to be boosted§8."
-  player_death_0: "%s took the easy way out§8. ⌈§5✟§8⌋"
-  player_death_1: "%s may find more luck in another life§8. ⌈§5✟§8⌋"
-  player_death_2: "%s's situation was... complicated§8. ⌈§5✟§8⌋"
-  player_death_3: "%s is in a better place now§8. ⌈§5✟§8⌋"
-  player_death_4: "%s can now play around with ghosts§8. ⌈§5✟§8⌋"
-  player_death_5: "%s tripped over a stone too hard§8. ⌈§5✟§8⌋"
-  player_death_6: "%s left the keyboard alone for too long§8. ⌈§5✟§8⌋"
-  player_death_7: "%s wasn't warmed up enough§8. ⌈§5✟§8⌋"
-  player_death_8: "%s skills are... improvable§8. ⌈§5✟§8⌋"
-  player_death_9: "%s had a hard time§8. ⌈§5✟§8⌋"
-  player_death_10: "%s just found a way out of that shit§8. ⌈§5✟§8⌋"
-  player_death_11: "I guess we lost track of %s§8. ⌈§5✟§8⌋"
-  player_death_12: "%s is seemingly out of sight, aren't they§8? ⌈§5✟§8⌋"
-  player_death_13: "%s dropped it§8. ⌈§5✟§8⌋"
-  player_death_info: "Your recent deaths location§8: §e%s, %s, %s§8§8."
+setlanguage:
+  lang_current: "Your current language is %s"
+  lang_how_to_change: "Use '/SetLanguage <Language acronym>' to change your language§8."
+  lang_load_error: "This language could not be used, it is missing essential strings§8."
+  lang_updated: "Your language has been updated from %s to %s"
   lang_missing_strings_warning: "Be aware: this language is apparently missing translations§8."
-  tps_insert: "Current server §eTPS§8: §71 minute§8: §6%s §8- §75 minutes§8: §6%s §8- §715 minutes§8: §6%s \n %s"
-  player_death_respawn_required: "You are required to respawn.
-   If you do not respawn, your location will be broadcast in 28 seconds."
-  player_death_did_not_respawn: "You did not respawn in time, your location will be broadcast."
 
-broadcasts:
-  death_location_broadcast: "%s died in the world %s at x: %s, y: %s, z: %s"
+speed:
+  speed_updated_flight: "Your flight speed was updated from %s to %s."
+  speed_updated_walk: "Your walk speed was updated from %s to %s."
+
+tickspersecond:
+# yet empty
+
+tpexact:
+  tp_exact_successful: "You were teleported to the exact block position."
+
+tpworld:
+  invalid_world: "The world %s could not be found."
+
+bossbar:
+# yet empty
+
+sound:
+# yet empty
+
+additemcooldown:
+# yet empty
+
+bedhandling:
+# yet empty
+
+chat:
+# yet empty
+
+cm:
+  welcome_back: "§7Welcome back §3%s §c❤"
+  join_teleport_spawn: "You were teleported to the §bSpawn§8."
+  login_location_broadcast_warning: "Your original logout location will be broadcast in §620 seconds§8."
+  spawn_location_bossbar: "Login location broadcast timer"
+  login_location_broadcast: "@%s's login location§8: §ex: %s, y: %s, z: %s§8."
   player_first_join: "%s joined us for the first time!"
   player_join_0: "%s just hopped in§8. ⌈§a»§8⌋"
   player_join_1: "%s is now with us§8. ⌈§a»§8⌋"
@@ -135,3 +171,82 @@ broadcasts:
   player_rejoin_1: "And it is... %s... I read that name today already... ⌈§6§l↺§8⌋"
   player_rejoin_2: "Here we go again, %s. Welcome back ⌈§6§l↺§8⌋"
   player_rejoin_3: "You must be fooling me! %s, I almost thought we lost you :c ⌈§6§l↺§8⌋"
+
+creeperprimecreeper:
+# yet empty
+
+death:
+  player_death_0: "%s took the easy way out§8. ⌈§5✟§8⌋"
+  player_death_1: "%s may find more luck in another life§8. ⌈§5✟§8⌋"
+  player_death_2: "%s's situation was... complicated§8. ⌈§5✟§8⌋"
+  player_death_3: "%s is in a better place now§8. ⌈§5✟§8⌋"
+  player_death_4: "%s can now play around with ghosts§8. ⌈§5✟§8⌋"
+  player_death_5: "%s tripped over a stone too hard§8. ⌈§5✟§8⌋"
+  player_death_6: "%s left the keyboard alone for too long§8. ⌈§5✟§8⌋"
+  player_death_7: "%s wasn't warmed up enough§8. ⌈§5✟§8⌋"
+  player_death_8: "%s skills are... improvable§8. ⌈§5✟§8⌋"
+  player_death_9: "%s had a hard time§8. ⌈§5✟§8⌋"
+  player_death_10: "%s just found a way out of that shit§8. ⌈§5✟§8⌋"
+  player_death_11: "I guess we lost track of %s§8. ⌈§5✟§8⌋"
+  player_death_12: "%s is seemingly out of sight, aren't they§8? ⌈§5✟§8⌋"
+  player_death_13: "%s dropped it§8. ⌈§5✟§8⌋"
+  death_location_broadcast: "%s died in the world %s at x: %s, y: %s, z: %s"
+  player_death_info: "Your recent deaths location§8: §e%s, %s, %s§8§8."
+  player_death_respawn_required: "You are required to respawn.
+   If you do not respawn, your location will be broadcast in 28 seconds."
+  player_death_did_not_respawn: "You did not respawn in time, your location will be broadcast."
+  death_location_bossbar: "Death location broadcast timer"
+  
+doors:
+  door_reset: "A Double door set was reset."
+
+effectheadbottle:
+  active_potion_effect: "Currently active potion effect: %s"
+
+elytraboost:
+  elytra_boost_whoa: "§7§lWhoa!!"
+
+enderpearl:
+# yet empty
+
+entitydamagedisplay:
+# yet empty
+
+fireworkjump:
+# yet empty
+
+itemcooldown:
+# yet empty
+
+predeath:
+# yet empty
+
+respawn:
+  no_death_location: "You do not have a valid death location."
+  you_died_title: "You Died!"
+  you_died_title_subtitle: "§7But at least you tried your best, didn't you?"
+
+sneakevent:
+  firework_jump_hint: "§7Right click on a block while sneaking to be boosted§8."
+  ender_pearl_sneak_hint: "§7Sneaking-throwing an ender pearl will decrease it's velocity by 40%."
+
+spawnpushbutton:
+# yet empty
+
+spawnprotection:
+  spawn_action_cancelled: "This action cannot be performed here."
+
+starttosprint:
+# yet empty
+
+teleport:
+  death_action_cancel_teleport: "You cannot teleport during death."
+
+tosaviorcommand:
+# yet empty
+
+treecutdown:
+# yet empty
+
+worldchanged:
+# yet empty

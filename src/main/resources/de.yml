@@ -4,122 +4,249 @@ values:
   has_resource: true
 
 prefixes:
-  broadcast: "§3Ausruf §8‖ §7"
+  broadcast: "§3Broadcast §8‖ §7"
   info: "§9Info §8‖ §7"
-  error: "§cFehler §8‖ §7"
-  warn: "§6Warnung §8‖ §7"
+  error: "§cError §8‖ §7"
+  warn: "§6Warn §8‖ §7"
 
-errors:
-  argument_specifics: "Das Argument #%s muss vom Typen %s sein§8."
-  argument_range: "Der Wert des Arguments an Stelle #%s sollte zwischen %s und %s liegen§8."
-  insufficient_permission: "Du hast nicht das benötigte Recht %s um diese Aktion auszuführen."
-  usage: "Die Nutzung des Commands %s ist %s."
-  target_invalid: "Die angegebene Person %s existiert nicht."
-  string_not_found: "Der string %s konnte nicht gefunden werden§8."
-  arg_length_desired: "Die gewünschte Argumenten-Länge ist %s§8."
-  lang_load_error: "Diese Sprache kann nicht angewandt werden, sie hat essenzielle Strings nicht§8."
-  no_player: "Diese Aktion ist unseren Spieler:innen vorbehalten§8."
-  no_death_location: "Du hast keine gültige Todesposition."
-  door_reset: "Eine Doppeltür wurde zurückgesetzt."
+savior:
+  plugin_loaded: "The plugin was loaded successfully§8."
+  plugin_unloaded: "The plugin was disabled successfully§8."
+  spawn_world_invalid: "The world \"Spawn\" is invalid."
 
-system_messages:
-  info_author: "Der Plugin Author ist %s"
-  info_version: " §7Du bist auf der Version §e%s §7des Savior Plugins§8."
-  info_ping: " §7Dein Ping§8: §%s§8."
-  info_ram_usage: " §7Ram Nutzung §8- §7In Verwendung§8: §7%sMB §8/ §7%sMB§8. §7Frei§8: §7%sMB§8."
-  spawn_world_invalid: "Die Welt \"Spawn\" ist ungültig."
-  welcome_back: "§7Willkommen zurück §3%s §c❤"
-  healed_title: "§7Du wurdest geheilt§8."
-  speed_updated_flight: "Deine Fluggeschwindigkeit wurde von %s auf %s gesetzt."
-  speed_updated_walk: "Deine Laufgeschwindigkeit wurde von %s auf %s gesetzt."
-  chat_cleared: "Der Chat wurde geleert."
-  ench_level_zero_hide_enchants: "Verzauberungen auf deinem Gegenstand werden versteckt."
-  ench_added: "Die Verzauberung %s, Level %s wurde erfolgreich hinzugefügt."
-  ench_result_invalid: "Die angegebene Verzauberung ist ungültig."
-  flight_updated: "Der Flugmodus der Spieler:in wurde geändert."
-  flight_updated_target: "Dein Flugmodus wurde geändert."
-  tp_exact_successful: "Du wurdest zur exakten Blockposition teleportiert."
-  invalid_world: "Die Welt %s konnte nicht gefunden werden."
-  join_teleport_spawn: "Du wurdest zum §bSpawn§7 teleportiert§8."
-  login_location_broadcast_warning: "Deine ursprüngliche Einlog-Position wird in §620 Sekunden§7 preisgegeben§8."
-  login_location_broadcast: "@%s's Einlog-Position§8: §ex: %s, y: %s, z: %s§8."
-  language_loaded: "Die Sprache %s wurde geladen§8."
-  plugin_loaded: "Das Plugin wurde erfolgreich geladen§8."
-  plugin_unloaded: "Das Plugin wurde erfolgreich deaktiviert§8."
-  lang_updated: "Deine Sprache wurde von %s in %s geändert"
-  lang_current: "Derzeit aktive Sprache: %s"
-  lang_how_to_change: "Nutze '/SetLanguage <Sprache>', um deine Sprache zu ändern§8."
-  arg_invalid: "Das angegebene Argument (%s) ist ungültig§8."
-  replacing_lang_file: "Die Sprach-Datei %s wurde von ihrer Resource ersetzt, da angenommen wird, dass sie aktueller ist§8."
-  creating_lang_resource: "Die Sprach-Datei %s wurde per Resource erstellt§8."
-  invalid_lang_resource: "Auf die angegebene Resource der Sprache %s konnte nicht zugegriffen werden."
-  change_attribute_target: "Das Attribut der Spieler:in wurde erfolgreich von %s zu %s gesetzt."
-  change_attribute: "Dein Attribut wurde erfolgreich von %s zu %s gesetzt."
+language:
+  string_not_found: "The string %s could not be determined§8."
+  language_loaded: "The language %s was loaded§8."
+  replacing_lang_file: "The language file %s was replaced by its resource, since it was estimated more up to date§8."
+  creating_lang_resource: "The language file %s was created from the resource§8."
+  invalid_lang_resource: "The provided language resource file %s could not be accessed."
 
-player_feedback:
-  spawn_action_cancelled: "Diese Aktion darfst du hier nicht ausführen."
-  death_action_cancel_teleport: "Du kannst dich während du tot bist nicht teleportieren."
-  active_potion_effect: "Derzeitig aktiver Effekt: %s"
-  spawn_location_bossbar: "Einlog-Positions-Ausruf Timer"
-  death_location_bossbar: "Todes-Positions-Ausruf Timer"
-  health_updated: "Deine maximalen Herzen wurden von %s zu %s gesetzt."
-  firework_jump_hint: "§7Rechts klicke auf einen Block während du die Raketen hältst, um geboostet zu werden§8."
-  player_death_0: "%s hat den einfachen Ausweg gewählt§8. "
-  player_death_1: "%s findet vielleicht mehr Glück in einem anderen Leben§8. "
-  player_death_2: "%s's Situation war... kompliziert§8. "
-  player_death_3: "%s ist jetzt an einem besseren Ort§8. "
-  player_death_4: "%s kann jetzt mit Geistern spielen§8. "
-  player_death_5: "%s ist zu doll über einen Stein gestolpert§8. "
-  player_death_6: "%s hat die Tastatur zu lange unberührt gelassen§8. "
-  player_death_7: "%s hat sich nicht ausreichend aufgewärmt§8. "
-  player_death_8: "%s's Fähigkeiten sind... verbesserungswürdig§8. "
-  player_death_9: "%s hatte eine schwere Zeit§8. "
-  player_death_10: "%s hat aus diesem scheiß einen einfacheren Ausweg gefunden§8. "
+frequent:
+  not_implemented_yet: "You are looking into the future! This feature has not been implemented yet!"
+  arg_invalid: "The provided argument (%s) is invalid§8."
+  argument_specifics: "The argument #%s must be of the type %s§8."
+  argument_range: "The argument #%s should be between %s and %s§8."
+  arg_length_required: "The required argument length for this command is %s§8."
+  insufficient_permission: "You do not have the required permission %s to perform this action."
+  usage: "The usage of the command %s is %s"
+  target_invalid: "The specified target is invalid."
+  no_player: "This feature is exclusively available to players§8."
+  change_attribute_target: "The target's attribute was changed from %s to %s successfully."
+  change_attribute: "Your attribute was changed from %s to %s successfully."
+
+
+build:
+  build_prohibited_world: "Build cannot be used in this world."
+
+hologram:
+#derzeit leer
+
+spawn:
+  teleported_successfully: "You were teleported successfully"
+  spawn_set_current_position: "The spawn was set to your current position"
+  spawn_set_default: "The spawn was set to its original position"
+
+arrowsinbody:
+#derzeit leer
+
+clearchat:
+  chat_cleared: "The chat was cleared."
+
+ench:
+  ench_level_zero_hide_enchants: "Enchants on your item will be hidden."
+  ench_added: "The enchantment %s, level %s was successfully added."
+  ench_result_invalid: "The enchantment you chose is not valid."
+
+fly:
+  flight_updated: "Your target's flight mode was toggled."
+  flight_updated_target: "Your flight mode was toggled."
+
+gm:
+#derzeit leer
+
+heal:
+  healed_title: "§7You were healed§8."
+  healed_everyone: "Everyone was healed"
+  target_healed: "The target was healed"
+
+health:
+  health_updated: "Your health has been set from %s to %s."
+
+info:
+  info_author: "This plugins author is %s"
+  info_version: " §7You are on version §e%s §7of the Savior plugin§8."
+  info_ping: " §7Your current ping§8: §%s§8."
+  info_ram_usage: " §7Ram usage §8- §7In use§8: §7%sMB §8/ §7%sMB§8. §7Free§8: §7%sMB§8."
+
+invsee:
+  invsee: "You are viewing %s's Inventory"
+
+pronouns:
+  pronouns_example_pre: "You've changed your pronouns§8. §7§oExample sentence§8: \n"
+  pronouns_example_sentence_0: "This is %pn. %p0 %pv xy years old. I like %p1 very much, because %p2 hair is fluffy.
+  This jacket is %p3, and %pn bought it %p4, it looks amazing!!"
+  pronouns_example_sentence_1: "%pn %pv new on the server. Welcome %p1, I'd bet %p0 %pv nice! Also, %p2 skin looks fancy.
+  I'm excited for %pn to introduce §p4. This whole effort of xy is %p3!"
+  pronouns_example_sentence_2: "Huh, %p0 %pv interesting... %pn...? I'm sure it's not %p2 way to invite you to something
+   and make you pay for it. Give %p1 a price already! They did the whole work %p4. This affection of motivation is %p3."
+
+setlanguage:
+  lang_current: "Your current language is %s"
+  lang_how_to_change: "Use '/SetLanguage <Language acronym>' to change your language§8."
+  lang_load_error: "This language could not be used, it is missing essential strings§8."
+  lang_updated: "Your language has been updated from %s to %s"
+  lang_missing_strings_warning: "Be aware: this language is apparently missing translations§8."
+
+speed:
+  speed_updated_flight: "Your flight speed was updated from %s to %s."
+  speed_updated_walk: "Your walk speed was updated from %s to %s."
+
+tickspersecond:
+#derzeit leer
+
+tpexact:
+  tp_exact_successful: "You were teleported to the exact block position."
+
+tpworld:
+  invalid_world: "The world %s could not be found."
+
+bossbar:
+#derzeit leer
+
+sound:
+#derzeit leer
+
+additemcooldown:
+#derzeit leer
+
+bedhandling:
+#derzeit leer
+
+chat:
+#derzeit leer
+
+cm:
+  welcome_back: "§7Welcome back §3%s §c❤"
+  join_teleport_spawn: "You were teleported to the §bSpawn§8."
+  login_location_broadcast_warning: "Your original logout location will be broadcast in §620 seconds§8."
+  spawn_location_bossbar: "Login location broadcast timer"
+  login_location_broadcast: "@%s's login location§8: §ex: %s, y: %s, z: %s§8."
+  player_first_join: "%s joined us for the first time!"
+  player_join_0: "%s just hopped in§8. ⌈§a»§8⌋"
+  player_join_1: "%s is now with us§8. ⌈§a»§8⌋"
+  player_join_2: "Hey %s, lookin' good today§8! ⌈§a»§8⌋"
+  player_join_3: "%s now accompanies us§8. ⌈§a»§8⌋"
+  player_join_4: "%s's taste in music just improved§8. ⌈§a»§8⌋"
+  player_join_5: "%s just wanted to take a look at how you've progressed§8. ⌈§a»§8⌋"
+  player_join_6: "%s was forced to join§8. ⌈§a»§8⌋"
+  player_join_7: "%s's daily dose of minecraft appears to take place here§8. ⌈§a»§8⌋"
+  player_join_8: "%s wants to make their day more difficult§8. ⌈§a»§8⌋"
+  player_join_9: "%s found out how to fix their router§8. ⌈§a»§8⌋"
+  player_join_10: "%s§8. §7Nothing more than that§8. ⌈§a»§8⌋"
+  player_join_11: "%s was summoned§8. ⌈§a»§8⌋"
+  player_join_12: "%s is now looking for diamonds§8. ⌈§a»§8⌋"
+  player_join_13: "Breaking news of the day: %s§8. ⌈§a»§8⌋"
+  player_join_14: "The magic worked! %s is now here§8. ⌈§a»§8⌋"
+  player_join_15: "Stop cursing, %s appeared§8. ⌈§a»§8⌋"
+  player_join_16: "What's that? A %s§8? ⌈§a»§8⌋"
+  player_unsuitable_quit: "%s dodged the quitting system§8."
+  player_quit_0: "%s has enough for today§8. ⌈§c«§8⌋"
+  player_quit_1: "%s forgot their pizza in the oven§8. ⌈§c«§8⌋"
+  player_quit_2: "%s separated from us§8. ⌈§c«§8⌋"
+  player_quit_3: "%s lost their mind§8. ⌈§c«§8⌋"
+  player_quit_4: "%s ditched us§8. ⌈§c«§8⌋"
+  player_quit_5: "%s's internet seems to have collapsed§8. ⌈§c«§8⌋"
+  player_quit_6: "%s's crush is more important than us§8. ⌈§c«§8⌋"
+  player_quit_7: "%s figured a way to get rich§8. ⌈§c«§8⌋"
+  player_quit_8: "%s called it a day§8. ⌈§c«§8⌋"
+  player_quit_9: "%s left the stove on§8. ⌈§c«§8⌋"
+  player_quit_10: "%s has to pee really bad§8. ⌈§c«§8⌋"
+  player_quit_11: "%s was caught by their parental authority§8. ⌈§c«§8⌋"
+  player_quit_12: "The day %s left, was the day my heart broke§8. ⌈§c«§8⌋"
+  player_quit_13: "%s just made poof§8. ⌈§c«§8⌋"
+  player_quit_14: "%s left their trouble behind§8. ⌈§c«§8⌋"
+  player_quit_15: "%s figured this is a waste of time§8. ⌈§c«§8⌋"
+  player_quit_16: "The last thing we've got left of %s is the idea of them§8. ⌈§c«§8⌋"
+  player_rejoin_0: "Am I havin' a Deja Vu? It's %s again! ⌈§6§l↺§8⌋"
+  player_rejoin_1: "And it is... %s... I read that name today already... ⌈§6§l↺§8⌋"
+  player_rejoin_2: "Here we go again, %s. Welcome back ⌈§6§l↺§8⌋"
+  player_rejoin_3: "You must be fooling me! %s, I almost thought we lost you :c ⌈§6§l↺§8⌋"
+
+creeperprimecreeper:
+#derzeit leer
+
+death:
+  player_death_0: "%s took the easy way out§8. ⌈§5✟§8⌋"
+  player_death_1: "%s may find more luck in another life§8. ⌈§5✟§8⌋"
+  player_death_2: "%s's situation was... complicated§8. ⌈§5✟§8⌋"
+  player_death_3: "%s is in a better place now§8. ⌈§5✟§8⌋"
+  player_death_4: "%s can now play around with ghosts§8. ⌈§5✟§8⌋"
+  player_death_5: "%s tripped over a stone too hard§8. ⌈§5✟§8⌋"
+  player_death_6: "%s left the keyboard alone for too long§8. ⌈§5✟§8⌋"
+  player_death_7: "%s wasn't warmed up enough§8. ⌈§5✟§8⌋"
+  player_death_8: "%s skills are... improvable§8. ⌈§5✟§8⌋"
+  player_death_9: "%s had a hard time§8. ⌈§5✟§8⌋"
+  player_death_10: "%s just found a way out of that shit§8. ⌈§5✟§8⌋"
   player_death_11: "I guess we lost track of %s§8. ⌈§5✟§8⌋"
   player_death_12: "%s is seemingly out of sight, aren't they§8? ⌈§5✟§8⌋"
   player_death_13: "%s dropped it§8. ⌈§5✟§8⌋"
-  player_death_info: "Deine kürzliche Todesposition§8: §e%s, %s, %s§8§8."
-  lang_missing_strings_warning: "Vorsicht: diese Sprache hat scheinbar nicht alle nötigen Übersetzungen§8."
-  tps_insert: "Current server §eTPS§8: §71 minute§8: §6%s §8- §75 minutes§8: §6%s §8- §715 minutes§8: §6%s \n %s"
-  player_death_respawn_required: "Du musst Respawnen.
-   Solltest du nicht respawnen, wird deine Todesposition in 28 Sekunden ausgerufen."
-  player_death_did_not_respawn: "Du bist nicht respawned, deine Todesposition wird ausgerufen."
+  death_location_broadcast: "%s died in the world %s at x: %s, y: %s, z: %s"
+  player_death_info: "Your recent deaths location§8: §e%s, %s, %s§8§8."
+  player_death_respawn_required: "You are required to respawn.
+   If you do not respawn, your location will be broadcast in 28 seconds."
+  player_death_did_not_respawn: "You did not respawn in time, your location will be broadcast."
+  death_location_bossbar: "Death location broadcast timer"
 
-broadcasts:
-  death_location_broadcast: "%s ist in der Welt %s bei den Koordinaten x: %s, y: %s, z: %s gestorben."
-  player_first_join: "%s ist das erste Mal beigetreten§8!"
-  player_join_0: "%s ist gerade reingehüpft§8. ⌈§a»§8⌋"
-  player_join_1: "%s ist nun bei uns§8. ⌈§a»§8⌋"
-  player_join_2: "Hallo %s, du siehst heute gut aus§8! ⌈§a»§8⌋"
-  player_join_3: "%s begleitet uns nun§8. ⌈§a»§8⌋"
-  player_join_4: "%s's Musikgeschmack ist etwas besser geworden§8. ⌈§a»§8⌋"
-  player_join_5: "%s möchte nur einen Blick auf euren Fortschritt wagen§8. ⌈§a»§8⌋"
-  player_join_6: "%s wurde gezwungen beizutreten§8. ⌈§a»§8⌋"
-  player_join_7: "%s's tägliche Dosis Minecraft scheint hier ihren Platz zu finden§8. ⌈§a»§8⌋"
-  player_join_8: "%s möchte seinen:ihren Tag schwieriger gestalten§8. ⌈§a»§8⌋"
-  player_join_9: "%s hat rausgefunden wie der router repariert wird§8. ⌈§a»§8⌋"
-  player_join_10: "%s§8. §7Nichts mehr als das§8. ⌈§a»§8⌋"
-  player_join_11: "%s wurde erschaffen§8. ⌈§a»§8⌋"
-  player_join_12: "%s sucht nun nach Diamanten§8. ⌈§a»§8⌋"
-  player_join_13: "Die Neuigkeiten des Tages: %s§8. ⌈§a»§8⌋"
-  player_join_14: "Die Magie zeigt Wirkung! %s ist jetzt hier§8. ⌈§a»§8⌋"
-  player_join_15: "Hört auf zu fluchen, %s ist aufgetaucht§8. ⌈§a»§8⌋"
-  player_join_16: "Was ist das? Ein %s§8? ⌈§a»§8⌋"
-  player_unsuitable_quit: "%s hat das Quit-System nicht berücksichtigt§8."
-  player_quit_0: "%s hat genug für heute§8. ⌈§c«§8⌋"
-  player_quit_1: "%s hat die Pizza im Ofen vergessen§8. ⌈§c«§8⌋"
-  player_quit_2: "%s hat sich von uns getrennt§8. ⌈§c«§8⌋"
-  player_quit_3: "%s hat den Verstand verloren§8. ⌈§c«§8⌋"
-  player_quit_4: "%s hat uns im Stich gelassen§8. ⌈§c«§8⌋"
-  player_quit_5: "%s's Internet scheint abgestürzt zu sein§8. ⌈§c«§8⌋"
-  player_quit_6: "%s's crush ist wichtiger als wir§8. ⌈§c«§8⌋"
-  player_quit_7: "%s hat einen Weg gefunden reich zu werden§8. ⌈§c«§8⌋"
-  player_quit_8: "%s macht für heute Schluss§8. ⌈§c«§8⌋"
-  player_quit_9: "%s hat den Herd angelassen§8. ⌈§c«§8⌋"
-  player_quit_10: "%s muss dringend auf Toilette§8. ⌈§c«§8⌋"
-  player_quit_11: "%s wurde von einer Erziehungsberechtigten Person erwischt§8. ⌈§c«§8⌋"
-  player_quit_12: "Der Tag an dem %s ging, war der Tag an dem mein Herz brach§8. ⌈§c«§8⌋"
-  player_quit_13: "%s hat gerade poof gemacht§8. ⌈§c«§8⌋"
-  player_quit_14: "%s hat seine:ihre Probleme zurück gelassen§8. ⌈§c«§8⌋"
-  player_quit_15: "%s hat herausgefunden, dass das hier zeitverschwendung ist§8. ⌈§c«§8⌋"
-  player_quit_16: "Das Letzte was uns von %s bleibt, ist die Erinnerung§8. ⌈§c«§8⌋"
+doors:
+  door_reset: "A Double door set was reset."
+
+effectheadbottle:
+  active_potion_effect: "Currently active potion effect: %s"
+
+elytraboost:
+  elytra_boost_whoa: "§7§lWhoa!!"
+
+enderpearl:
+#derzeit leer
+
+entitydamagedisplay:
+#derzeit leer
+
+fireworkjump:
+#derzeit leer
+
+itemcooldown:
+#derzeit leer
+
+predeath:
+#derzeit leer
+
+respawn:
+  no_death_location: "You do not have a valid death location."
+  you_died_title: "You Died!"
+  you_died_title_subtitle: "§7But at least you tried your best, didn't you?"
+
+sneakevent:
+  firework_jump_hint: "§7Right click on a block while sneaking to be boosted§8."
+  ender_pearl_sneak_hint: "§7Sneaking-throwing an ender pearl will decrease it's velocity by 40%."
+
+spawnpushbutton:
+#derzeit leer
+
+spawnprotection:
+  spawn_action_cancelled: "This action cannot be performed here."
+
+starttosprint:
+#derzeit leer
+
+teleport:
+  death_action_cancel_teleport: "You cannot teleport during death."
+
+tosaviorcommand:
+#derzeit leer
+
+treecutdown:
+#derzeit leer
+
+worldchanged:
+#derzeit leer
