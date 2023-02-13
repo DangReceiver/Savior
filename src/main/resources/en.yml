@@ -82,13 +82,17 @@ invsee:
   invsee: "You are viewing %s's Inventory"
 
 pronouns:
+  be_singular: "is"
+  be_plural: "are"
+  have_singular: "has"
+  have_plural: "have"
   pronouns_example_pre: "You've changed your pronouns§8. §7§oExample sentence§8: \n"
   pronouns_example_sentence_0: "This is %pn. %p0 %pv xy years old. I like %p1 very much, because %p2 hair is fluffy.
   This jacket is %p3, and %pn bought it %p4, it looks amazing!!"
   pronouns_example_sentence_1: "%pn %pv new on the server. Welcome %p1, I'd bet %p0 %pv nice! Also, %p2 skin looks fancy.
   I'm excited for %pn to introduce §p4. This whole effort of xy is %p3!"
   pronouns_example_sentence_2: "Huh, %p0 %pv interesting... %pn...? I'm sure it's not %p2 way to invite you to something
-   and make you pay for it. Give %p1 a price already! They did the whole work %p4. This affection of motivation is %p3."
+   and make you pay for it. Give %p1 a price already! %p0 did the whole work %p4. This affection of motivation is %p3."
 
 setlanguage:
   lang_current: "Your current language is %s"

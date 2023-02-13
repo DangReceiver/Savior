@@ -50,6 +50,7 @@ public final class Savior extends JavaPlugin {
         }
 
         Language.loadMessages();
+        Pronouns.fill();
 
         File file = new File("plugins/Savior/Settings.yml");
         YamlConfiguration settings = YamlConfiguration.loadConfiguration(file);
@@ -81,6 +82,7 @@ public final class Savior extends JavaPlugin {
         pm.registerEvents(new ItemCooldown(), this);
         pm.registerEvents(new AddItemCooldown(), this);
         pm.registerEvents(new EnderPearl(), this);
+        pm.registerEvents(new EntitySpawn(), this);
 //		pm.registerEvents(new ToSaviorCommand(), this);
 
         Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());

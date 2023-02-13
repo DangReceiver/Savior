@@ -19,9 +19,29 @@ public class Pronouns implements CommandExecutor {
             name = new ArrayList<>(Arrays.asList("@pn", "@pn", "@pn's", "@pn's", "@pn")),
             he = new ArrayList<>(Arrays.asList("he", "him", "his", "his", "himself")),
             she = new ArrayList<>(Arrays.asList("she", "her", "her", "hers", "herself")),
-            it = new ArrayList<>(Arrays.asList("it", "it", "its", "its", "itself"));
+            it = new ArrayList<>(Arrays.asList("it", "it", "its", "its", "itself")),
+            person = new ArrayList<>(Arrays.asList("he", "him", "his", "his", "himself")),
+            er = new ArrayList<>(Arrays.asList("he", "him", "his", "his", "himself")),
+            sie = new ArrayList<>(Arrays.asList("she", "her", "her", "hers", "herself")),
+            es = new ArrayList<>(Arrays.asList("it", "it", "its", "its", "itself"));
 
-    public static List[] lists = new List[]{they, she, he, it, name};
+    public static ArrayList<List[]> lists;
+    public static List[] eng = new List[]{they, name, she, he, it},
+            de = new List[]{person, name, sie, er, es};
+
+    public static void fill() {
+        lists.add(eng);
+        lists.add(de);
+//        lists.add(others);
+    }
+
+    public int langToInt(File lang) {
+        return switch (lang.getName().split(".yml")[0]) {
+            case "en" -> 0;
+            case "de" -> 1;
+            default -> -1;
+        };
+    }
 
     @Override
     public boolean onCommand(CommandSender sen, Command cmd, String lab, String[] args) {
@@ -66,10 +86,14 @@ public class Pronouns implements CommandExecutor {
 
     public String replaceText(String text, PC pc) {
         int pn = pc.getPronouns();
-        List current = lists[pn];
+        File lang = Language.getLang(pc.getOfflinePlayer().getPlayer());
+
+//      List current = lists[pn];   // list, depending on set language
+        List current = List.of(lists.get(langToInt(lang)));
 
         String pName = pc.getOfflinePlayer().getName(),
-                verb = !isSingular(pn) ? "are" : "is";
+                verb = !isSingular(pn) ? Language.getMessage(lang, "to_be_plural")
+                        : Language.getMessage(lang, "to_be_singular") ;
 
         for (int i = 0; i < current.size(); i++)
             text = text.replaceAll("%pv", verb);

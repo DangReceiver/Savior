@@ -7,8 +7,11 @@ import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,7 +60,7 @@ public class Holo {
 
     public void remove() {
         as.remove();
-        c.set(as.getWorld().getName() + "-" + name , as);
+        c.set(as.getWorld().getName() + "-" + name, as);
     }
 
     public void setUp(String pName, String pDisplay) {
@@ -79,6 +82,27 @@ public class Holo {
 
         as.setCustomName("default display");
         as.setCustomNameVisible(true);
+    }
+
+    @Nullable
+    public static List<ArmorStand> getNearbyHolos(Location loc) {
+        List<ArmorStand> l = null;
+
+        for (Entity en : loc.getNearbyEntities(10, 10, 10)) {
+            if (en.getType() != EntityType.ARMOR_STAND) continue;
+//            ((ArmorStand) en).
+        }
+
+        return l;
+    }
+
+    @Nullable
+    public static List<ArmorStand> getNearbyHolos(Location loc, double distance) {
+        List<ArmorStand> l = null;
+
+        loc.getNearbyEntities(distance, distance, distance);
+
+        return l;
     }
 
     public String getName() {

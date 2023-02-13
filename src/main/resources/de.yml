@@ -82,13 +82,18 @@ invsee:
   invsee: "You are viewing %s's Inventory"
 
 pronouns:
-  pronouns_example_pre: "You've changed your pronouns§8. §7§oExample sentence§8: \n"
-  pronouns_example_sentence_0: "This is %pn. %p0 %pv xy years old. I like %p1 very much, because %p2 hair is fluffy.
-  This jacket is %p3, and %pn bought it %p4, it looks amazing!!"
-  pronouns_example_sentence_1: "%pn %pv new on the server. Welcome %p1, I'd bet %p0 %pv nice! Also, %p2 skin looks fancy.
-  I'm excited for %pn to introduce §p4. This whole effort of xy is %p3!"
-  pronouns_example_sentence_2: "Huh, %p0 %pv interesting... %pn...? I'm sure it's not %p2 way to invite you to something
-   and make you pay for it. Give %p1 a price already! They did the whole work %p4. This affection of motivation is %p3."
+  be_singular: "ist"
+  be_plural: "sind"
+  have_singular: "hat"
+  have_plural: "haben"
+  pronouns_example_pre: "Du hast deine Pronomen angepasst§8. §7§oBeispiel-Satz§8: \n"
+  pronouns_example_sentence_0: "Das ist %pn. %p0 %pv xy Jahre alt. Ich mag %p1 sehr, weil %p2 Haare weich sind.
+  Diese Jacke ist %p3, und %pn hat sie %p4 gekauft, die Jacke sieht super aus!!"
+  pronouns_example_sentence_1: "%pn %pv neu auf dem Server. Willkommen %p1, Ich würde wetten %p0 %pv cool! Außerdem, %p2
+   Skin sieht schick aus. ich bin gespannt darauf, dass %pn §p4 vorstellt. Der ganze Aufwand von xy ist von %p3!"
+  pronouns_example_sentence_2: "Hmm, %p0 %pv interessant... %pn...? Ich glaube, es ist nicht %p2 Art einen Menschen zu
+   etwas einzuladen und die Person zahlen zu lassen. Gib %p1 endlich einen Preis! %p0 - die ganze Arbeit %p4 gemacht.
+   Dieser Affekt von Motivation ist %p3."
 
 setlanguage:
   lang_current: "Your current language is %s"
