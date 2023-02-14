@@ -5,6 +5,7 @@ import de.tdf.cmd.manage.Build;
 import de.tdf.cmd.manage.Hologram;
 import de.tdf.language.*;
 import de.tdf.listener.*;
+import de.tdf.tutorial.Introduce;
 import org.bukkit.*;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -105,6 +106,8 @@ public final class Savior extends JavaPlugin {
         Objects.requireNonNull(getCommand("Spawn")).setExecutor(new de.tdf.cmd.manage.Spawn());
         Objects.requireNonNull(getCommand("Spawn")).setTabCompleter(new de.tdf.cmd.manage.Spawn());
         Objects.requireNonNull(getCommand("Pronouns")).setExecutor(new Pronouns());
+        Objects.requireNonNull(getCommand("Introduce")).setExecutor(new Introduce());
+        Objects.requireNonNull(getCommand("Introduce")).setTabCompleter(new Introduce());
 
         for (Player ap : Bukkit.getOnlinePlayers())
             Language.setLang(ap, Language.getLangFile("en"));

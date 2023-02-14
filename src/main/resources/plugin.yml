@@ -80,3 +80,5 @@ commands:
       - TpSpawn
   Pronouns:
     description: Change your preferred pronouns, that are used server sided.
+  Introduce:
+    description: Tutorial, Introduction, whatever you wanna call it; get to know the server.

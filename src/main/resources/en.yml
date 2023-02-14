@@ -27,6 +27,7 @@ frequent:
   argument_specifics: "The argument #%s must be of the type %s§8."
   argument_range: "The argument #%s should be between %s and %s§8."
   arg_length_required: "The required argument length for this command is %s§8."
+  arg_length_range: "Valid argument lengths for this command are between %s and %s§8."
   insufficient_permission: "You do not have the required permission %s to perform this action."
   usage: "The usage of the command %s is %s"
   target_invalid: "The specified target is invalid."
