@@ -1,4 +1,4 @@
-package de.tdf.cmd.manage;
+package de.tdf.cmd;
 
 import de.tdf.language.Language;
 import de.tdf.savior.Savior;

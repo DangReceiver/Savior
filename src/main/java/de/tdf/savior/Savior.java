@@ -1,6 +1,20 @@
 package de.tdf.savior;
 
-import de.tdf.cmd.*;
+import de.tdf.cmd.ArrowsInBody;
+import de.tdf.cmd.ClearChat;
+import de.tdf.cmd.Ench;
+import de.tdf.cmd.Fly;
+import de.tdf.cmd.Gm;
+import de.tdf.cmd.Heal;
+import de.tdf.cmd.Health;
+import de.tdf.cmd.Info;
+import de.tdf.cmd.Invsee;
+import de.tdf.cmd.Pronouns;
+import de.tdf.cmd.SetLanguage;
+import de.tdf.cmd.Speed;
+import de.tdf.cmd.TicksPerSecond;
+import de.tdf.cmd.TpExact;
+import de.tdf.cmd.TpWorld;
 import de.tdf.cmd.manage.Build;
 import de.tdf.cmd.manage.Hologram;
 import de.tdf.language.*;
@@ -123,8 +137,8 @@ public final class Savior extends JavaPlugin {
         Objects.requireNonNull(getCommand("Health")).setExecutor(new Health());
         Objects.requireNonNull(getCommand("Build")).setExecutor(new Build());
         Objects.requireNonNull(getCommand("Hologram")).setExecutor(new Hologram());
-        Objects.requireNonNull(getCommand("Spawn")).setExecutor(new de.tdf.cmd.manage.Spawn());
-        Objects.requireNonNull(getCommand("Spawn")).setTabCompleter(new de.tdf.cmd.manage.Spawn());
+        Objects.requireNonNull(getCommand("Spawn")).setExecutor(new de.tdf.cmd.Spawn());
+        Objects.requireNonNull(getCommand("Spawn")).setTabCompleter(new de.tdf.cmd.Spawn());
         Objects.requireNonNull(getCommand("Pronouns")).setExecutor(new Pronouns());
         Objects.requireNonNull(getCommand("Introduce")).setExecutor(new Introduce());
         Objects.requireNonNull(getCommand("Introduce")).setTabCompleter(new Introduce());
