@@ -4,8 +4,29 @@ import de.tdf.cmd.*;
 import de.tdf.cmd.manage.Build;
 import de.tdf.cmd.manage.Hologram;
 import de.tdf.language.*;
-import de.tdf.listener.*;
+import de.tdf.listener.BedHandling;
+import de.tdf.listener.CM;
+import de.tdf.listener.Chat;
+import de.tdf.listener.CreeperPrimeCreeper;
+import de.tdf.listener.Death;
+import de.tdf.listener.Doors;
+import de.tdf.listener.EffectHeadBottle;
+import de.tdf.listener.ElytraBoost;
+import de.tdf.listener.EnderPearl;
+import de.tdf.listener.EntityDamageDisplay;
+import de.tdf.listener.EntitySpawn;
+import de.tdf.listener.FireWorkJump;
+import de.tdf.listener.PreDeath;
+import de.tdf.listener.Respawn;
+import de.tdf.listener.SneakEvent;
+import de.tdf.listener.SpawnProtection;
+import de.tdf.listener.StartToSprint;
+import de.tdf.listener.Teleport;
+import de.tdf.listener.TreeCutDown;
+import de.tdf.listener.WorldChanged;
+import de.tdf.listener.features.ItemCooldown;
 import de.tdf.tutorial.Introduce;
+import de.tdf.worlds.SpawnWorld;
 import org.bukkit.*;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -38,7 +59,7 @@ public final class Savior extends JavaPlugin {
 
         if (w != null) w.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, false);
 
-        if (!de.tdf.worlds.Spawn.checkExists()) {
+        if (!SpawnWorld.SpawnGen.checkExists()) {
             cs.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "spawn_world_invalid"));
             getServer().getPluginManager().disablePlugin(this);
             return;
@@ -70,7 +91,6 @@ public final class Savior extends JavaPlugin {
         pm.registerEvents(new PreDeath(), this);
         pm.registerEvents(new Respawn(), this);
         pm.registerEvents(new Teleport(), this);
-        pm.registerEvents(new SpawnButtonPush(), this);
         pm.registerEvents(new EntityDamageDisplay(), this);
         pm.registerEvents(new TreeCutDown(), this);
         pm.registerEvents(new Doors(), this);
@@ -79,9 +99,9 @@ public final class Savior extends JavaPlugin {
         pm.registerEvents(new ElytraBoost(), this);
         pm.registerEvents(new BedHandling(), this);
         pm.registerEvents(new Build(), this);
+        pm.registerEvents(new SpawnWorld(), this);
         pm.registerEvents(new WorldChanged(), this);
         pm.registerEvents(new ItemCooldown(), this);
-        pm.registerEvents(new AddItemCooldown(), this);
         pm.registerEvents(new EnderPearl(), this);
         pm.registerEvents(new EntitySpawn(), this);
 //		pm.registerEvents(new ToSaviorCommand(), this);
@@ -146,9 +166,7 @@ public final class Savior extends JavaPlugin {
 
             if (ap != null) {
                 v = ap.getImplementationVersion();
-
-                if (v == null)
-                    v = ap.getSpecificationVersion();
+                if (v == null) v = ap.getSpecificationVersion();
             }
         }
         return v;
@@ -159,8 +177,7 @@ public final class Savior extends JavaPlugin {
     }
 
     public static boolean createFolder(String path) {
-        if (path == null)
-            path = "plugins/Savior";
+        if (path == null) path = "plugins/Savior";
 
         File f1 = new File(path);
         if (f1.exists()) {

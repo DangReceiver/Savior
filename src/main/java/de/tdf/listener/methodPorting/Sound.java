@@ -1,4 +1,4 @@
-package de.tdf.listener.methods;
+package de.tdf.listener.methodPorting;
 
 import de.tdf.savior.Savior;
 import org.bukkit.Bukkit;
@@ -16,6 +16,4 @@ public class Sound {
 		Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () ->
 				oneByOne(p, s, times, startAtPitch, pitch, up, volume, delay, current + 1), delay);
 	}
-
-
 }

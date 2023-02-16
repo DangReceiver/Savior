@@ -2,7 +2,7 @@ package de.tdf.listener;
 
 import de.tdf.PC;
 import de.tdf.language.Language;
-import de.tdf.listener.methods.BossBar;
+import de.tdf.listener.methodPorting.BossBar;
 import de.tdf.savior.Savior;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -58,7 +58,7 @@ public class CM implements Listener {
         p.sendMessage(Language.PRE + Language.getMessage(lf, "join_teleport_spawn"));
 
         int i = 0;
-        de.tdf.listener.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_CHIME, 4,
+        de.tdf.listener.methodPorting.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_CHIME, 4,
                 0.225f, 0.225f, true, 0.55f, 3, i);
     }
 
@@ -78,7 +78,7 @@ public class CM implements Listener {
                         lol.getBlockX() + "", lol.getBlockY() + "", lol.getBlockZ() + "");
 
                 int i = 0;
-                de.tdf.listener.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_FLUTE, 5,
+                de.tdf.listener.methodPorting.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_FLUTE, 5,
                         0.4f, 0.3f, true, 0.55f, 10, i);
             }, 20 * 20);
         }, 6 * 20);

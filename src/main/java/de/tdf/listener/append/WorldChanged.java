@@ -21,7 +21,6 @@ public class WorldChanged implements Listener {
 		} else {
 			Build.disableBuild(p, PC.loadConfig(p));
 			p.setGameMode(GameMode.SURVIVAL);
-
 		}
 	}
 }

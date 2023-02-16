@@ -25,7 +25,7 @@ public class SpawnProtection implements Listener {
 				Language.getMessage(Language.getLang(p), "spawn_action_cancelled")));
 
 		int i = 0;
-		de.tdf.listener.methods.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_BASS, 2,
+		de.tdf.listener.methodPorting.Sound.oneByOne(p, Sound.BLOCK_NOTE_BLOCK_BASS, 2,
 				0.5f, 0f, true, 0.65f, 6, i);
 	}
 }
