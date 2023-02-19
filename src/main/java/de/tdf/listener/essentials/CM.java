@@ -1,7 +1,8 @@
-package de.tdf.listener;
+package de.tdf.listener.essentials;
 
-import de.tdf.PC;
+import de.tdf.obj.PC;
 import de.tdf.language.Language;
+import de.tdf.listener.features.deathAndRespawn.PreDeath;
 import de.tdf.listener.methodPorting.BossBar;
 import de.tdf.savior.Savior;
 import org.bukkit.Bukkit;
@@ -43,6 +44,8 @@ public class CM implements Listener {
             Language.broadcastArg("player_first_join", p.getName());
 
         else {
+            p.sendMessage(pc.getJoinTime() + " | " + pc.getQuitTime()
+                    + " || " + (pc.getJoinTime() - pc.getQuitTime()));
             if (pc.getJoinTime() - pc.getQuitTime() <= 15000)
                 Language.broadcastArg("player_rejoin_"
                         + new Random().nextInt(4), p.getName());
@@ -102,8 +105,7 @@ public class CM implements Listener {
             ArrayList<ItemStack> con = new ArrayList<>();
             int c = 0;
 
-            for (ItemStack i : contents)
-                if (i != null) con.add(i);
+            for (ItemStack i : contents) if (i != null) con.add(i);
 
             PreDeath.nobelItemDrop(p.getLocation().clone(), con, c);
             p.getInventory().clear();
@@ -113,10 +115,8 @@ public class CM implements Listener {
                     l.getBlockX() + "", l.getBlockY() + "", l.getBlockZ() + "");
         }
 
-        if (!p.getWorld().getName().equalsIgnoreCase("Spawn")) {
-            pc.setLogoutLocation(l);
-            pc.savePCon();
-        }
+        if (!p.getWorld().getName().equalsIgnoreCase("Spawn")) pc.setLogoutLocation(l);
+        pc.savePCon();
 
         Language.broadcastArg("player_quit_" + new Random().nextInt(17), p.getName());
         Language.removePlayer(p);

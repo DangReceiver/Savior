@@ -1,6 +1,6 @@
-package de.tdf.cmd.manage;
+package de.tdf.cmd;
 
-import de.tdf.PC;
+import de.tdf.obj.PC;
 import de.tdf.language.Language;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.List;

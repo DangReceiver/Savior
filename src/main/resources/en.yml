@@ -172,10 +172,10 @@ cm:
   player_quit_14: "%s left their trouble behind§8. ⌈§c«§8⌋"
   player_quit_15: "%s figured this is a waste of time§8. ⌈§c«§8⌋"
   player_quit_16: "The last thing we've got left of %s is the idea of them§8. ⌈§c«§8⌋"
-  player_rejoin_0: "Am I havin' a Deja Vu? It's %s again! ⌈§6§l↺§8⌋"
-  player_rejoin_1: "And it is... %s... I read that name today already... ⌈§6§l↺§8⌋"
-  player_rejoin_2: "Here we go again, %s. Welcome back ⌈§6§l↺§8⌋"
-  player_rejoin_3: "You must be fooling me! %s, I almost thought we lost you :c ⌈§6§l↺§8⌋"
+  player_rejoin_0: "Am I havin' a Deja Vu? It's %s again! ⌈§5§l↺§8⌋"
+  player_rejoin_1: "And it is... %s... I read that name today already... ⌈§5§l↺§8⌋"
+  player_rejoin_2: "Here we go again, %s. Welcome back ⌈§5§l↺§8⌋"
+  player_rejoin_3: "You must be fooling me! %s, I almost thought we lost you :c ⌈§5§l↺§8⌋"
 
 creeperprimecreeper:
 # yet empty

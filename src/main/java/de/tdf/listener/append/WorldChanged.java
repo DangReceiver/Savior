@@ -1,7 +1,7 @@
-package de.tdf.listener;
+package de.tdf.listener.append;
 
-import de.tdf.PC;
-import de.tdf.cmd.manage.Build;
+import de.tdf.obj.PC;
+import de.tdf.cmd.Build;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;

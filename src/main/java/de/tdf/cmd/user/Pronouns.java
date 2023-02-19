@@ -1,7 +1,9 @@
-package de.tdf.cmd;
+package de.tdf.cmd.user;
 
-import de.tdf.PC;
+import de.tdf.obj.PC;
 import de.tdf.language.Language;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,7 +27,7 @@ public class Pronouns implements CommandExecutor {
             sie = new ArrayList<>(Arrays.asList("she", "her", "her", "hers", "herself")),
             es = new ArrayList<>(Arrays.asList("it", "it", "its", "its", "itself"));
 
-    public static ArrayList<List[]> lists;
+    public static ArrayList<List[]> lists = new ArrayList<>();
     public static List[] eng = new List[]{they, name, she, he, it},
             de = new List[]{person, name, sie, er, es};
 
@@ -95,13 +97,18 @@ public class Pronouns implements CommandExecutor {
                 verb = !isSingular(pn) ? Language.getMessage(lang, "to_be_plural")
                         : Language.getMessage(lang, "to_be_singular") ;
 
+        Bukkit.getConsoleSender().sendMessage(ChatColor.stripColor(text) + "\n");
+
         for (int i = 0; i < current.size(); i++)
             text = text.replaceAll("%pv", verb);
+        Bukkit.getConsoleSender().sendMessage(ChatColor.stripColor(text) + "\n");
 
         text = text.replaceAll("%pn", pName);
+        Bukkit.getConsoleSender().sendMessage(ChatColor.stripColor(text) + "\n");
 
         for (int i = 0; i < current.size(); i++)
             text = text.replaceAll("%p" + i, current.get(i).toString());
+        Bukkit.getConsoleSender().sendMessage(ChatColor.stripColor(text) + "\n");
 
         text = text.replaceAll("@pn", pName);
 

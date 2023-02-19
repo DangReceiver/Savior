@@ -1,6 +1,6 @@
 package de.tdf.language;
 
-import de.tdf.PC;
+import de.tdf.obj.PC;
 import org.bukkit.entity.Player;
 
 import java.io.File;

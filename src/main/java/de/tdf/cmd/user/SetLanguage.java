@@ -1,6 +1,6 @@
-package de.tdf.cmd;
+package de.tdf.cmd.user;
 
-import de.tdf.PC;
+import de.tdf.obj.PC;
 import de.tdf.language.Language;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

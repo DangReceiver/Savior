@@ -1,6 +1,6 @@
-package de.tdf.listener;
+package de.tdf.listener.features.deathAndRespawn;
 
-import de.tdf.PC;
+import de.tdf.obj.PC;
 import de.tdf.savior.Savior;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;

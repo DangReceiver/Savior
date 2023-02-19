@@ -1,4 +1,4 @@
-package de.tdf;
+package de.tdf.obj;
 
 import de.tdf.language.Language;
 import de.tdf.savior.Savior;
@@ -8,10 +8,8 @@ import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -214,7 +212,7 @@ public class PC {
 
     public List<Integer> getDefaultMessageColor() {
         return c.isSet("Customization.Chat.ChatColor") ? c.getIntegerList("Customization.Chat.ChatColor") :
-                Arrays.asList(210, 210, 210);
+                Arrays.asList(190, 180, 185);
     }
 
 //	public String getDefaultMessageColor() {
