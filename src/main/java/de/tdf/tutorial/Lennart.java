@@ -6,6 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -65,7 +67,8 @@ public class Lennart {
         lennart.setCustomName(Language.colorFromRGB(20, 240, 40) + "§oLennart");
         lennart.setInvulnerable(true);
         lennart.setSilent(true);
-
+        lennart.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,
+                Integer.MAX_VALUE, 3, false, false, false));
     }
 
     public void spawn(@Nullable Location loc) {
