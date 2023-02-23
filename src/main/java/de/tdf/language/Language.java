@@ -62,7 +62,8 @@ public class Language {
 
     public static String invalidString(String key) {
         try {
-            return messages.get(getServerLang()).get(key);
+            String s = messages.get(getServerLang()).get(key);
+            s = s.split(".")[1];
 
         } catch (InvalidStringException ex) {
             ex.printStackTrace();
@@ -131,8 +132,6 @@ public class Language {
             sLang = new File(df + "/language", c.getString("Language") + ".yml");
 
         } else if (langFiles.contains(language.getName())) sLang = language;
-
-        return;
     }
 
     public static void setLang(Player p, File file) {
@@ -178,7 +177,7 @@ public class Language {
     }
 
     public static void loadResources(Plugin sa, File langF) {
-        List<String> resources = new ArrayList<>(Arrays.asList("en.yml", "oldde.yml"));
+        List<String> resources = new ArrayList<>(Arrays.asList("en.yml", "de.yml"));
 
         for (String s : resources) {
 
@@ -187,7 +186,7 @@ public class Language {
             InputStream in = sa.getResource(s);
 
             ConsoleCommandSender cs = Bukkit.getConsoleSender();
-            File sl = Language.getLangFile(s.split(".yml")[0]);
+            File sl = getLangFile(s.split(".yml")[0]);
 
             if (in == null) {
                 Bukkit.getScheduler().runTaskLaterAsynchronously(Savior.getSavior(), () -> cs.sendMessage(
