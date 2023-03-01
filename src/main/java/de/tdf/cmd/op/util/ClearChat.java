@@ -9,33 +9,28 @@ import org.bukkit.entity.Player;
 
 public class ClearChat implements CommandExecutor {
 
-	@Override
-	public boolean onCommand(final CommandSender sen, final Command command, final String label, final String[] args) {
-		if (sen instanceof Player) {
-			final Player p = (Player) sen;
+    @Override
+    public boolean onCommand(final CommandSender sen, final Command command, final String label, final String[] args) {
+        if (!(sen instanceof Player p)) {
+            sen.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "not_a_player"));
+            return false;
+        }
 
-			if (p.hasPermission("Savior.ChatClear")) {
-				if (args.length == 0) {
+        if (!p.hasPermission("Savior.ChatClear")) {
+            sen.sendMessage(Language.PRE + String.format(Language.getMessage(
+                    Language.getServerLang(), "insufficient_permission"), "Savior.ChatClear"));
+            return false;
+        }
 
-					for (int times = 0; times <= 400; ++times)
-						Bukkit.broadcastMessage(" \n §0» \n ");
-					Language.broadcast("chat_cleared");
+        if (args.length != 0) {
+            p.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "arg_length"));
+            return false;
+        }
 
-				} else
-					p.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "arg_length"));
+        for (int times = 0; times <= 400; ++times)
+            Bukkit.broadcastMessage(" \n §0» \n ");
+        Language.broadcast("chat_cleared");
 
-			} else
-				sen.sendMessage(Language.PRE + String.format(Language.getMessage(Language.getServerLang(),
-						"insufficient_permission"), "Savior.ChatClear"));
-
-		} else if (args.length == 0) {
-
-			for (int times2 = 0; times2 <= 200; ++times2)
-				Bukkit.broadcastMessage("\n §7» \n");
-			Bukkit.broadcastMessage("chat_cleared");
-
-		} else
-			sen.sendMessage(Language.PRE + Language.getMessage(Language.getServerLang(), "arg_length"));
-		return false;
-	}
+        return false;
+    }
 }

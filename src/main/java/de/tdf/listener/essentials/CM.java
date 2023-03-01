@@ -44,9 +44,7 @@ public class CM implements Listener {
             Language.broadcastArg("player_first_join", p.getName());
 
         else {
-            p.sendMessage(pc.getJoinTime() + " | " + pc.getQuitTime()
-                    + " || " + (pc.getJoinTime() - pc.getQuitTime()));
-            if (pc.getJoinTime() - pc.getQuitTime() <= 15000)
+            if (pc.getJoinTime() - pc.getQuitTime() <= 20000)
                 Language.broadcastArg("player_rejoin_"
                         + new Random().nextInt(4), p.getName());
             else Language.broadcastArg("player_join_"

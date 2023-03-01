@@ -107,7 +107,7 @@ speed:
   speed_updated_walk: "Your walk speed was updated from %s to %s."
 
 tickspersecond:
-# yet empty
+  tps: "Current server tps: %s, %s, %s"
 
 tpexact:
   tp_exact_successful: "You were teleported to the exact block position."

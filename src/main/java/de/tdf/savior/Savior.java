@@ -11,10 +11,10 @@ import de.tdf.cmd.Health;
 import de.tdf.cmd.Info;
 import de.tdf.cmd.Invsee;
 import de.tdf.cmd.Speed;
-import de.tdf.cmd.TicksPerSecond;
 import de.tdf.cmd.TpExact;
 import de.tdf.cmd.TpWorld;
 import de.tdf.cmd.manage.Hologram;
+import de.tdf.cmd.op.util.TicksPerSecond;
 import de.tdf.cmd.user.Pronouns;
 import de.tdf.cmd.user.SetLanguage;
 import de.tdf.language.Language;
@@ -86,7 +86,7 @@ public final class Savior extends JavaPlugin {
         }
 
         Language.loadMessages();
-        Pronouns.fill();
+        Pronouns.setup();
 
         File file = new File("plugins/Savior/Settings.yml");
         YamlConfiguration settings = YamlConfiguration.loadConfiguration(file);

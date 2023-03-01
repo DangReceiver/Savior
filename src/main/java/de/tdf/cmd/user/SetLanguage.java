@@ -42,7 +42,6 @@ public class SetLanguage implements CommandExecutor, TabCompleter {
 		File lf = Language.getLangFile(lang);
 
 		if (!validLangInputFeedback(p, args[0], lf)) return false;
-
 		Language.setLang(p, lf);
 
 		PC pc = PC.loadConfig(p);
