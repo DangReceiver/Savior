@@ -17,6 +17,7 @@ import de.tdf.cmd.manage.Hologram;
 import de.tdf.cmd.op.util.TicksPerSecond;
 import de.tdf.cmd.user.Pronouns;
 import de.tdf.cmd.user.SetLanguage;
+import de.tdf.gokart.Hotbar;
 import de.tdf.language.Language;
 import de.tdf.listener.BedHandling;
 import de.tdf.listener.CreeperPrimeCreeper;
@@ -118,6 +119,7 @@ public final class Savior extends JavaPlugin {
         pm.registerEvents(new ItemCooldown(), this);
         pm.registerEvents(new EnderPearl(), this);
         pm.registerEvents(new EntitySpawn(), this);
+        pm.registerEvents(new Hotbar(), this);
 //		pm.registerEvents(new ToSaviorCommand(), this);
 
         Objects.requireNonNull(getCommand("SetLanguage")).setExecutor(new SetLanguage());
