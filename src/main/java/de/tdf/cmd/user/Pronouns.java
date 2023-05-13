@@ -29,14 +29,14 @@ public class Pronouns implements CommandExecutor {
             she = new ArrayList<>(Arrays.asList("she", "her", "her", "hers", "herself")),
             it = new ArrayList<>(Arrays.asList("it", "it", "its", "its", "itself")),
     // de
-    person = new ArrayList<>(Arrays.asList("he", "him", "his", "his", "himself")),
+    dey = new ArrayList<>(Arrays.asList("dey", "denen", "denen", "deren", "deren")),
             er = new ArrayList<>(Arrays.asList("he", "him", "his", "his", "himself")),
             sie = new ArrayList<>(Arrays.asList("she", "her", "her", "hers", "herself")),
             es = new ArrayList<>(Arrays.asList("it", "it", "its", "its", "itself"));
 
     public static List<ArrayList<List<String>>> lists = new ArrayList<>();
     public static ArrayList<List<String>> en = new ArrayList<>(Arrays.asList(they, name, she, he, it)),
-            de = new ArrayList<>(Arrays.asList(person, name, sie, er, es));
+            de = new ArrayList<>(Arrays.asList(dey, name, sie, er, es));
 
     public static void setup() {
         lists.add(en);

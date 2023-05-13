@@ -25,14 +25,13 @@ import de.tdf.listener.Doors;
 import de.tdf.listener.EffectHeadBottle;
 import de.tdf.listener.ElytraBoost;
 import de.tdf.listener.EnderPearl;
-import de.tdf.listener.EntityDamageDisplay;
-import de.tdf.listener.EntitySpawn;
 import de.tdf.listener.FireWorkJump;
 import de.tdf.listener.SneakEvent;
 import de.tdf.listener.SpawnProtection;
 import de.tdf.listener.StartToSprint;
 import de.tdf.listener.Teleport;
 import de.tdf.listener.TreeCutDown;
+import de.tdf.listener.append.EntitySpawn;
 import de.tdf.listener.append.WorldChanged;
 import de.tdf.listener.essentials.CM;
 import de.tdf.listener.essentials.Chat;
@@ -54,6 +53,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.Properties;
@@ -106,7 +106,7 @@ public final class Savior extends JavaPlugin {
         pm.registerEvents(new PreDeath(), this);
         pm.registerEvents(new Respawn(), this);
         pm.registerEvents(new Teleport(), this);
-        pm.registerEvents(new EntityDamageDisplay(), this);
+//        pm.registerEvents(new EntityDamageDisplay(), this);
         pm.registerEvents(new TreeCutDown(), this);
         pm.registerEvents(new Doors(), this);
         pm.registerEvents(new CreeperPrimeCreeper(), this);
@@ -162,30 +162,17 @@ public final class Savior extends JavaPlugin {
         savior = null;
     }
 
-    public synchronized String getVersion() {
-        String v = null;
+    public String getVersion() {
+        final Properties properties = new Properties();
+
         try {
+            properties.load(this.getClassLoader().getResourceAsStream("project.properties"));
 
-            Properties p = new Properties();
-            InputStream is = getClass().getResourceAsStream("/META-INF/maven/de.tdf/Savior/pom.properties");
-
-            if (is != null) {
-                p.load(is);
-                v = p.getProperty("version", "");
-            }
-
-        } catch (Exception ignored) {
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
-        if (v == null) {
-            Package ap = getClass().getPackage();
-
-            if (ap != null) {
-                v = ap.getImplementationVersion();
-                if (v == null) v = ap.getSpecificationVersion();
-            }
-        }
-        return v;
+        return properties.getProperty("version");
     }
 
     public static Plugin getSavior() {
@@ -208,17 +195,6 @@ public final class Savior extends JavaPlugin {
         return true;
     }
 
-    public static Location getSafeSpawnLocation() {
-        FileConfiguration c = Savior.getSavior().getConfig();
-        Location spawnLoc = c.getLocation("Locations.Spawn");
 
-        if (spawnLoc == null) {
-            spawnLoc = new Location(Bukkit.getWorld("Spawn"), 0, 64.02, 0);
-
-            c.set("Locations.Spawn", spawnLoc);
-            Savior.getSavior().saveConfig();
-        }
-        return spawnLoc;
-    }
 }
 

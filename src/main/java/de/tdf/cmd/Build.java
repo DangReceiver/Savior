@@ -20,12 +20,12 @@ public class Build implements CommandExecutor, Listener {
 	@Override
 	public boolean onCommand(CommandSender sen, Command cmd, String lab, String[] args) {
 
-		if (!(sen instanceof Player p)) {
+		if (! (sen instanceof Player p)) {
 			sen.sendMessage(Language.getMessage(Language.getServerLang(), "no_player"));
 			return false;
 		}
 
-		if (!p.hasPermission("Savior.Spawn")) {
+		if (! p.hasPermission("Savior.Spawn")) {
 			p.sendMessage(Language.getMessage(Language.getLang(p), "no_player"));
 			return false;
 		}
@@ -37,7 +37,7 @@ public class Build implements CommandExecutor, Listener {
 			return false;
 		}
 
-		if (!pc.getBuild()) {
+		if (! pc.getBuild()) {
 			pc.setBuild(true);
 
 			p.setFlying(true);
@@ -74,12 +74,12 @@ public class Build implements CommandExecutor, Listener {
 		// pc.getSaveBuild()
 
 		List<Double> list = pc.getSaveBuildNumbers();
-		p.setHealth(list.get(0));
+		p.setHealth(! list.isEmpty() ? list.get(0) : 20);
 
 		float saturation = 1, exp = 1;
 		try {
-			saturation = Float.parseFloat(list.get(1) + "");
-			exp = Float.parseFloat(list.get(2) + "");
+			saturation = Float.parseFloat((! list.isEmpty() ? list.get(0) : 20 )+ "");
+			exp = Float.parseFloat((! list.isEmpty() ? list.get(2) : 20) + "");
 
 		} catch (NumberFormatException e) {
 			e.printStackTrace();

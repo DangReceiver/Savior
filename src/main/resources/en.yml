@@ -74,9 +74,9 @@ health:
   health_updated: "Your health has been set from %s to %s."
 
 info:
-  info_author: "This plugins author is %s"
+  info_author: "The plugin author is %s"
   info_version: " §7You are on version §e%s §7of the Savior plugin§8."
-  info_ping: " §7Your current ping§8: §%s§8."
+  info_ping: " §7Your current ping§8: §%s%s§8."
   info_ram_usage: " §7Ram usage §8- §7In use§8: §7%sMB §8/ §7%sMB§8. §7Free§8: §7%sMB§8."
 
 invsee:

@@ -2,6 +2,7 @@ package de.tdf.cmd;
 
 import de.tdf.language.Language;
 import de.tdf.savior.Savior;
+import de.tdf.worlds.SpawnWorld;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -32,7 +33,7 @@ public class Spawn implements CommandExecutor, TabCompleter {
 		}
 
 		if (args.length == 0) {
-			p.teleport(Savior.getSafeSpawnLocation());
+			p.teleport(SpawnWorld.getSafeSpawnLocation());
 			p.sendActionBar(Component.text(Language.PRE + Language.getMessage(Language.getLang(p),
 					"teleported_successfully")));
 			p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASEDRUM, 0.25f, 0.85f);
@@ -62,9 +63,8 @@ public class Spawn implements CommandExecutor, TabCompleter {
 			}
 
 
-		} else {
+		} else
 			p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "not_implemented_yet"));
-		}
 
 		return false;
 	}

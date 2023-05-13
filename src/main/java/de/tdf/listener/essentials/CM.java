@@ -5,6 +5,7 @@ import de.tdf.language.Language;
 import de.tdf.listener.features.deathAndRespawn.PreDeath;
 import de.tdf.listener.methodPorting.BossBar;
 import de.tdf.savior.Savior;
+import de.tdf.worlds.SpawnWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -28,10 +29,8 @@ public class CM implements Listener {
         Player p = e.getPlayer();
         PC pc = PC.loadConfig(p);
 
-        if (pc.getLanguageString() == null) {
+        if (pc.getLanguageString() == null)
             pc.setLanguage(Language.getServerLang());
-            pc.savePCon();
-        }
 
         pc.setJoinTime(System.currentTimeMillis());
         pc.savePCon();
@@ -52,7 +51,7 @@ public class CM implements Listener {
         }
 
         p.setGameMode(GameMode.ADVENTURE);
-        p.teleport(Savior.getSafeSpawnLocation());
+        p.teleport(SpawnWorld.getSafeSpawnLocation());
 
         setupLoginLocation(p, pc);
         p.sendTitle(Language.PRE, String.format(Language.getMessage(lf, "welcome_back"), p.getName()), 30, 50, 50);

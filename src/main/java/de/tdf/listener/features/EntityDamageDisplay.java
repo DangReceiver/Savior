@@ -1,4 +1,4 @@
-package de.tdf.listener;
+package de.tdf.listener.features;
 
 import de.tdf.savior.Savior;
 import net.md_5.bungee.api.ChatColor;
@@ -18,7 +18,8 @@ import java.awt.*;
 
 public class EntityDamageDisplay implements Listener {
 
-	@EventHandler
+//	@EventHandler
+//	@EventHandler
 	public void handle(EntityDamageEvent ev) {
 		if (ev.isCancelled()) return;
 

@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.UUID;
 
 public class Info implements CommandExecutor {
 
@@ -24,15 +25,16 @@ public class Info implements CommandExecutor {
 
 		sen.sendMessage("§0 \n §0 ");
 
-		sen.sendMessage(Language.PRE + String.format(Language.getMessage(l, "info_author"), "CruelAmbition"));
+		sen.sendMessage(Language.PRE + String.format(Language.getMessage(l, "info_author"),
+				Bukkit.getOfflinePlayer(UUID.fromString("991e417e-50ed-4d5c-872d-4783b672a449")).getName()));
 		sen.sendMessage(String.format(Language.getMessage(l, "info_version"), Savior.version));
 
 		if ((Bukkit.getServer().getVersion().contains("1.19")) && sen instanceof Player)
-			sen.sendMessage(String.format(Language.getMessage(l, "info_ping"), pingColor(p) + p.getPing()));
+			sen.sendMessage(String.format(Language.getMessage(l, "info_ping"), pingColor(p), p.getPing()));
 
 		if (sen.hasPermission("Savior.Info.ViewRam"))
-		sen.sendMessage(String.format(Language.getMessage(l, "info_ram_usage"),
-				m, r.maxMemory() / s, r.freeMemory() / s));
+			sen.sendMessage(String.format(Language.getMessage(l, "info_ram_usage"),
+					m, r.maxMemory() / s, r.freeMemory() / s));
 		sen.sendMessage("§0 \n §0 ");
 		return true;
 	}

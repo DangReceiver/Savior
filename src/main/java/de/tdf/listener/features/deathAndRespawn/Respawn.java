@@ -3,6 +3,7 @@ package de.tdf.listener.features.deathAndRespawn;
 import de.tdf.obj.PC;
 import de.tdf.language.Language;
 import de.tdf.savior.Savior;
+import de.tdf.worlds.SpawnWorld;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,7 +16,7 @@ public class Respawn implements Listener {
     @EventHandler
     public void handle(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
-        e.setRespawnLocation(Savior.getSafeSpawnLocation());
+        e.setRespawnLocation(SpawnWorld.getSafeSpawnLocation());
 
         File l = Language.getLang(p);
         p.sendTitle(Language.colorFromRGB(220, 10, 30) + Language.getMessage(l, "you_died_title"), Language.getMessage(l,
