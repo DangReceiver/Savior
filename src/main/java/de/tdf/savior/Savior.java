@@ -82,7 +82,7 @@ public final class Savior extends JavaPlugin {
 
         if (Language.updateServerLang()) if (Language.updateServerLang()) {
             saveConfig();
-            cs.sendMessage(Language.PRE + "The server language could not be estimated. Stopping plugin load process.");
+            cs.sendMessage(Language.PRE + "The server language could not be determined. Stopping plugin load process.");
             return;
         }
 

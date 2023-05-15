@@ -7,7 +7,8 @@ import java.io.File;
 
 public class ReadOut {
 
-    private String path, langPath;
+    private final String langPath;
+    private String path;
     private Player p;
     private File lf;
 
