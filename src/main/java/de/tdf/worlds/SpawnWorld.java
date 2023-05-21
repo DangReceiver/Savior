@@ -70,7 +70,6 @@ public class SpawnWorld implements Listener {
 
 	@EventHandler
 	public void handle(PlayerInteractEvent e) {
-
 		Player p = e.getPlayer();
 		Block cb = e.getClickedBlock();
 
@@ -78,12 +77,12 @@ public class SpawnWorld implements Listener {
 		if (cb.getWorld() != Bukkit.getWorld("Spawn")) return;
 
 		if (! cb.getType().toString().contains("BUTTON")) return;
-		if (! cb.equals(getSafeSpawnLocation().getBlock())) return;
+		if (! cb.equals(Savior.getSavior().getConfig().getLocation("Spawn.ButtonLocation").getBlock())) return;
 
 		PC pc = PC.loadConfig(p);
 
 		if (pc.hasLogoutLocation()) p.teleport(pc.getLogoutLocation());
-		else p.teleport(new Location(Bukkit.getWorld("world"), 0, 64, 0));
+		else p.teleport(new Location(Bukkit.getWorld("world"), 0.5, 64, 0.5));
 
 		int i = 0;
 		de.tdf.listener.methodPorting.Sound.oneByOne(p, Sound.ENTITY_PLAYER_BREATH, 4,
@@ -100,6 +99,7 @@ public class SpawnWorld implements Listener {
 			spawnLoc = new Location(Bukkit.getWorld("Spawn"), 0.5, 64.02, 0.5);
 
 			c.set("Locations.Spawn", spawnLoc);
+			c.set("Spawn.ButtonLocation", spawnLoc);
 			Savior.getSavior().saveConfig();
 		}
 
@@ -112,13 +112,20 @@ public class SpawnWorld implements Listener {
 		boolean b = true;
 		if (! SpawnGen.checkExists()) b = false;
 
-		Location c = getSafeSpawnLocation().clone();
+		Location c = Savior.getSavior().getConfig().getLocation("Locations.Spawn");
 		ConsoleCommandSender cs = Bukkit.getConsoleSender();
 
-		if (c.add(0, - 1, 0).getBlock().getType() == Material.AIR) {
+		if (c == null) {
+			Location sp = new Location(Bukkit.getWorld("Spawn"), 0.5, 64.02, 0.5);
+			Savior.getSavior().getConfig().set("Locations.Spawn", sp);
+			Savior.getSavior().saveConfig();
+			c = sp.clone();
+		}
+
+		if (c.clone().add(0, - 1, 0).getBlock().getType() == Material.AIR) {
 			b = false;
 
-			c.add(0, - 1, 0).getBlock().setType(Material.BEDROCK);
+			c.clone().add(0, - 1, 0).getBlock().setType(Material.BEDROCK);
 			Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> cs.sendMessage(
 					Language.PRE + Language.getMessage(Language.getServerLang(),
 							"spawn_repair_missing_block_fix")), 1);

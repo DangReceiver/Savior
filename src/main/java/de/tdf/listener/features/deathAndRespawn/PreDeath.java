@@ -30,6 +30,7 @@ public class PreDeath implements Listener {
 
         PC pc = PC.loadConfig(p);
         pc.setDead(true);
+        pc.setDeathLocation(p.getLocation());
         pc.savePCon();
 
         Location dl = p.getLocation();
@@ -50,7 +51,6 @@ public class PreDeath implements Listener {
 
         int i = 0;
         deathBoost(p, i, dl, con);
-        deathBoost(p, i, dl, con);
     }
 
     public static void deathBoost(Player p, int i, Location dl, ArrayList<ItemStack> con) {
@@ -70,9 +70,9 @@ public class PreDeath implements Listener {
 
         Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
 
-            p.setVelocity(p.getVelocity().add(new Vector(0, 1, 0)));
+            p.setVelocity(p.getVelocity().add(new Vector(0, 0.9, 0)));
             p.spawnParticle(Particle.HEART, p.getLocation().add(0, -1.5, 0), 1);
-            p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SHOOT, 0.5f, 1.8f);
+            p.playSound(p.getLocation(), Sound.ENTITY_GHAST_SHOOT, 0.5f, 2f);
 
             p.setFlySpeed(0);
             int temp = i + 1;
@@ -85,11 +85,11 @@ public class PreDeath implements Listener {
         if (con.isEmpty()) return;
 
         Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
-            Item item = dl.getWorld().dropItemNaturally(dl.clone().add(0, 0.15, 0), con.get(0));
-            item.setVelocity(item.getVelocity().add(new Vector(0, 0.4, 0)));
+            Item item = dl.getWorld().dropItemNaturally(dl.clone().add(0, 0.175, 0), con.get(0));
+            item.setVelocity(item.getVelocity().add(new Vector(0, 0.42, 0)));
 
             con.remove(0);
             nobelItemDrop(dl, con, cTemp);
-        }, 2);
+        }, 3);
     }
 }

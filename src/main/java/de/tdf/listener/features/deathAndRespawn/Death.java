@@ -3,7 +3,13 @@ package de.tdf.listener.features.deathAndRespawn;
 import de.tdf.obj.PC;
 import de.tdf.language.Language;
 import de.tdf.savior.Savior;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.ComponentBuilder;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -16,42 +22,41 @@ import java.util.Random;
 
 public class Death implements Listener {
 
-    @EventHandler
-    public void handle(PlayerDeathEvent e) {
-        if (e.isCancelled()) return;
+	@EventHandler
+	public void handle(PlayerDeathEvent e) {
+		if (e.isCancelled()) return;
 
-        Player p = e.getPlayer();
-        Block block = p.getLocation().getBlock();
+		Player p = e.getPlayer();
+		Block block = p.getLocation().getBlock();
 
-        e.setDeathMessage(null);
+		e.setDeathMessage(null);
 
-        Location dl = new Location(p.getWorld(), block.getX() + 0.5, block.getY(), block.getZ() + 0.5);
-        Language.broadcastArg("player_death_" + new Random().nextInt(14), p.getName());
+		Location dl = new Location(p.getWorld(), block.getX() + 0.5, block.getY(), block.getZ() + 0.5);
+		Language.broadcastArg("player_death_" + new Random().nextInt(14), p.getName());
 
-        PC pc = PC.loadConfig(p);
-        pc.setDeathLocation(dl);
-        pc.setRespawnRequired(true);
-        pc.savePCon();
+		PC pc = PC.loadConfig(p);
+		pc.setRespawnRequired(true);
+		pc.savePCon();
 
-        BukkitScheduler bs = Bukkit.getScheduler();
-        bs.runTaskLater(Savior.getSavior(), () -> p.sendMessage(Language.PRE + String.format(Language.getMessage(
-                Language.getLang(p), "player_death_info"), dl.getX(), dl.getY(), dl.getZ())), 20);
+		BukkitScheduler bs = Bukkit.getScheduler();
+		bs.runTaskLater(Savior.getSavior(), () -> p.sendMessage(Language.PRE + String.format(Language.getMessage(
+				Language.getLang(p), "player_death_info"), dl.getX(), dl.getY(), dl.getZ())), 10);
 
-        bs.runTaskLater(Savior.getSavior(), () -> p.sendMessage(Language.PRE + Language.getMessage(
-                Language.getLang(p), "player_death_respawn_required")), 2 * 20);
+		bs.runTaskLater(Savior.getSavior(), () -> p.sendMessage(Language.PRE + Language.getMessage(
+				Language.getLang(p), "player_death_respawn_required")), 2 * 20);
 
 
-        bs.runTaskLater(Savior.getSavior(), () -> {
-            PC pcd = PC.loadConfig(p);
+		bs.runTaskLater(Savior.getSavior(), () -> {
+			PC pcd = PC.loadConfig(p);
 
-            if (pcd.getDeathLocation() == null) return;
-            p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "player_death_did_not_respawn"));
-            Language.broadcastArg("death_location_broadcast", p.getName(),
-                    dl.getWorld().getName(), dl.getX() + "", dl.getY() + "", dl.getZ() + "");
+			if (pcd.getDeathLocation() == null) return;
+			p.sendMessage(Language.PRE + Language.getMessage(Language.getLang(p), "player_death_did_not_respawn"));
+			Language.broadcastArg("death_location_broadcast", p.getName(),
+					dl.getWorld().getName(), dl.getX() + "", dl.getY() + "", dl.getZ() + "");
 
-            pcd.setDeathLocation(null);
-            pcd.setRespawnRequired(false);
-            pcd.savePCon();
-        }, 30 * 20);
-    }
+			pcd.setDeathLocation(null);
+			pcd.setRespawnRequired(false);
+			pcd.savePCon();
+		}, 30 * 20);
+	}
 }

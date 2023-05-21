@@ -19,6 +19,6 @@ public class Hotbar implements Listener {
 		int previousSlot = e.getPreviousSlot();
 		int difference = previousSlot - newSlot;
 
-		p.sendMessage(Language.PRE + String.format("raw: %s; slot: %s | difference: %s", newSlot, previousSlot, difference));
+//		p.sendMessage(Language.PRE + String.format("raw: %s; slot: %s | difference: %s", newSlot, previousSlot, difference));
 	}
 }
