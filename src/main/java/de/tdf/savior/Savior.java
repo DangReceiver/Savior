@@ -78,11 +78,11 @@ public final class Savior extends JavaPlugin {
 			return;
 		}
 
-		if (Language.updateServerLang()) if (Language.updateServerLang()) {
-			saveConfig();
-			cs.sendMessage(Language.PRE + "The server language could not be estimated. Stopping plugin load process.");
-			return;
-		}
+        if (Language.updateServerLang()) if (Language.updateServerLang()) {
+            saveConfig();
+            cs.sendMessage(Language.PRE + "The server language could not be determined. Stopping plugin load process.");
+            return;
+        }
 
 		Language.loadMessages();
 		Pronouns.setup();
