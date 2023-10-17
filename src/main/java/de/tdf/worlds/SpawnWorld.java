@@ -104,7 +104,6 @@ public class SpawnWorld implements Listener {
 		}
 
 		isSpawnSafe();
-
 		return spawnLoc;
 	}
 

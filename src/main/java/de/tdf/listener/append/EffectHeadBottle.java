@@ -23,26 +23,26 @@ public class EffectHeadBottle implements Listener {
 		Entity en = e.getEntity();
 		if (!(en instanceof Player p)) return;
 
-		if (e.getAction() == EntityPotionEffectEvent.Action.ADDED) {
-			ItemStack i = new ItemStack(Material.POTION);
-			PotionMeta pm = (PotionMeta) i.getItemMeta();
-
-			pm.addEnchant(Enchantment.VANISHING_CURSE, 10, true);
-			pm.addEnchant(Enchantment.BINDING_CURSE, 10, true);
-			pm.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-
-			pm.displayName(Component.text(Language.colorFromRGB(20, 160, 255) +
-					String.format(Language.getMessage(Language.getLang(p), "active_potion_effect"), e.getNewEffect())));
-			pm.setColor(Color.fromRGB(200, 200, 200));
-
-			ItemStack h = p.getInventory().getHelmet();
-			p.getInventory().setHelmet(i);
-			i.setItemMeta(pm);
-
-			Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
-				if (p.getInventory().getHelmet() != h || p.getInventory().getHelmet() == i)
-					p.getInventory().setHelmet(h);
-			}, 50);
-		}
+//		if (e.getAction() == EntityPotionEffectEvent.Action.ADDED) {
+//			ItemStack i = new ItemStack(Material.POTION);
+//			PotionMeta pm = (PotionMeta) i.getItemMeta();
+//
+//			pm.addEnchant(Enchantment.VANISHING_CURSE, 10, true);
+//			pm.addEnchant(Enchantment.BINDING_CURSE, 10, true);
+//			pm.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+//
+//			pm.displayName(Component.text(Language.colorFromRGB(20, 160, 255) +
+//					String.format(Language.getMessage(Language.getLang(p), "active_potion_effect"), e.getNewEffect())));
+//			pm.setColor(Color.fromRGB(200, 200, 200));
+//
+//			ItemStack h = p.getInventory().getHelmet();
+//			p.getInventory().setHelmet(i);
+//			i.setItemMeta(pm);
+//
+//			Bukkit.getScheduler().runTaskLater(Savior.getSavior(), () -> {
+//				if (p.getInventory().getHelmet() != h || p.getInventory().getHelmet() == i)
+//					p.getInventory().setHelmet(h);
+//			}, 50);
+//		}
 	}
 }
